@@ -1,4 +1,4 @@
-export ZSH="/Users/lysandroc/.oh-my-zsh"
+export ZSH="~/.oh-my-zsh"
 
 export PATH=$HOME/bin:/usr/local/bin:$PATH 
 
