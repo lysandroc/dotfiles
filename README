@@ -1,1 +1,9 @@
 ln -s ~/dotfiles/.dotfiles/neovim.vim ~/.config/nvim/init.vim
+
+prerequisites 
+- zsh
+- ohmyzsh
+- asdf
+- fzf
+- ripgrep
+- neovim
