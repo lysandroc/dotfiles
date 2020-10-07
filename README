@@ -1,6 +1,8 @@
-ln -s ~/dotfiles/.dotfiles/neovim.vim ~/.config/nvim/init.vim
+Actions needed
+- create a makefile to extract this repository inside the root of user (~/)
+- inside the makefile create this symbolic link (ln -s ~/dotfiles/.dotfiles/neovim.vim ~/.config/nvim/init.vim)
 
-prerequisites 
+Prerequisites 
 - zsh
 - ohmyzsh
 - asdf
