@@ -9,3 +9,8 @@ Prerequisites
 - fzf
 - ripgrep
 - neovim
+- autojump
+- exa
+- fd
+- delta
+- bat
