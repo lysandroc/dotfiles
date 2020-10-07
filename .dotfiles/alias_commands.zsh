@@ -43,4 +43,3 @@ cd_with_fzf() {
 }
 
 bindkey -s '^o' 'cd_with_fzf \n'
-#bindkey -s '^i' 'open_with_fzf \n'

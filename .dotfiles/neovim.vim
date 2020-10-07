@@ -21,19 +21,19 @@ Plug 'sheerun/vim-polyglot'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 Plug 'morhetz/gruvbox'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'stsewd/fzf-checkout.vim'
-Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 Plug 'sainnhe/gruvbox-material'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 "
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
+"Plug 'leafgarland/typescript-vim'
+"Plug 'peitalin/vim-jsx-typescript'
 call plug#end()
 
 set number                         " Line numbers
@@ -118,6 +118,7 @@ nnoremap <leader>gr :diffget //3<CR>
 nnoremap <leader>gl :diffget //2<CR>
 
 nnoremap <leader>n :NERDTreeToggle<cr>
+nnoremap <leader>N :NERDTreeFind<cr>
 nnoremap <leader>edit :vsplit $MYVIMRC<cr>
 nnoremap <leader>src :x<cr>:source $MYVIMRC<cr>
 nnoremap <leader>hl :GitGutterLineNrHighlightsToggle<cr>
@@ -186,10 +187,3 @@ nnoremap <silent><nowait> <space>cp  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>cl  :<C-u>CocListResume<CR>
 "END COC SECTION
-
-tnoremap <Esc> <C-\><C-n>
-function! OpenTerminal()
-  split term://zsh
-  resize 4 
-endfunction
-nnoremap <leader>t :call OpenTerminal()<cr>
