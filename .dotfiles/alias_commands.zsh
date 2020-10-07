@@ -2,6 +2,7 @@
 ## alias: Expand with whitespace at the end
 ## balias: Expand without whitespace at the end
 ## ialias: Don't expand
+alias template="source ~/.oh-my-zsh/templates/zshrc.zsh-template"
 
 alias vs="code-insiders ."
 alias vim="nvim"
