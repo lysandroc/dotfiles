@@ -11,6 +11,7 @@ plugins=(git dotenv zsh-autosuggestions zsh-iterm-touchbar tmux)
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 [ -f ~/.dotfiles/alias_expansion.zsh ] && source ~/.dotfiles/alias_expansion.zsh
+[ -f ~/.dotfiles/alias_commands.zsh ] && source ~/.dotfiles/alias_commands.zsh
 
 [ -f ~/.fzf/shell/completion.zsh ] && source ~/.fzf/shell/completion.zsh
 [ -f ~/.fzf/shell/key-bindings.zsh ] && source ~/.fzf/shell/key-bindings.zsh
