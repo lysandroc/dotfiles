@@ -25,6 +25,7 @@ alias tmksv="tmux kill-server"
 alias g="git"
 alias gl="git log --graph --decorate --all"
 alias gfa="git fetch --all"
+alias grhm="git reset --hard origin/master"
 
 ialias fzf="fzf --color=16 --preview 'bat --style=numbers --color=always {}'"
 

@@ -70,7 +70,7 @@ set undodir=$HOME/.vimdid/         " Directory where state will be saved
 set inccommand=nosplit             " Updates in realtime like :s/old/new
 set ignorecase                     " Ignore word case on search
 set scrolloff=3                    " M
-set number relativenumber         " turn hybrid line numbers on
+"set number relativenumber         " turn hybrid line numbers on
 
 colorscheme gruvbox
 if has('termguicolors')
@@ -89,7 +89,8 @@ let $FZF_DEFAULT_OPTS='--reverse'
 " FZF + ripgrep will not consider filename as a match in Vim.
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
 command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
-
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, {'options': ['--layout=reverse', '--info=inline', '--preview', '~/.config/nvim/plugged/fzf.vim/bin/preview.sh {}']}, <bang>0)
 "
 " use alt+hjkl to move between split/vsplit panels
 tnoremap <A-h> <C-\><C-n><C-w>h

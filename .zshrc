@@ -2,7 +2,15 @@ export ZSH="~/.oh-my-zsh"
 
 source $ZSH/oh-my-zsh.sh
 
-plugins=(git dotenv zsh-autosuggestions zsh-iterm-touchbar tmux)
+plugins=(
+  git
+  gitfast
+  zsh-autosuggestions
+  fzf
+  ripgrep
+  dotenv
+  tmux
+)
 
 [ -f ~/.dotfiles/plugins.zsh ] && source ~/.dotfiles/plugins.zsh
 

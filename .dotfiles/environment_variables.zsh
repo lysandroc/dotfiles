@@ -4,7 +4,7 @@ export GOPATH=$HOME/go
 #export PATH=$PATH:$GOROOT/bin
 
 # turn user binaries available through command like
-export PATH=$HOME/bin:/usr/local/bin:$PATH 
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH 
 
 export ZSH_DISABLE_COMPFIX="true"
 export SOLARIZED_THEME="dark"
