@@ -4,15 +4,15 @@
 ## ialias: Don't expand
 alias template="source ~/.oh-my-zsh/templates/zshrc.zsh-template"
 
+alias daily="npm run start-daily"
 alias vs="code-insiders ."
+
 alias vim="nvim"
 alias vi="nvim"
 alias v="nvim"
 
 alias gpr="gh pr"
 alias gprc="gh pr create"
-alias gprl="gh pr list"
-alias gprv="gh pr view"
 
 alias tm="tmux"
 alias tma="tmux attach-session"

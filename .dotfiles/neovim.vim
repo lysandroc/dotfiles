@@ -27,6 +27,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'stsewd/fzf-checkout.vim'
 Plug 'tpope/vim-surround'
+Plug 'tomtom/tcomment_vim'
 Plug 'sainnhe/gruvbox-material'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline'
@@ -70,7 +71,7 @@ set undodir=$HOME/.vimdid/         " Directory where state will be saved
 set inccommand=nosplit             " Updates in realtime like :s/old/new
 set ignorecase                     " Ignore word case on search
 set scrolloff=3                    " M
-"set number relativenumber         " turn hybrid line numbers on
+set number relativenumber         " turn hybrid line numbers on
 
 colorscheme gruvbox
 if has('termguicolors')
@@ -89,9 +90,8 @@ let $FZF_DEFAULT_OPTS='--reverse'
 " FZF + ripgrep will not consider filename as a match in Vim.
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
 command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
-command! -bang -nargs=? -complete=dir Files
-    \ call fzf#vim#files(<q-args>, {'options': ['--layout=reverse', '--info=inline', '--preview', '~/.config/nvim/plugged/fzf.vim/bin/preview.sh {}']}, <bang>0)
-"
+command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, {'options': ['--layout=reverse', '--info=inline', '--preview', '~/.config/nvim/plugged/fzf.vim/bin/preview.sh {}']}, <bang>0)
+
 " use alt+hjkl to move between split/vsplit panels
 tnoremap <A-h> <C-\><C-n><C-w>h
 tnoremap <A-j> <C-\><C-n><C-w>j
@@ -115,8 +115,8 @@ let mapleader = ' '
 
 nnoremap <leader>gs :G<CR> 
 nnoremap <leader>gd :Gvdiffsplit<CR> 
-nnoremap <leader>gr :diffget //3<CR>
-nnoremap <leader>gl :diffget //2<CR>
+nnoremap <leader>gl :diffget //3<CR>
+nnoremap <leader>gh :diffget //2<CR>
 
 nnoremap <leader>n :NERDTreeToggle<cr>
 nnoremap <leader>N :NERDTreeFind<cr>
@@ -143,6 +143,8 @@ let g:coc_global_extensions = [
       \ 'coc-prettier',
       \ ]
 let g:go_def_mapping_enable=0
+nmap <leader>es :CocCommand eslint.executeAutofix<cr>
+nmap <leader>pr :CocCommand prettier.formatFile<cr>
 
 inoremap <silent><expr> <c-space> coc#refresh()
 " Use `[g` and `]g` to navigate diagnostics
@@ -159,7 +161,7 @@ nmap <leader>rn <Plug>(coc-rename)
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 " Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac  <Plug>(coc-codeaction)
+nmap <leader>ca  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
 " Use K to show documentation in preview window.
