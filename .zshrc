@@ -9,7 +9,7 @@ plugins=(
   ripgrep
   dotenv
   tmux
-  zsh-syntax-highlighting)
+  zsh-syntax-highlighting
 )
 
 [ -f ~/.dotfiles/plugins.zsh ] && source ~/.dotfiles/plugins.zsh
