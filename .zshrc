@@ -4,12 +4,10 @@ source $ZSH/oh-my-zsh.sh
 
 plugins=(
   git
-  zsh-autosuggestions
   fzf
   ripgrep
   dotenv
   tmux
-  zsh-syntax-highlighting
 )
 
 [ -f ~/dotfiles/.dotfiles/plugins.zsh ] && source ~/dotfiles/.dotfiles/plugins.zsh

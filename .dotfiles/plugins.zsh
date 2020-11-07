@@ -21,6 +21,7 @@ zinit light zdharma/fast-syntax-highlighting
 zinit light zdharma/history-search-multi-word
 
 bindkey '^e' autosuggest-accept
+bindkey '^ ' autosuggest-execute
 
 # zsh-autosuggestions
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#4f4f4f"
