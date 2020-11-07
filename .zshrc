@@ -4,7 +4,6 @@ source $ZSH/oh-my-zsh.sh
 
 plugins=(
   git
-  gitfast
   zsh-autosuggestions
   fzf
   ripgrep
