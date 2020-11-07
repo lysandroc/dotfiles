@@ -4,6 +4,9 @@
 ## ialias: Don't expand
 alias template="source ~/.oh-my-zsh/templates/zshrc.zsh-template"
 
+ialias edit="nvim ~/.zshrc"
+ialias src="source ~/.zshrc"
+
 alias daily="npm run start-daily"
 alias wd="source ~/dotfiles/.dotfiles/tmux -d"
 alias wt="source ~/dotfiles/.dotfiles/tmux -t"
