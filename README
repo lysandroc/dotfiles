@@ -1,6 +1,8 @@
-Actions needed
-- create a makefile to extract this repository inside the root of user (~/)
-- inside the makefile create this symbolic link (ln -s ~/dotfiles/.dotfiles/neovim.vim ~/.config/nvim/init.vim)
+1 - clone this repo in the user folder
+2 - ln -s ~/dotfiles/.zshrc ~/.zshrc
+3 - ln -s ~/dotfiles/.dotfiles/neovim.vim ~/.config/nvim/init.vim
+4 - ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
+
 
 Prerequisites 
 - zsh
