@@ -108,7 +108,7 @@ nnoremap <left> 3<C-W>>
 nnoremap <right> 3<C-W><
 
 nnoremap <c-g> :Rg<cr>
-nnoremap <space>g :Rg <C-R>=expand("<cword>")<CR><CR>
+nnoremap <space>rg :Rg <C-R>=expand("<cword>")<CR><CR>
 nnoremap <c-p> :FZF<cr>
 
 let mapleader = ' '
@@ -131,7 +131,7 @@ nnoremap <leader>sh :ls<cr>:sp<space>\|<space>b<space>
 "enable/disable spell checking
 nnoremap <silent> <leader>sp :set spell!<cr>
 inoremap <silent> <leader>sp <C-O>:set spell!<cr>
- 
+
 "coc section
 let g:coc_global_extensions = [
       \ 'coc-tsserver',
@@ -141,6 +141,7 @@ let g:coc_global_extensions = [
       \ 'coc-css',
       \ 'coc-emmet',
       \ 'coc-prettier',
+      \ 'coc-solargraph',
       \ ]
 let g:go_def_mapping_enable=0
 nmap <leader>es :CocCommand eslint.executeAutofix<cr>
@@ -172,6 +173,17 @@ function! s:show_documentation()
   else
     call CocAction('doHover')
   endif
+endfunction
+"poup mapping
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 " Show all diagnostics.
 nnoremap <silent><nowait> <space>cd  :<C-u>CocList diagnostics<cr>

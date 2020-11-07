@@ -5,14 +5,14 @@
 alias template="source ~/.oh-my-zsh/templates/zshrc.zsh-template"
 
 alias daily="npm run start-daily"
+alias wd="source ~/dotfiles/.dotfiles/tmux -d"
+alias wt="source ~/dotfiles/.dotfiles/tmux -t"
+
 alias vs="code-insiders ."
 
 alias vim="nvim"
 alias vi="nvim"
 alias v="nvim"
-
-alias gpr="gh pr"
-alias gprc="gh pr create"
 
 alias tm="tmux"
 alias tma="tmux attach-session"
@@ -22,10 +22,18 @@ alias tmls="tmux ls"
 alias tmks="tmux kill-session"
 alias tmksv="tmux kill-server"
 
+alias ghp="gh pr create -a lysandro-carioca"
+
 alias g="git"
 alias gl="git log --graph --decorate --all"
+alias gds="git diff --staged"
+alias gd="git diff"
 alias gfa="git fetch --all"
-alias grhm="git reset --hard origin/master"
+alias grm="git reset --hard origin/master"
+alias gri="git rebase --i origin/master"
+alias gc="git checkout"
+alias gs="git status"
+alias gpf="git push --set-upstream origin \$(git symbolic-ref --short HEAD)"
 
 ialias fzf="fzf --color=16 --preview 'bat --style=numbers --color=always {}'"
 

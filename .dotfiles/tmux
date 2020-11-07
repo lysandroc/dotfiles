@@ -1,0 +1,93 @@
+#!/usr/bin/env zsh
+
+WORKSPACE_3D="~/3d"
+D_FRONTEND="$WORKSPACE_3D/device-app-frontend"
+D_BACKEND="$WORKSPACE_3D/device-app-backend"
+D_DAL="$WORKSPACE_3D/go-dal-client"
+T_FRONTEND="$WORKSPACE_3D/tauron-ui"
+T_BACKEND="$WORKSPACE_3D/tauron-api"
+T_DAL="$WORKSPACE_3D/go-dal-client"
+
+#PERSONAL_SESSION="vimdeathmatch"
+#DEATHMATCH="~/personal/VimDeathmatch/server"
+#VWM="~/personal/vim-with-me/v3"
+#TVUI="~/work/tvui"
+#TVUI_AUTOMATION="~/work/tvui-automation"
+
+createWindow() {
+    session=$1
+    window=$2
+    shift
+    shift
+    hasWindow=$(tmux list-windows -t $session | grep "$window")
+    if [ -z "$hasWindow" ]; then
+        cmd="tmux neww -t $session: -n $window -d"
+        if [ $# -gt 0 ]; then
+            cmd="$cmd $@"
+        fi
+        echo "Creating Window(\"$hasWindow\"): $cmd"
+        eval $cmd
+    fi
+}
+
+createSession() {
+    session=$1
+    window=$2
+    shift
+    shift
+    cmd="tmux new -s $session -d -n $window $@ > /dev/null 2>&1"
+
+    echo "Creating Session: $cmd"
+    eval $cmd
+}
+
+while [ "$#" -gt 0 ]; do
+    curr=$1
+    shift
+
+    case "$curr" in
+    "-d")
+        #version=$1
+        #if [ -z $version ]; then
+        #    echo "-n should have the next argument contain a number"
+        #    exit 1
+        #fi
+        createSession 3DDevice scripts -c $D_FRONTEND
+        tmux split-window -t 3DDevice:scripts -c $D_BACKEND
+        createWindow 3DDevice frontend -c $D_FRONTEND
+        createWindow 3DDevice backend -c $D_BACKEND
+        createWindow 3DDevice go-dal-client -c $D_DAL
+        ;;
+    "-t")
+        createSession 3DTauron scripts -c $T_FRONTEND
+        tmux split-window -t 3D:scripts -c $T_BACKEND
+        createWindow 3DTauron tauron-ui -c $T_FRONTEND
+        createWindow 3DTauron tauron-api -c $T_BACKEND
+        createWindow 3DTauron ruby-dal-client -c $T_DAL
+        ;;
+
+    # "-ta")
+    #     createSession tvui primary -c $TVUI_AUTOMATION
+    #     createWindow tvui tvui_automation -c $TVUI_AUTOMATION
+    #     createWindow tvui tvui_automation_vim -c $TVUI_AUTOMATION
+    #     ;;
+    #
+    # "--vwm")
+    #     createSession $PERSONAL_SESSION primary -c $VWM
+    #     createWindow $PERSONAL_SESSION vwm -c $VWM "NVIM_LISTEN_ADDRESS=/tmp/nvim2 go run main.go"
+    #     ;;
+    #
+    # "--deathmatch")
+    #     createSession $PERSONAL_SESSION primary -c $DEATHMATCH
+    #     createWindow $PERSONAL_SESSION server -c $DEATHMATCH/server "docker-compose up --build"
+    #     tmux next-window -t $PERSONAL_SESSION:primary
+    #     ;;
+    #
+    # "--dm-logging")
+    #     createSession $PERSONAL_SESSION primary -c $DEATHMATCH
+    #     tmux Split-window -t $PERSONAL_SESSION:primary -p 35 -h tail -F ~/.local/share/nvim/VimDeathmatch.log
+    #     ;;
+
+    *) echo "Unavailable workspace... $curr"
+    esac
+done
