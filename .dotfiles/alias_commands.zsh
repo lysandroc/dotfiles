@@ -47,9 +47,9 @@ ialias ll="exa -l --all"
 ialias l="exa -l --all"
 ialias cat="bat"
 
-open_with_fzf() {
-  fd -t f -H -I | fzf -m --preview="xdg-mime query default {}" | xargs -ro -d "\n" xdg-open 2>&-
-}
+# open_with_fzf() {
+#   fd -t f -H -I | fzf -m --preview="xdg-mime query default {}" | xargs -ro -d "\n" xdg-open 2>&-
+# }
 
 cd_with_fzf() {
   local exclude="go"
@@ -58,3 +58,4 @@ cd_with_fzf() {
 }
 
 bindkey -s '^o' 'cd_with_fzf \n'
+# bindkey -s '^P' 'open_with_fzf \n'
