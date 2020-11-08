@@ -1,6 +1,6 @@
 Clone this repo in the user root folder
 ```
-ln -s ~/dotfiles/.zshrc ~/.zshrc```
+ln -s ~/dotfiles/.zshrc ~/.zshrc
 ln -s ~/dotfiles/.dotfiles/neovim.vim ~/.config/nvim/init.vim
 ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
 ```
