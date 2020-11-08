@@ -6,17 +6,10 @@ ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
 ```
 
 Prerequisites 
-- zsh
-- ohmyzsh
+- zsh, ohmyzsh
 - asdf
-- fzf
-- ripgrep
 - neovim
-- autojump
-- exa
-- fd
-- delta
-- bat
+- fzf, ripgrep, autojump, exa, fd, delta, bat
 
 
 Shortcuts
