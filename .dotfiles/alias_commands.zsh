@@ -53,7 +53,7 @@ ialias cat="bat"
 
 cd_with_fzf() {
   local exclude="go"
-  local dir="$(fd -t d --exclude ${exclude} | fzf --preview="tree -L 1 {}")"
+  local dir="$(fd -t d -H --exclude ${exclude} | fzf --preview="tree -L 1 {}")"
   cd "$dir"
 }
 
