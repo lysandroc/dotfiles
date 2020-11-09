@@ -1,5 +1,5 @@
 Prerequisites 
-- zsh, ohmyzsh
+- zsh, ohmyzsh, starship
 - asdf
 - neovim
 - fzf, ripgrep, autojump, exa, fd, delta, bat
