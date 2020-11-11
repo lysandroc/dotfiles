@@ -1,5 +1,4 @@
-export ZSH="~/.oh-my-zsh"
-
+export ZSH="/home/lysandroc/.oh-my-zsh"
 source $ZSH/oh-my-zsh.sh
 
 plugins=(
@@ -12,8 +11,7 @@ plugins=(
 
 [ -f ~/dotfiles/.dotfiles/plugins.zsh ] && source ~/dotfiles/.dotfiles/plugins.zsh
 
-# it needs to turn avaiable for mac and linux
-[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+[ -f ~/autojump/bin/autojump.sh ] && source ~/autojump/bin/autojump.sh
 
 [ -f ~/dotfiles/.dotfiles/alias_expansion.zsh ] && source ~/dotfiles/.dotfiles/alias_expansion.zsh
 [ -f ~/dotfiles/.dotfiles/alias_commands.zsh ] && source ~/dotfiles/.dotfiles/alias_commands.zsh
@@ -23,5 +21,7 @@ plugins=(
 [ -f ~/.fzf/shell/key-bindings.zsh ] && source ~/.fzf/shell/key-bindings.zsh
 
 [ -f ~/.asdf/asdf.sh ] && source ~/.asdf/asdf.sh
+
+[ -f ~/.local_settings.zsh ] && source ~/.local_settings.zsh
 
 eval "$(starship init zsh)"
