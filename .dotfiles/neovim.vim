@@ -32,13 +32,9 @@ Plug 'sainnhe/gruvbox-material'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-"
-"Plug 'leafgarland/typescript-vim'
-"Plug 'peitalin/vim-jsx-typescript'
 call plug#end()
 
 set number                         " Line numbers
-" set spell                        " disable by default
 set spelllang=en_us                " dictionary
 set linebreak                      " Break line without break word
 set smartcase                      " If have any uppercase, active case sensitive
@@ -73,26 +69,35 @@ set ignorecase                     " Ignore word case on search
 set scrolloff=3                    " M
 set number relativenumber         " turn hybrid line numbers on
 
+"theme
 colorscheme gruvbox
 if has('termguicolors')
   set termguicolors
 endif
-
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='base16_gruvbox_dark_hard'
-
 let g:gruvbox_contrast_dark='hard'
 let g:gruvbox_material_background = 'hard'
 
-let g:fzf_layout = {'window': {'width':0.8,'height':0.8}}
-let $FZF_DEFAULT_OPTS='--reverse'
-"let $FZF_DEFAULT_COMMAND = 'rg --files' "using fd
-" FZF + ripgrep will not consider filename as a match in Vim.
+"FZF.vim settings
+let g:fzf_layout = {'window': {'width':0.7,'height':0.9}}
+let $FZF_DEFAULT_OPTS='--layout=reverse'
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
-command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
-command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, {'options': ['--layout=reverse', '--info=inline', '--preview', '~/.config/nvim/plugged/fzf.vim/bin/preview.sh {}']}, <bang>0)
+command! -bang -nargs=? -complete=dir Files 
+  \ call fzf#vim#files(
+  \   <q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
 
-" use alt+hjkl to move between split/vsplit panels
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  letec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+
+"use alt+hjkl to move between split/vsplit panels
 tnoremap <A-h> <C-\><C-n><C-w>h
 tnoremap <A-j> <C-\><C-n><C-w>j
 tnoremap <A-k> <C-\><C-n><C-w>k
@@ -102,32 +107,38 @@ nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
 
-nnoremap <up> 10<C-W>+
+"increase decrease size of buffer panels using arrow keys
+snoremap <up> 10<C-W>+
 nnoremap <down> 10<C-W>-
 nnoremap <left> 3<C-W>>
 nnoremap <right> 3<C-W><
 
-nnoremap <c-g> :Rg<cr>
-nnoremap <space>rg :Rg <C-R>=expand("<cword>")<CR><CR>
-nnoremap <c-p> :FZF<cr>
-
 let mapleader = ' '
 
+"fzf-vim
+nnoremap <c-g> :Rg
+nnoremap <space>rg :Rg <C-R>=expand("<cword>")<CR><CR>
+nnoremap <c-p> :Files<cr>
+
+"git-fugitive
 nnoremap <leader>gs :G<CR> 
 nnoremap <leader>gd :Gvdiffsplit<CR> 
 nnoremap <leader>gl :diffget //3<CR>
 nnoremap <leader>gh :diffget //2<CR>
 
+"common 
 nnoremap <leader>n :NERDTreeToggle<cr>
 nnoremap <leader>N :NERDTreeFind<cr>
 nnoremap <leader>edit :vsplit $MYVIMRC<cr>
 nnoremap <leader>src :x<cr>:source $MYVIMRC<cr>
 nnoremap <leader>hl :GitGutterLineNrHighlightsToggle<cr>
 nnoremap <leader>h :History<cr>
-nnoremap <leader>b :buffers<CR>:buffer<Space>
+nnoremap <leader><tab> :buffers<CR>:buffer<Space>
+
 "split horizontal/vertical
 nnoremap <leader>sv :ls<cr>:vsp<space>\|<space>b<space>
 nnoremap <leader>sh :ls<cr>:sp<space>\|<space>b<space>
+
 "enable/disable spell checking
 nnoremap <silent> <leader>sp :set spell!<cr>
 inoremap <silent> <leader>sp <C-O>:set spell!<cr>
@@ -142,6 +153,7 @@ let g:coc_global_extensions = [
       \ 'coc-emmet',
       \ 'coc-prettier',
       \ 'coc-solargraph',
+      \ 'coc-sh',
       \ ]
 let g:go_def_mapping_enable=0
 nmap <leader>es :CocCommand eslint.executeAutofix<cr>
