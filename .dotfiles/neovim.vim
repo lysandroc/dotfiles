@@ -80,7 +80,7 @@ let g:gruvbox_contrast_dark='hard'
 let g:gruvbox_material_background = 'hard'
 
 "FZF.vim settings
-let g:fzf_layout = {'window': {'width':0.7,'height':0.9}}
+let g:fzf_layout = {'window': {'width':1,'height':0.8}}
 let $FZF_DEFAULT_OPTS='--layout=reverse'
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
 command! -bang -nargs=? -complete=dir Files 
