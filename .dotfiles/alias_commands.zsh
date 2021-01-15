@@ -12,6 +12,8 @@ ialias src="source ~/.zshrc"
 alias daily="npm run start-daily"
 alias wd="source ~/dotfiles/.dotfiles/tmux -d"
 alias wt="source ~/dotfiles/.dotfiles/tmux -t"
+alias proxyon='source ~/.bash_proxyon'
+alias proxyoff='source ~/.bash_proxyoff'
 
 alias vs="code-insiders ."
 

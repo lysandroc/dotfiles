@@ -7,7 +7,7 @@ D_DAL="$WORKSPACE_3D/go-dal-client"
 T_FRONTEND="$WORKSPACE_3D/tauron-ui"
 T_BACKEND="$WORKSPACE_3D/tauron-api"
 J_BACKEND="$WORKSPACE_3D/jango"
-T_DAL="$WORKSPACE_3D/go-dal-client"
+T_DAL="$WORKSPACE_3D/dal"
 
 #PERSONAL_SESSION="vimdeathmatch"
 #DEATHMATCH="~/personal/VimDeathmatch/server"
@@ -64,8 +64,7 @@ while [ "$#" -gt 0 ]; do
         tmux split-window -t 3D:scripts -c $T_BACKEND
         createWindow 3DTauron tauron-ui -c $T_FRONTEND
         createWindow 3DTauron tauron-api -c $T_BACKEND
-        createWindow 3DTauron jango-api -c $J_BACKEND
-        createWindow 3DTauron ruby-dal-client -c $T_DAL
+        createWindow 3DTauron ruby-dal -c $T_DAL
         ;;
 
     # "-ta")
