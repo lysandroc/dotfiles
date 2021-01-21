@@ -21,3 +21,5 @@ ctrl + P -> search and open a file in the current directory
 ```
 
 More shortcuts are available inside of alias_commands.zsh
+
+font name -> Operator Mono Lig
