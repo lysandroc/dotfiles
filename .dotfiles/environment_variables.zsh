@@ -10,3 +10,6 @@ export ZSH_DISABLE_COMPFIX="true"
 export SOLARIZED_THEME="dark"
 export FORCE_COLOR=true
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-messages -g "!{.git}"'
+
+# exilir 
+export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac"

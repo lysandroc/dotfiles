@@ -1,5 +1,5 @@
-export ZSH="/home/lysandroc/.oh-my-zsh"
-source $ZSH/oh-my-zsh.sh
+#export ZSH="/home/lysandroc/.oh-my-zsh"
+#source $ZSH/oh-my-zsh.sh
 
 plugins=(
   git
@@ -11,7 +11,7 @@ plugins=(
 
 [ -f ~/dotfiles/.dotfiles/plugins.zsh ] && source ~/dotfiles/.dotfiles/plugins.zsh
 
-[ -f ~/autojump/bin/autojump.sh ] && source ~/autojump/bin/autojump.sh
+[ -f ~/.autojump/etc/profile.d/autojump.sh ] && source ~/.autojump/etc/profile.d/autojump.sh
 
 [ -f ~/dotfiles/.dotfiles/alias_expansion.zsh ] && source ~/dotfiles/.dotfiles/alias_expansion.zsh
 [ -f ~/dotfiles/.dotfiles/alias_commands.zsh ] && source ~/dotfiles/.dotfiles/alias_commands.zsh
@@ -25,3 +25,5 @@ plugins=(
 [ -f ~/.local_settings.zsh ] && source ~/.local_settings.zsh
 
 eval "$(starship init zsh)"
+
+autoload -Uz compinit && compinit

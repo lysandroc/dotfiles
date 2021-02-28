@@ -68,6 +68,8 @@ set inccommand=nosplit             " Updates in realtime like :s/old/new
 set ignorecase                     " Ignore word case on search
 set scrolloff=3                    " M
 set number relativenumber         " turn hybrid line numbers on
+"set colorcolumn=80
+set signcolumn=yes
 
 "theme
 colorscheme gruvbox
@@ -80,7 +82,7 @@ let g:gruvbox_contrast_dark='hard'
 let g:gruvbox_material_background = 'hard'
 
 "FZF.vim settings
-let g:fzf_layout = {'window': {'width':1,'height':0.8}}
+let g:fzf_layout = {'window': {'width':0.9,'height':0.8}}
 let $FZF_DEFAULT_OPTS='--layout=reverse'
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
 command! -bang -nargs=? -complete=dir Files 
@@ -134,6 +136,8 @@ nnoremap <leader>src :x<cr>:source $MYVIMRC<cr>
 nnoremap <leader>hl :GitGutterLineNrHighlightsToggle<cr>
 nnoremap <leader>h :History<cr>
 nnoremap <leader><tab> :buffers<CR>:buffer<Space>
+nmap <TAB> :bnext<cr>
+nmap <S-TAB> :bprevious<cr>
 
 "split horizontal/vertical
 nnoremap <leader>sv :ls<cr>:vsp<space>\|<space>b<space>
@@ -153,7 +157,6 @@ let g:coc_global_extensions = [
       \ 'coc-emmet',
       \ 'coc-prettier',
       \ 'coc-solargraph',
-      \ 'coc-sh',
       \ ]
 let g:go_def_mapping_enable=0
 nmap <leader>es :CocCommand eslint.executeAutofix<cr>
