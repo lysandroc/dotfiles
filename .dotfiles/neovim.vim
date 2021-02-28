@@ -32,6 +32,11 @@ Plug 'sainnhe/gruvbox-material'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
 call plug#end()
 
 set number                         " Line numbers
@@ -99,15 +104,15 @@ endfunction
 
 command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
-"use alt+hjkl to move between split/vsplit panels
-tnoremap <A-h> <C-\><C-n><C-w>h
-tnoremap <A-j> <C-\><C-n><C-w>j
-tnoremap <A-k> <C-\><C-n><C-w>k
-tnoremap <A-l> <C-\><C-n><C-w>l
-nnoremap <A-h> <C-w>h
-nnoremap <A-j> <C-w>j
-nnoremap <A-k> <C-w>k
-nnoremap <A-l> <C-w>l
+"use ctrl+hjkl to move between split/vsplit panels
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-l> <C-\><C-n><C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 "increase decrease size of buffer panels using arrow keys
 snoremap <up> 10<C-W>+
@@ -131,13 +136,11 @@ nnoremap <leader>gh :diffget //2<CR>
 "common 
 nnoremap <leader>n :NERDTreeToggle<cr>
 nnoremap <leader>N :NERDTreeFind<cr>
+nnoremap <leader>w :w<CR>
 nnoremap <leader>edit :vsplit $MYVIMRC<cr>
 nnoremap <leader>src :x<cr>:source $MYVIMRC<cr>
 nnoremap <leader>hl :GitGutterLineNrHighlightsToggle<cr>
-nnoremap <leader>h :History<cr>
 nnoremap <leader><tab> :buffers<CR>:buffer<Space>
-nmap <TAB> :bnext<cr>
-nmap <S-TAB> :bprevious<cr>
 
 "split horizontal/vertical
 nnoremap <leader>sv :ls<cr>:vsp<space>\|<space>b<space>
@@ -217,3 +220,27 @@ nnoremap <silent><nowait> <space>cp  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>cl  :<C-u>CocListResume<CR>
 "END COC SECTION
+
+
+" Find files using Telescope command-line sugar.
+nnoremap <C-f> <cmd>Telescope find_files<cr> 
+" prompt_position=top sorting_strategy=ascending<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>ft <cmd>Telescope colorscheme<cr>
+
+lua << EOF
+local actions = require('telescope.actions')
+require('telescope').setup{
+  defaults = {
+    prompt_position = "top",
+    sorting_strategy = "ascending",
+    mappings = {
+      i = {
+        ["<esc>"] = actions.close
+      },
+    },
+  }
+}
+EOF
