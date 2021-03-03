@@ -23,19 +23,23 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'morhetz/gruvbox'
+"begin remove
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'stsewd/fzf-checkout.vim'
+"end remove
 Plug 'tpope/vim-surround'
 Plug 'tomtom/tcomment_vim'
 Plug 'sainnhe/gruvbox-material'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'mattn/emmet-vim'
 
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
 call plug#end()
 
@@ -86,6 +90,7 @@ let g:airline_theme='base16_gruvbox_dark_hard'
 let g:gruvbox_contrast_dark='hard'
 let g:gruvbox_material_background = 'hard'
 
+"REMOVE FZF.VIM
 "FZF.vim settings
 let g:fzf_layout = {'window': {'width':0.9,'height':0.8}}
 let $FZF_DEFAULT_OPTS='--layout=reverse'
@@ -103,6 +108,7 @@ function! RipgrepFzf(query, fullscreen)
 endfunction
 
 command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+" REMOVE FZF.VIM
 
 "use ctrl+hjkl to move between split/vsplit panels
 tnoremap <C-h> <C-\><C-n><C-w>h
@@ -125,7 +131,7 @@ let mapleader = ' '
 "fzf-vim
 nnoremap <c-g> :Rg
 nnoremap <space>rg :Rg <C-R>=expand("<cword>")<CR><CR>
-nnoremap <c-p> :Files<cr>
+nnoremap <leader><c-p> :Files<cr>
 
 "git-fugitive
 nnoremap <leader>gs :G<CR> 
@@ -221,26 +227,52 @@ nnoremap <silent><nowait> <space>cp  :<C-u>CocPrev<CR>
 nnoremap <silent><nowait> <space>cl  :<C-u>CocListResume<CR>
 "END COC SECTION
 
+"begin - telescope settings
+  lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
 
-" Find files using Telescope command-line sugar.
-nnoremap <C-f> <cmd>Telescope find_files<cr> 
-" prompt_position=top sorting_strategy=ascending<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-nnoremap <leader>ft <cmd>Telescope colorscheme<cr>
+  " Find files using Telescope command-line sugar.
+  nnoremap <c-p> <cmd>Telescope find_files<cr> 
+  " prompt_position=top sorting_strategy=ascending<cr>
+  nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+  nnoremap <leader>fb <cmd>Telescope buffers<cr>
+  nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+  nnoremap <leader>ft <cmd>Telescope colorscheme<cr>
 
-lua << EOF
-local actions = require('telescope.actions')
-require('telescope').setup{
-  defaults = {
-    prompt_position = "top",
-    sorting_strategy = "ascending",
-    mappings = {
-      i = {
-        ["<esc>"] = actions.close
+  nnoremap <leader>pw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>")  }<CR>
+  nnoremap <leader>ps :lua require('telescope.builtin').grep_string()<CR>
+  nnoremap <leader>bs /<C-R>=escape(expand("<cWORD>"), "/")<CR><CR>
+
+  lua << EOF
+  local actions = require('telescope.actions')
+  require('telescope').setup{
+    defaults = {
+      file_sorter = require('telescope.sorters').get_fzy_sorter,
+      prompt_prefix = '> ',
+      prompt_position = "top",
+      sorting_strategy = "ascending",
+      file_previewer   = require('telescope.previewers').vim_buffer_cat.new,
+      grep_previewer   = require('telescope.previewers').vim_buffer_vimgrep.new,
+      qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
+      mappings = {
+        i = {
+          ["<esc>"] = actions.close
+        },
       },
-    },
+      extensions = {
+          fzy_native = {
+              override_generic_sorter = false,
+              override_file_sorter = true,
+          }
+      }
+    }
   }
-}
+  require('telescope').load_extension('fzy_native')
+  local M = {}
+  M.search_dotfiles = function() 
+      require("telescope.builtin").find_files({
+          prompt_title = "< dotfiles >",
+          cwd = "$HOME/dotfiles",
+      })
+  end
 EOF
+"end - telescope settings
