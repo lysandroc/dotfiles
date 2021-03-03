@@ -131,6 +131,9 @@ nnoremap <down> 10<C-W>-
 nnoremap <left> 3<C-W>>
 nnoremap <right> 3<C-W><
 
+nnoremap <C-k> :cnext<CR>
+nnoremap <C-j> :cprev<CR>
+
 let mapleader = ' '
 
 "clipboard

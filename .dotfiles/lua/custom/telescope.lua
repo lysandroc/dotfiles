@@ -5,12 +5,17 @@
       prompt_prefix = '> ',
       prompt_position = "top",
       sorting_strategy = "ascending",
+      set_env = { ['COLORTERM'] = 'truecolor' },
       file_previewer   = require('telescope.previewers').vim_buffer_cat.new,
       grep_previewer   = require('telescope.previewers').vim_buffer_vimgrep.new,
       qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
       mappings = {
         i = {
-          ["<esc>"] = actions.close
+          ["<esc>"] = actions.close,
+          ["<C-x>"] = false, 
+          ["<C-q>"] = actions.send_to_qflist,
+          ["<C-j>"] = actions.move_selection_next,
+          ["<C-k>"] = actions.move_selection_previous,
         },
       },
       extensions = {
