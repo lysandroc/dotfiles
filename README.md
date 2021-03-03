@@ -8,6 +8,7 @@ Clone this repo in the user root folder
 ```
 ln -s ~/dotfiles/.zshrc ~/.zshrc
 ln -s ~/dotfiles/.dotfiles/neovim.vim ~/.config/nvim/init.vim
+ln -s ~/dotfiles/.dotfiles/lua ~/.config/nvim/lua
 ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
 ```
 
@@ -21,5 +22,3 @@ ctrl + P -> search and open a file in the current directory
 ```
 
 More shortcuts are available inside of alias_commands.zsh
-
-font name -> Operator Mono Lig
