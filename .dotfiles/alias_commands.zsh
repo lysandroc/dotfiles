@@ -41,6 +41,7 @@ alias grm="git reset --hard origin/master"
 alias gri="git rebase --i origin/master"
 alias gc="git checkout"
 alias gs="git status"
+alias gp="git push"
 alias gpf="git push --set-upstream origin \$(git symbolic-ref --short HEAD)"
 
 ialias fzf="fzf --color=16 --preview 'bat --style=numbers --color=always {}'"

@@ -130,11 +130,6 @@ nnoremap <up> 10<C-W>+
 nnoremap <down> 10<C-W>-
 nnoremap <left> 3<C-W>>
 nnoremap <right> 3<C-W><
-" Remap arrow keys to resize window
-" nnoremap <Up>    :resize -10<CR>
-" nnoremap <Down>  :resize +10<CR>
-" nnoremap <Left>  :vertical resize -3<CR>
-" nnoremap <Right> :vertical resize +3<CR>
 
 nnoremap <C-j> :cnext<CR>
 nnoremap <C-k> :cprev<CR>
@@ -148,7 +143,8 @@ nnoremap <leader>P "+P<CR>
 vnoremap <leader>P "+P<CR> 
 
 "git-fugitive
-nnoremap <leader>gs :G<CR> 
+nnoremap <silent> <leader>gs :G<CR> 
+nnoremap <silent> <leader>gp :G push<CR> 
 nnoremap <leader>gd :Gvdiffsplit<CR> 
 nnoremap <leader>gl :diffget //3<CR>
 nnoremap <leader>gh :diffget //2<CR>
@@ -156,7 +152,6 @@ nnoremap <leader>gh :diffget //2<CR>
 "common 
 nnoremap <leader>n :NERDTreeToggle<cr>
 nnoremap <leader>N :NERDTreeFind<cr>
-nnoremap <leader>w :w<CR>
 nnoremap <leader>edit :vsplit $MYVIMRC<cr>
 nnoremap <leader>src :x<cr>:source $MYVIMRC<cr>
 nnoremap <leader>hl :GitGutterLineNrHighlightsToggle<cr>
@@ -164,6 +159,14 @@ nnoremap <leader><tab> :buffers<CR>:buffer<Space>
 "split horizontal/vertical
 nnoremap <leader>sv :ls<cr>:vsp<space>\|<space>b<space>
 nnoremap <leader>sh :ls<cr>:sp<space>\|<space>b<space>
+
+"common to exit
+nnoremap <silent> <A-q> :q<CR> 
+nnoremap <silent> <A-x> :x<CR> 
+nnoremap <silent> <A-w> :w<CR> 
+inoremap <silent> <A-q> <ESC>:q<CR>
+inoremap <silent> <A-x> <ESC>:x<CR>
+inoremap <silent> <A-w> <ESC>:w<CR>a
 
 "enable/disable spell checking
 nnoremap <silent> <leader>sp :set spell!<cr>
@@ -241,7 +244,7 @@ nnoremap <silent><nowait> <space>cl  :<C-u>CocListResume<CR>
 "END COC SECTION
 
 lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
-"Telescope settings
+"Telescope settings - it uses dotfiles/.dotfiles/lua/custom/telescope.lua
   lua require("custom")
   nnoremap <leader>sf <cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<cr> 
   nnoremap <leader>sh :lua require('telescope.builtin').help_tags()<CR>
