@@ -9,6 +9,12 @@ T_BACKEND="$WORKSPACE_3D/tauron-api"
 J_BACKEND="$WORKSPACE_3D/jango"
 T_DAL="$WORKSPACE_3D/dal"
 
+WORKSPACE_NATURA="~/natura"
+RT_DOWNLOAD="$WORKSPACE_NATURA/commercial-segmentation-calc-relationship-time"
+RT_UPLOAD="$WORKSPACE_NATURA/commercial-segmentation-upload-recognition"
+RT_CONSUMER_SQS_PYTHON="$WORKSPACE_NATURA/commercial-segmentation-relationship-time"
+RT_PRODUCER_SQS_NODE="$WORKSPACE_NATURA/commercial-segmentation-relationship-time-load-sqs"
+
 #PERSONAL_SESSION="vimdeathmatch"
 #DEATHMATCH="~/personal/VimDeathmatch/server"
 #VWM="~/personal/vim-with-me/v3"
@@ -67,12 +73,14 @@ while [ "$#" -gt 0 ]; do
         createWindow 3DTauron ruby-dal -c $T_DAL
         ;;
 
-    # "-ta")
-    #     createSession tvui primary -c $TVUI_AUTOMATION
-    #     createWindow tvui tvui_automation -c $TVUI_AUTOMATION
-    #     createWindow tvui tvui_automation_vim -c $TVUI_AUTOMATION
-    #     ;;
-    #
+    "-rt")
+        createSession relationship-time scripts -c $RT_PRODUCER_SQS_NODE
+        tmux split-window -t relationship-time:scripts -c $RT_CONSUMER_SQS_PYTHON
+        createWindow relationship-time producer-relationshiptime -c $RT_PRODUCER_SQS_NODE
+        createWindow relationship-time consumer-relationshiptime -c $RT_CONSUMER_SQS_PYTHON
+        createWindow relationship-time motor-upload -c $RT_UPLOAD
+        createWindow relationship-time motor-download -c $RT_DOWNLOAD
+        ;;
     # "--vwm")
     #     createSession $PERSONAL_SESSION primary -c $VWM
     #     createWindow $PERSONAL_SESSION vwm -c $VWM "NVIM_LISTEN_ADDRESS=/tmp/nvim2 go run main.go"
@@ -82,11 +90,6 @@ while [ "$#" -gt 0 ]; do
     #     createSession $PERSONAL_SESSION primary -c $DEATHMATCH
     #     createWindow $PERSONAL_SESSION server -c $DEATHMATCH/server "docker-compose up --build"
     #     tmux next-window -t $PERSONAL_SESSION:primary
-    #     ;;
-    #
-    # "--dm-logging")
-    #     createSession $PERSONAL_SESSION primary -c $DEATHMATCH
-    #     tmux Split-window -t $PERSONAL_SESSION:primary -p 35 -h tail -F ~/.local/share/nvim/VimDeathmatch.log
     #     ;;
 
     *) echo "Unavailable workspace... $curr"

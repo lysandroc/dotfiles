@@ -95,7 +95,7 @@ let g:gruvbox_material_better_performance = 1
 "REMOVE FZF.VIM
     nnoremap <c-g> :Rg
     nnoremap <space>rg :Rg <C-R>=expand("<cword>")<CR><CR>
-    nnoremap <leader><c-p> :Files<cr>
+    nnoremap <leader>p :Files<cr>
     "FZF.vim settings
     let g:fzf_layout = {'window': {'width':0.9,'height':0.8}}
     let $FZF_DEFAULT_OPTS='--layout=reverse'
@@ -116,23 +116,28 @@ let g:gruvbox_material_better_performance = 1
 " REMOVE FZF.VIM
 
 "use ctrl+hjkl to move between split/vsplit panels
-tnoremap <C-h> <C-\><C-n><C-w>h
-tnoremap <C-j> <C-\><C-n><C-w>j
-tnoremap <C-k> <C-\><C-n><C-w>k
-tnoremap <C-l> <C-\><C-n><C-w>l
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+tnoremap <A-h> <C-\><C-n><C-w>h
+tnoremap <A-j> <C-\><C-n><C-w>j
+tnoremap <A-k> <C-\><C-n><C-w>k
+tnoremap <A-l> <C-\><C-n><C-w>l
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
 
-"increase decrease size of buffer panels using arrow keys
-snoremap <up> 10<C-W>+
+" increase decrease size of buffer panels using arrow keys
+nnoremap <up> 10<C-W>+
 nnoremap <down> 10<C-W>-
 nnoremap <left> 3<C-W>>
 nnoremap <right> 3<C-W><
+" Remap arrow keys to resize window
+" nnoremap <Up>    :resize -10<CR>
+" nnoremap <Down>  :resize +10<CR>
+" nnoremap <Left>  :vertical resize -3<CR>
+" nnoremap <Right> :vertical resize +3<CR>
 
-nnoremap <C-k> :cnext<CR>
-nnoremap <C-j> :cprev<CR>
+nnoremap <C-j> :cnext<CR>
+nnoremap <C-k> :cprev<CR>
 
 let mapleader = ' '
 
@@ -156,7 +161,6 @@ nnoremap <leader>edit :vsplit $MYVIMRC<cr>
 nnoremap <leader>src :x<cr>:source $MYVIMRC<cr>
 nnoremap <leader>hl :GitGutterLineNrHighlightsToggle<cr>
 nnoremap <leader><tab> :buffers<CR>:buffer<Space>
-
 "split horizontal/vertical
 nnoremap <leader>sv :ls<cr>:vsp<space>\|<space>b<space>
 nnoremap <leader>sh :ls<cr>:sp<space>\|<space>b<space>
