@@ -3,19 +3,16 @@
 ## balias: Expand without whitespace at the end
 ## ialias: Don't expand
 #############################
-
 alias template="source ~/.oh-my-zsh/templates/zshrc.zsh-template"
 
 ialias edit="nvim ~/.zshrc"
 ialias src="source ~/.zshrc"
 
-alias daily="npm run start-daily"
-alias wd="source ~/dotfiles/.dotfiles/tmux -d"
-alias wt="source ~/dotfiles/.dotfiles/tmux -t"
+# alias wd="source ~/dotfiles/.dotfiles/tmux -d"
+# alias wt="source ~/dotfiles/.dotfiles/tmux -t"
 alias wr="source ~/dotfiles/.dotfiles/tmux -rt"
-alias proxyon='source ~/.bash_proxyon'
-alias proxyoff='source ~/.bash_proxyoff'
-
+# alias proxyon='source ~/.bash_proxyon'
+# alias proxyoff='source ~/.bash_proxyoff'
 alias vs="code-insiders ."
 
 alias vim="nvim"
@@ -43,6 +40,8 @@ alias gc="git checkout"
 alias gs="git status"
 alias gp="git push"
 alias gpf="git push --set-upstream origin \$(git symbolic-ref --short HEAD)"
+
+alias ct="bat ~/dotfiles/.dotfiles/commit-types.txt"
 
 ialias fzf="fzf --color=16 --preview 'bat --style=numbers --color=always {}'"
 

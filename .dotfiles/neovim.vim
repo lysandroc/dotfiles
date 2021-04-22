@@ -36,11 +36,13 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mattn/emmet-vim'
 
+"telescope stuffs
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
+"end telescope stuffs
 call plug#end()
 
 set number                         " Line numbers
@@ -92,27 +94,30 @@ let g:gruvbox_material_background = 'hard'
 let g:gruvbox_material_diagnostic_line_highlight = 1
 let g:gruvbox_material_better_performance = 1
 
+"NERDTree Settings
+let NERDTreeShowHidden=1
+
 "REMOVE FZF.VIM
-    nnoremap <c-g> :Rg
-    nnoremap <space>rg :Rg <C-R>=expand("<cword>")<CR><CR>
-    nnoremap <leader>p :Files<cr>
-    "FZF.vim settings
-    let g:fzf_layout = {'window': {'width':0.9,'height':0.8}}
-    let $FZF_DEFAULT_OPTS='--layout=reverse'
-    let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
-    command! -bang -nargs=? -complete=dir Files 
-      \ call fzf#vim#files(
-      \   <q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+nnoremap <c-g> :Rg
+nnoremap <space>rg :Rg <C-R>=expand("<cword>")<CR><CR>
+nnoremap <leader>p :Files<cr>
+"FZF.vim settings
+let g:fzf_layout = {'window': {'width':0.9,'height':0.8}}
+let $FZF_DEFAULT_OPTS='--layout=reverse'
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
+command! -bang -nargs=? -complete=dir Files 
+  \ call fzf#vim#files(
+  \   <q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
 
-    function! RipgrepFzf(query, fullscreen)
-      let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
-      let initial_command = printf(command_fmt, shellescape(a:query))
-      let reload_command = printf(command_fmt, '{q}')
-      letec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
-      call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
-    endfunction
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  letec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
 
-    command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 " REMOVE FZF.VIM
 
 "use ctrl+hjkl to move between split/vsplit panels
@@ -131,9 +136,6 @@ nnoremap <down> 10<C-W>-
 nnoremap <left> 3<C-W>>
 nnoremap <right> 3<C-W><
 
-nnoremap <C-j> :cnext<CR>
-nnoremap <C-k> :cprev<CR>
-
 let mapleader = ' '
 
 "clipboard
@@ -144,26 +146,27 @@ vnoremap <leader>P "+P<CR>
 
 "git-fugitive
 nnoremap <silent> <leader>gs :G<CR> 
-nnoremap <silent> <leader>gp :G push<CR> 
+nnoremap <silent> <leader>gp <ESC>:G push<CR> 
 nnoremap <leader>gd :Gvdiffsplit<CR> 
 nnoremap <leader>gl :diffget //3<CR>
 nnoremap <leader>gh :diffget //2<CR>
 
 "common 
+nnoremap <silent> <esc> :noh<return><esc>
 nnoremap <leader>n :NERDTreeToggle<cr>
 nnoremap <leader>N :NERDTreeFind<cr>
-nnoremap <leader>edit :vsplit $MYVIMRC<cr>
-nnoremap <leader>src :x<cr>:source $MYVIMRC<cr>
 nnoremap <leader>hl :GitGutterLineNrHighlightsToggle<cr>
 nnoremap <leader><tab> :buffers<CR>:buffer<Space>
-"split horizontal/vertical
+"common edit/source nvim without exit to load
+nnoremap <leader>edit :vsplit $MYVIMRC<cr>
+nnoremap <leader>src :x<cr>:source $MYVIMRC<cr>
+"common split horizontal/vertical
 nnoremap <leader>sv :ls<cr>:vsp<space>\|<space>b<space>
 nnoremap <leader>sh :ls<cr>:sp<space>\|<space>b<space>
-
 "common to exit
-nnoremap <silent> <A-q> :q<CR> 
-nnoremap <silent> <A-x> :x<CR> 
-nnoremap <silent> <A-w> :w<CR> 
+nnoremap <silent> <A-q> :q<CR>
+nnoremap <silent> <A-x> :x<CR>
+nnoremap <silent> <A-w> :w<CR>
 inoremap <silent> <A-q> <ESC>:q<CR>
 inoremap <silent> <A-x> <ESC>:x<CR>
 inoremap <silent> <A-w> <ESC>:w<CR>a

@@ -1,5 +1,11 @@
 # Expansion of aliases
 # Credit: https://blog.sebastian-daschner.com/entries/zsh-aliases
+#
+########## Aliases ##########
+## alias: Expand with whitespace at the end
+## balias: Expand without whitespace at the end
+## ialias: Don't expand
+#############################
 
 # blank aliases
 typeset -a baliases
