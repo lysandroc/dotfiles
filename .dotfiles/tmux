@@ -74,8 +74,7 @@ while [ "$#" -gt 0 ]; do
         ;;
 
     "-rt")
-        createSession relationship-time scripts -c $RT_PRODUCER_SQS_NODE
-        tmux split-window -t relationship-time:scripts -c $RT_CONSUMER_SQS_PYTHON
+        createSession relationship-time scripts -c $RT_PRODUCER_SQS_NODE \; tmux splitw -t relationship-time:scripts -d -c $RT_CONSUMER_SQS_PYTHON
         createWindow relationship-time producer-relationshiptime -c $RT_PRODUCER_SQS_NODE
         createWindow relationship-time consumer-relationshiptime -c $RT_CONSUMER_SQS_PYTHON
         createWindow relationship-time motor-upload -c $RT_UPLOAD
