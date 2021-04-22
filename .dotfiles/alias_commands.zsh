@@ -62,3 +62,5 @@ cd_with_fzf() {
 
 bindkey -s '^o' 'cd_with_fzf \n'
 # bindkey -s '^P' 'open_with_fzf \n'
+
+bindkey -s '^[ ' '!!^M' 

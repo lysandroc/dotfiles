@@ -173,7 +173,6 @@ inoremap <silent> <A-w> <ESC>:w<CR>a
 
 "enable/disable spell checking
 nnoremap <silent> <leader>sp :set spell!<cr>
-inoremap <silent> <leader>sp <C-O>:set spell!<cr>
 
 "coc section
 let g:coc_global_extensions = [
