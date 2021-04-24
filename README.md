@@ -25,6 +25,6 @@ tmux prefix + O -> opens the dotfile project in a new tmux window
 ```
 
 More shortcuts are available inside of alias_commands.zsh
-[alias commands](/.dotfiles/README.md)
+[alias commands](.dotfiles/README.md)
 
 https://www.notion.so/Vim-d575e6a95dff4fb993b39c9f122820b3
