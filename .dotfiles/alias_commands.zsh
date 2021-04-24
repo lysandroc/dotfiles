@@ -50,6 +50,8 @@ ialias ll="exa -l --all"
 ialias l="exa -l --all"
 ialias cat="bat"
 
+alias tree="exa -a --tree --level=2 --long --ignore-glob=\"*.git*\""
+
 # open_with_fzf() {
 #   fd -t f -H -I | fzf -m --preview="xdg-mime query default {}" | xargs -ro -d "\n" xdg-open 2>&-
 # }
