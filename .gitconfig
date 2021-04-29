@@ -6,12 +6,20 @@
 [core]
 	pager = delta
 	editor = nvim
+	autocrlf = false
 [interactive]
-      diffFilter = delta --color-only
+  diffFilter = delta --color-only
 [delta]
   features = side-by-side line-numbers decorations
   whitespace-error-style = 22 reverse
+  plus-color = "#012800"
+  minus-color = "#340001"
+  syntax-theme = Monokai Extended
 [delta "decorations"]
   commit-decoration-style = bold yellow box ul
   file-style = bold yellow ul
   file-decoration-style = none
+[rebase]
+	instructionFormat = (%an <%ae>) %s
+[includeIf "gitdir:~/ia-workspace/"]
+	path = ~/ia-workspace/.gitconfig
