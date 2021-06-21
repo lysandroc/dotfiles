@@ -20,3 +20,5 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-messages -g "!{.gi
 # eval "$(pyenv virtualenv-init -)"
 #
 # export PATH="/usr/local/opt/python@3.8/bin:$PATH"
+
+

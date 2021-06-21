@@ -21,5 +21,6 @@
   file-decoration-style = none
 [rebase]
 	instructionFormat = (%an <%ae>) %s
-[includeIf "gitdir:~/ia-workspace/"]
-	path = ~/ia-workspace/.gitconfig
+
+[includeIf "gitdir:~/natura/"]
+	path = ~/natura/.gitconfig

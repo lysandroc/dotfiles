@@ -18,7 +18,7 @@ endif
 
 call plug#begin(expand('~/.config/nvim/plugged'))
 Plug 'sheerun/vim-polyglot'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } "golang
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -26,7 +26,7 @@ Plug 'morhetz/gruvbox'
 "begin remove
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'stsewd/fzf-checkout.vim'
+" Plug 'stsewd/fzf-checkout.vim'
 "end remove
 Plug 'tpope/vim-surround'
 Plug 'tomtom/tcomment_vim'
@@ -43,6 +43,9 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
 "end telescope stuffs
+
+" Plug 'p00f/nvim-ts-rainbow', {'do': ':TSUpdate'} 
+
 call plug#end()
 
 set number                         " Line numbers
@@ -100,7 +103,7 @@ let NERDTreeShowHidden=1
 "REMOVE FZF.VIM
 nnoremap <c-g> :Rg
 nnoremap <space>rg :Rg <C-R>=expand("<cword>")<CR><CR>
-nnoremap <leader>p :Files<cr>
+nnoremap <leader><c-p> :Files<cr>
 "FZF.vim settings
 let g:fzf_layout = {'window': {'width':0.9,'height':0.8}}
 let $FZF_DEFAULT_OPTS='--layout=reverse'
@@ -178,13 +181,13 @@ nnoremap <silent> <leader>sp :set spell!<cr>
 let g:coc_global_extensions = [
       \ 'coc-tsserver',
       \ 'coc-eslint',
-      \ 'coc-go',
       \ 'coc-json',
       \ 'coc-css',
       \ 'coc-emmet',
       \ 'coc-prettier',
-      \ 'coc-solargraph',
       \ ]
+      " \ 'coc-go', "golang
+      " \ 'coc-metals', "scala
 let g:go_def_mapping_enable=0
 nmap <leader>es :CocCommand eslint.executeAutofix<cr>
 nmap <leader>pr :CocCommand prettier.formatFile<cr>
@@ -216,6 +219,12 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
+
+" function! CocMinimalStatus() abort
+"   return get(g:, 'coc_status', '')
+" endfunction
+" let g:airline_section_c = '%t %#LineNr#%{CocMinimalStatus()}'
+
 "poup mapping
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
@@ -246,6 +255,7 @@ nnoremap <silent><nowait> <space>cl  :<C-u>CocListResume<CR>
 "END COC SECTION
 
 lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
+
 "Telescope settings - it uses dotfiles/.dotfiles/lua/custom/telescope.lua
   lua require("custom")
   nnoremap <leader>sf <cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<cr> 

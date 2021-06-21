@@ -10,10 +10,19 @@ J_BACKEND="$WORKSPACE_3D/jango"
 T_DAL="$WORKSPACE_3D/dal"
 
 WORKSPACE_NATURA="~/natura"
-RT_DOWNLOAD="$WORKSPACE_NATURA/commercial-segmentation-calc-relationship-time"
 RT_UPLOAD="$WORKSPACE_NATURA/commercial-segmentation-upload-recognition"
 RT_CONSUMER_SQS_PYTHON="$WORKSPACE_NATURA/commercial-segmentation-relationship-time"
 RT_PRODUCER_SQS_NODE="$WORKSPACE_NATURA/commercial-segmentation-relationship-time-load-sqs"
+#engine-segmentation
+SEGMENTATION_TITLES_ENGINE="$WORKSPACE_NATURA/segmentation-commercial-titles-engine"
+SEGMENTATION_ACTIVES_ENGINE="$WORKSPACE_NATURA/segmentation-commercial-actives-engine"
+SEGMENTATION_COMMON="$WORKSPACE_NATURA/segmentation-commercial-commons-engine"
+#segmentation
+SEGMENTATION_FRONTEND="$WORKSPACE_NATURA/segmentation-commercial-frontend"
+SEGMENTATION_BACKEND="$WORKSPACE_NATURA/segmentation-commercial-api"
+#malotes
+MALOTES_FRONTEND="$WORKSPACE_NATURA/mpd-commercial-frontend"
+MALOTES_BACKEND="$WORKSPACE_NATURA/gem-commercial-api"
 
 #PERSONAL_SESSION="vimdeathmatch"
 #DEATHMATCH="~/personal/VimDeathmatch/server"
@@ -73,12 +82,27 @@ while [ "$#" -gt 0 ]; do
         createWindow 3DTauron ruby-dal -c $T_DAL
         ;;
 
-    "-rt")
+    "-relationshiptime")
         createSession relationship-time scripts -c $RT_PRODUCER_SQS_NODE \; tmux splitw -t relationship-time:scripts -d -c $RT_CONSUMER_SQS_PYTHON
         createWindow relationship-time producer-relationshiptime -c $RT_PRODUCER_SQS_NODE
         createWindow relationship-time consumer-relationshiptime -c $RT_CONSUMER_SQS_PYTHON
         createWindow relationship-time motor-upload -c $RT_UPLOAD
-        createWindow relationship-time motor-download -c $RT_DOWNLOAD
+        ;;
+    "-engine-segmentation")
+        createSession engine-seg scripts -c $SEGMENTATION_ACTIVES_ENGINE \; tmux splitw -t engine-seg:scripts -d -c $SEGMENTATION_TITLES_ENGINE
+        createWindow engine-seg actives-engine -c $SEGMENTATION_ACTIVES_ENGINE
+        createWindow engine-seg tiltes-engine -c $SEGMENTATION_TITLES_ENGINE
+        createWindow engine-seg common -c $SEGMENTATION_COMMON
+        ;;
+    "-segmentation")
+        createSession segmentation scripts -c $SEGMENTATION_FRONTEND \; tmux splitw -t segmentation:scripts -d -c $SEGMENTATION_BACKEND
+        createWindow segmentation seg-front -c $SEGMENTATION_FRONTEND
+        createWindow segmentation seg-back -c $SEGMENTATION_BACKEND
+        ;;
+    "-malotes")
+        createSession malotes scripts -c $MALOTES_BACKEND \; tmux splitw -t malotes:scripts -d -c $MALOTES_FRONTEND
+        createWindow malotes malotes-front -c $MALOTES_FRONTEND
+        createWindow malotes malotes-back -c $MALOTES_BACKEND
         ;;
     # "--vwm")
     #     createSession $PERSONAL_SESSION primary -c $VWM

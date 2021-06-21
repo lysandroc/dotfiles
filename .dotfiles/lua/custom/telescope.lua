@@ -12,7 +12,8 @@
       mappings = {
         i = {
           ["<esc>"] = actions.close,
-          ["<C-x>"] = false, 
+          ["<C-s>"] = actions.select_horizontal, 
+          ["<C-v>"] = actions.select_vertical, 
           ["<C-q>"] = actions.send_to_qflist,
           ["<C-j>"] = actions.move_selection_next,
           ["<C-k>"] = actions.move_selection_previous,

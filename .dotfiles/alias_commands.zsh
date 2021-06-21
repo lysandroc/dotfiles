@@ -10,7 +10,10 @@ ialias src="source ~/.zshrc"
 
 # alias wd="source ~/dotfiles/.dotfiles/tmux -d"
 # alias wt="source ~/dotfiles/.dotfiles/tmux -t"
-alias wr="source ~/dotfiles/.dotfiles/tmux -rt"
+alias wr="source ~/dotfiles/.dotfiles/tmux -relationshiptime"
+alias wes="source ~/dotfiles/.dotfiles/tmux -engine-segmentation"
+alias ws="source ~/dotfiles/.dotfiles/tmux -segmentation"
+alias wm="source ~/dotfiles/.dotfiles/tmux -malotes"
 # alias proxyon='source ~/.bash_proxyon'
 # alias proxyoff='source ~/.bash_proxyoff'
 alias vs="code-insiders ."
