@@ -7,6 +7,11 @@
 	pager = delta
 	editor = nvim
 	autocrlf = false
+[pager]
+    diff = delta
+    log = delta
+    reflog = delta
+    show = delta
 [interactive]
   diffFilter = delta --color-only
 [delta]
@@ -21,6 +26,5 @@
   file-decoration-style = none
 [rebase]
 	instructionFormat = (%an <%ae>) %s
-
 [includeIf "gitdir:~/natura/"]
 	path = ~/natura/.gitconfig

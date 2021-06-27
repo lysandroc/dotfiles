@@ -2,7 +2,6 @@ Prerequisites
 - tmux, neovim nightly
 - zsh, ohmyzsh, starship
 - asdf
-- neovim
 - fzf, ripgrep, autojump, exa, fd, delta, bat
 
 Clone this repo in the user root folder
