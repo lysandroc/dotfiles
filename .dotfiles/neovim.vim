@@ -100,11 +100,11 @@ let g:gruvbox_material_better_performance = 1
 "NERDTree Settings
 let NERDTreeShowHidden=1
 
-"REMOVE FZF.VIM
+"FZF.vim settings
 nnoremap <c-g> :Rg
 nnoremap <space>rg :Rg <C-R>=expand("<cword>")<CR><CR>
-nnoremap <leader><c-p> :Files<cr>
-"FZF.vim settings
+" nnoremap <c-p> :Files<cr>
+
 let g:fzf_layout = {'window': {'width':0.9,'height':0.8}}
 let $FZF_DEFAULT_OPTS='--layout=reverse'
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
