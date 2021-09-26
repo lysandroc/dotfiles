@@ -26,7 +26,7 @@ Plug 'morhetz/gruvbox'
 "begin remove
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-" Plug 'stsewd/fzf-checkout.vim'
+Plug 'stsewd/fzf-checkout.vim'
 "end remove
 Plug 'tpope/vim-surround'
 Plug 'tomtom/tcomment_vim'
