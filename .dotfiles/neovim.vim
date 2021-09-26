@@ -160,12 +160,15 @@ nnoremap <leader>n :NERDTreeToggle<cr>
 nnoremap <leader>N :NERDTreeFind<cr>
 nnoremap <leader>hl :GitGutterLineNrHighlightsToggle<cr>
 nnoremap <leader><tab> :buffers<CR>:buffer<Space>
+
 "common edit/source nvim without exit to load
 nnoremap <leader>edit :vsplit $MYVIMRC<cr>
 nnoremap <leader>src :x<cr>:source $MYVIMRC<cr>
+
 "common split horizontal/vertical
 nnoremap <leader>sv :ls<cr>:vsp<space>\|<space>b<space>
 nnoremap <leader>sh :ls<cr>:sp<space>\|<space>b<space>
+
 "common to exit
 nnoremap <silent> <A-q> :q<CR>
 nnoremap <silent> <A-x> :x<CR>
@@ -186,8 +189,6 @@ let g:coc_global_extensions = [
       \ 'coc-emmet',
       \ 'coc-prettier',
       \ ]
-      " \ 'coc-go', "golang
-      " \ 'coc-metals', "scala
 let g:go_def_mapping_enable=0
 nmap <leader>es :CocCommand eslint.executeAutofix<cr>
 nmap <leader>pr :CocCommand prettier.formatFile<cr>
@@ -219,11 +220,6 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
-
-" function! CocMinimalStatus() abort
-"   return get(g:, 'coc_status', '')
-" endfunction
-" let g:airline_section_c = '%t %#LineNr#%{CocMinimalStatus()}'
 
 "poup mapping
 inoremap <silent><expr> <TAB>
