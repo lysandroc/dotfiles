@@ -96,10 +96,18 @@ gcof() {
   git checkout $(echo "$BRANCH" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
 }
 
-# last command executed
+watch() {
+  while true; 
+  do 
+    eval $@;
+    sleep 300; 
+  done;
+}
+
 bindkey -s '^[ ' '!!^M' 
 
-bindkey -s '^o' 'cd_with_fzf \n'
-bindkey -s '^P' 'open_with_fzf \n'
-bindkey -s '^G' 'gcof \n'
-bindkey -s '^W' 'gacps -m "working in progress" \n'
+# bindkey -s '^o' 'cd_with_fzf \n'
+# bindkey -s '^P' 'open_with_fzf \n'
+# bindkey -s '^G' 'gcof \n'
+# bindkey -s '^I' 'gacps -m "working in progress" \n'
+# bindkey -s '^W' 'tmux neww -n "teste" watch_auth \n'
