@@ -1,6 +1,6 @@
 Prerequisites 
 - tmux, neovim nightly
-- zsh, zinit, ohmyzsh, starship
+- zsh, zinit, ohmyzsh, zinit, starship
 - asdf
 - fzf, ripgrep, autojump, exa, fd, delta, bat
 

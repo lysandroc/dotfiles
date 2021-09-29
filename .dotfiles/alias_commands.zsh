@@ -14,8 +14,7 @@ alias wr="source ~/dotfiles/.dotfiles/tmux -relationshiptime"
 alias wes="source ~/dotfiles/.dotfiles/tmux -engine-segmentation"
 alias ws="source ~/dotfiles/.dotfiles/tmux -segmentation"
 alias wm="source ~/dotfiles/.dotfiles/tmux -malotes"
-# alias proxyon='source ~/.bash_proxyon'
-# alias proxyoff='source ~/.bash_proxyoff'
+
 alias vs="code-insiders ."
 
 alias vim="nvim"
@@ -55,9 +54,9 @@ ialias cat="bat"
 
 alias tree="exa -a --tree --level=2 --long --ignore-glob=\"*.git*\""
 
-# open_with_fzf() {
-#   fd -t f -H -I | fzf -m --preview="xdg-mime query default {}" | xargs -ro -d "\n" xdg-open 2>&-
-# }
+open_with_fzf() {
+  nvim $(fzf)
+}
 
 cd_with_fzf() {
   local exclude="go"
@@ -65,7 +64,50 @@ cd_with_fzf() {
   cd "$dir"
 }
 
-bindkey -s '^o' 'cd_with_fzf \n'
-# bindkey -s '^P' 'open_with_fzf \n'
+# Commits staged and pushes in one go (e.g. gcps -m "another test passes")
+gcps() {
+  git commit "$@" && git push
+}
+
+# Commits all changes and pushes in one go (e.g. gacps -m "another test passes")
+gacps() {
+  git add -A && gcps
+}
+
+# Rebase and squash all commits on top of master (by default) or can supply another branch as first argument
+gsq() {
+  BRANCH=${1:-master}
+
+  GIT_SEQUENCE_EDITOR='sed -i '' -e "2,\$s/pick/f/"' git rebase -i $BRANCH
+}
+
+# Rebase and squash current commit on top of previous commit
+gsqp() {
+  # We need to pass in the ref of commit that's before the previous commit due to how rebase works
+  gsq $(git rev-parse @~2)
+}
+
+# Checkout from list of branches sorted by most recent commit using fzf
+gcof() {
+  local BRANCHES BRANCH
+
+  BRANCHES=$(git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format="%(refname:short)") &&
+  BRANCH=$(echo "$BRANCHES" | fzf-tmux -d $(( 2 + $(wc -l <<< "$BRANCHES") )) +m) &&
+  git checkout $(echo "$BRANCH" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+}
+
+watch() {
+  while true; 
+  do 
+    eval $@;
+    sleep 300; 
+  done;
+}
 
 bindkey -s '^[ ' '!!^M' 
+
+# bindkey -s '^o' 'cd_with_fzf \n'
+# bindkey -s '^P' 'open_with_fzf \n'
+# bindkey -s '^G' 'gcof \n'
+# bindkey -s '^I' 'gacps -m "working in progress" \n'
+# bindkey -s '^W' 'tmux neww -n "teste" watch_auth \n'

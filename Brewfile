@@ -1,0 +1,17 @@
+tap "caskroom/fonts"
+tap "devhubapp/devhub"
+tap "golangci/tap"
+tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/core"
+tap "homebrew/services"
+brew "mackup"
+brew "mysql@5.7", restart_service: true
+brew "nvm"
+brew "openvpn", restart_service: true
+brew "rabbitmq"
+brew "zsh"
+cask "discord"
+cask "font-fira-code"
+cask "java"
+cask "telegram"
