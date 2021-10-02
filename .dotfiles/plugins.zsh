@@ -19,6 +19,7 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
 zinit light zdharma/fast-syntax-highlighting
 zinit light zdharma/history-search-multi-word
+zinit light chrissicool/zsh-256color
 
 bindkey '^e' autosuggest-accept
 bindkey '^ ' autosuggest-execute
