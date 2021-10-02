@@ -23,6 +23,7 @@ SEGMENTATION_BACKEND="$WORKSPACE_NATURA/segmentation-commercial-api"
 #malotes
 MALOTES_FRONTEND="$WORKSPACE_NATURA/mpd-commercial-frontend"
 MALOTES_BACKEND="$WORKSPACE_NATURA/gem-commercial-api"
+PARAMETER_FRONTEND="$WORKSPACE_NATURA/commercial-parameter-management-grp"
 
 #PERSONAL_SESSION="vimdeathmatch"
 #DEATHMATCH="~/personal/VimDeathmatch/server"
@@ -103,6 +104,7 @@ while [ "$#" -gt 0 ]; do
         createSession malotes scripts -c $MALOTES_BACKEND \; tmux splitw -t malotes:scripts -d -c $MALOTES_FRONTEND
         createWindow malotes malotes-front -c $MALOTES_FRONTEND
         createWindow malotes malotes-back -c $MALOTES_BACKEND
+        createWindow malotes parameter -c $PARAMETER_FRONTEND
         ;;
     # "--vwm")
     #     createSession $PERSONAL_SESSION primary -c $VWM
