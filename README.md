@@ -4,13 +4,11 @@ Prerequisites
 - asdf
 - fzf, ripgrep, autojump, exa, fd, delta, bat
 
-Clone this repo in the user root folder
+
+Linking the dotfiles
 ```
-ln -s ~/dotfiles/.zshrc ~/.zshrc
-ln -s ~/dotfiles/.gitconfig ~/.gitconfig
-ln -s ~/dotfiles/.dotfiles/neovim.vim ~/.config/nvim/init.vim
-ln -s ~/dotfiles/.dotfiles/lua ~/.config/nvim/lua
-ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
+$ cd ~ && git clone https://github.com/lysandroc/dotfiles.git
+$ ./install.sh
 ```
 
 Shortcuts
@@ -24,7 +22,7 @@ ctrl + P -> search and open a file in the current directory (disabled)
 
 tmux prefix + O -> opens the dotfile project in a new tmux window
 ```
-
-### - [alias command available](/.dotfiles/alias_commands.zsh)
-
-### - [vim notes](https://www.notion.so/Vim-d575e6a95dff4fb993b39c9f122820b3)
+ 
+ - [Alias available](/.dotfiles/alias_commands.zsh)
+ - [tmux workspace](/.dotfiles/tmux)
+ - [vim notes](https://www.notion.so/Vim-d575e6a95dff4fb993b39c9f122820b3)
