@@ -1,5 +1,8 @@
-# !/bin/bash
+#!/bin/bash
 set -e
 
 git clone -c core.eol=lf https://github.com/lysandroc/dotfiles ~/dotfiles
-bash ~/dotfiles/setup.sh
+cd ~/dotfiles
+chmod 644 setup.sh
+bash ./setup.sh
+
