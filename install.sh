@@ -3,7 +3,5 @@ set -e
 
 mkdir -p "$HOME/dotfiles" && 
 git clone https://github.com/lysandroc/dotfiles "$HOME/dotfiles" &&
-chmod g-rwX "$HOME/dotfiles" &&
-"./setup.sh"
-
-
+chmod g-rwX "$HOME/dotfiles/setup.sh" &&
+"./dotfiles/setup.sh"
