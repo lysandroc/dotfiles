@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash -x
 set -e
 
 mkdir -p "$HOME/dotfiles"
