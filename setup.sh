@@ -15,4 +15,4 @@ asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 asdf install nodejs 14.18.0
 asdf global nodejs 14.18.0
 
-source ~/.zshrc
+echo "finished, reload your terminal"
