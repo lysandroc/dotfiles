@@ -1,4 +1,4 @@
-# Lysandro's Dotfiles
+# Lysandro's dotfiles
 
 ```
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/lysandroc/dotfiles/main/install.sh)"
