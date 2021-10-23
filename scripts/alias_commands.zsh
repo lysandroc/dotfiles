@@ -87,6 +87,11 @@ gsqp() {
   gsq $(git rev-parse @~2)
 }
 
+gwip() {
+  git add .
+  git commit -m "wip"
+}
+
 # Checkout from list of branches sorted by most recent commit using fzf
 gcof() {
   local BRANCHES BRANCH
