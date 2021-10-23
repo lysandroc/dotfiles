@@ -1,15 +1,6 @@
-Prerequisites 
-- tmux, neovim nightly
-- zsh, zinit, ohmyzsh, zinit, starship
-- asdf
-- fzf, ripgrep, autojump, exa, fd, delta, bat
+# Lysandro's Dotfiles
 
-
-Linking the dotfiles
-```
-$ cd ~ && git clone https://github.com/lysandroc/dotfiles.git
-$ ./install.sh
-```
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/lysandroc/dotfiles/main/install.sh)"
 
 Shortcuts
 ```
