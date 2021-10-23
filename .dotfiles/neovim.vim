@@ -42,9 +42,8 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
+Plug 'p00f/nvim-ts-rainbow', {'do': ':TSUpdate'} 
 "end telescope stuffs
-
-" Plug 'p00f/nvim-ts-rainbow', {'do': ':TSUpdate'} 
 
 call plug#end()
 
@@ -250,10 +249,9 @@ nnoremap <silent><nowait> <space>cp  :<C-u>CocPrev<CR>
 nnoremap <silent><nowait> <space>cl  :<C-u>CocListResume<CR>
 "END COC SECTION
 
-lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
-
 "Telescope settings - it uses dotfiles/.dotfiles/lua/custom/telescope.lua
   lua require("custom")
+
   nnoremap <leader>sf <cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<cr> 
   nnoremap <leader>sh :lua require('telescope.builtin').help_tags()<CR>
   nnoremap <leader>sc :lua require('telescope.builtin').colorscheme()<CR>
