@@ -8,12 +8,12 @@ alias template="source ~/.oh-my-zsh/templates/zshrc.zsh-template"
 ialias edit="nvim ~/.zshrc"
 ialias src="source ~/.zshrc"
 
-# alias wd="source ~/dotfiles/.dotfiles/tmux -d"
-# alias wt="source ~/dotfiles/.dotfiles/tmux -t"
-alias wr="source ~/dotfiles/.dotfiles/tmux -relationshiptime"
-alias wes="source ~/dotfiles/.dotfiles/tmux -engine-segmentation"
-alias ws="source ~/dotfiles/.dotfiles/tmux -segmentation"
-alias wm="source ~/dotfiles/.dotfiles/tmux -malotes"
+# alias wd="source ~/dotfiles/scripts/tmux -d"
+# alias wt="source ~/dotfiles/scripts/tmux -t"
+alias wr="source ~/dotfiles/scripts/tmux -relationshiptime"
+alias wes="source ~/dotfiles/scripts/tmux -engine-segmentation"
+alias ws="source ~/dotfiles/scripts/tmux -segmentation"
+alias wm="source ~/dotfiles/scripts/tmux -malotes"
 
 alias vs="code-insiders ."
 
@@ -43,7 +43,7 @@ alias gs="git status"
 alias gp="git push"
 alias gpf="git push --set-upstream origin \$(git symbolic-ref --short HEAD)"
 
-alias ct="bat ~/dotfiles/.dotfiles/commit-types.txt"
+alias ct="bat ~/dotfiles/scripts/commit-types.txt"
 
 ialias fzf="fzf --color=16 --preview 'bat --style=numbers --color=always {}'"
 

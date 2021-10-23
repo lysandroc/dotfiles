@@ -9,13 +9,13 @@ plugins=(
   tmux
 )
 
-[ -f ~/dotfiles/.dotfiles/plugins.zsh ] && source ~/dotfiles/.dotfiles/plugins.zsh
+[ -f ~/dotfiles/scripts/plugins.zsh ] && source ~/dotfiles/scripts/plugins.zsh
 
 [ -f ~/.autojump/etc/profile.d/autojump.sh ] && source ~/.autojump/etc/profile.d/autojump.sh
 
-[ -f ~/dotfiles/.dotfiles/alias_expansion.zsh ] && source ~/dotfiles/.dotfiles/alias_expansion.zsh
-[ -f ~/dotfiles/.dotfiles/alias_commands.zsh ] && source ~/dotfiles/.dotfiles/alias_commands.zsh
-[ -f ~/dotfiles/.dotfiles/environment_variables.zsh ] && source ~/dotfiles/.dotfiles/environment_variables.zsh
+[ -f ~/dotfiles/scripts/alias_expansion.zsh ] && source ~/dotfiles/scripts/alias_expansion.zsh
+[ -f ~/dotfiles/scripts/alias_commands.zsh ] && source ~/dotfiles/scripts/alias_commands.zsh
+[ -f ~/dotfiles/scripts/environment_variables.zsh ] && source ~/dotfiles/scripts/environment_variables.zsh
 
 [ -f ~/.fzf/shell/completion.zsh ] && source ~/.fzf/shell/completion.zsh
 [ -f ~/.fzf/shell/key-bindings.zsh ] && source ~/.fzf/shell/key-bindings.zsh

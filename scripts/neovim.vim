@@ -249,7 +249,7 @@ nnoremap <silent><nowait> <space>cp  :<C-u>CocPrev<CR>
 nnoremap <silent><nowait> <space>cl  :<C-u>CocListResume<CR>
 "END COC SECTION
 
-"Telescope settings - it uses dotfiles/.dotfiles/lua/custom/telescope.lua
+"Telescope settings - it uses dotfiles/scripts/lua/custom/telescope.lua
   lua require("custom")
 
   nnoremap <leader>sf <cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<cr> 

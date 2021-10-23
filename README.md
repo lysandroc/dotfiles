@@ -15,8 +15,8 @@ Shortcut | Description
 `tmux prefix + O` | opens the dotfile project in a new tmux window
 
 
- [alias](/.dotfiles/alias_commands.zsh)
+ [alias](/scripts/alias_commands.zsh)
 
- [tmux-workspace](/.dotfiles/tmux)
+ [tmux-workspace](/scripts/tmux)
  
  [notes](https://www.notion.so/Vim-d575e6a95dff4fb993b39c9f122820b3)
