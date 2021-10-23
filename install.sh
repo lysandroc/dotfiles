@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
 
-git clone -c core.eol=lf https://github.com/lysandroc/dotfiles ~/dotfiles
-cd ~/dotfiles
-chmod 644 setup.sh
-bash ./setup.sh
+command mkdir -p "$HOME/dotfiles" && command chmod g-rwX "$HOME/dotfiles"
+command git clone https://github.com/lysandroc/dotfiles "$HOME/dotfiles"
+command setup.sh
+
 
