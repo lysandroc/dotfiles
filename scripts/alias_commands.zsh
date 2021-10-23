@@ -70,7 +70,7 @@ gcps() {
 }
 
 # Commits all changes and pushes in one go (e.g. gacps -m "another test passes")
-gacps() {
+gwip() {
   git add -A && gcps
 }
 
@@ -85,11 +85,6 @@ gsq() {
 gsqp() {
   # We need to pass in the ref of commit that's before the previous commit due to how rebase works
   gsq $(git rev-parse @~2)
-}
-
-gwip() {
-  git add .
-  git commit -m "wip"
 }
 
 # Checkout from list of branches sorted by most recent commit using fzf
