@@ -5,7 +5,7 @@
 #############################
 alias template="source ~/.oh-my-zsh/templates/zshrc.zsh-template"
 
-ialias edit="nvim ~/.zshrc"
+ialias edit="nvim ~/.local_settings.zsh"
 ialias src="source ~/.zshrc"
 
 # alias wd="source ~/dotfiles/scripts/tmux -d"
