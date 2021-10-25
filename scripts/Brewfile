@@ -5,6 +5,7 @@ tap "homebrew/core"
 tap "homebrew/services"
 brew "starship"
 brew "zsh"
+brew "zsh-completions"
 brew "neovim", args: ["HEAD"]
 brew "asdf"
 brew "gnupg"

@@ -6,6 +6,9 @@ ln -sfn ~/dotfiles/scripts/neovim.vim ~/.config/nvim/init.vim
 ln -sfn ~/dotfiles/scripts/lua ~/.config/nvim/lua
 ln -sfn ~/dotfiles/scripts/.tmux.conf ~/.tmux.conf
 
+rm -rf "$HOME/.zinit"
+rm -rf "$HOME/.oh-my-zsh"
+
 curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh
 curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
 
@@ -15,4 +18,4 @@ asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 asdf install nodejs 14.18.0
 asdf global nodejs 14.18.0
 
-echo "finished, reload your terminal"
+echo "Finished! Reload your terminal to use the latest setup."
