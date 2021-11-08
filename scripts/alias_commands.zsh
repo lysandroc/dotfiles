@@ -10,10 +10,11 @@ ialias src="source ~/.zshrc"
 
 # alias wd="source ~/dotfiles/scripts/tmux -d"
 # alias wt="source ~/dotfiles/scripts/tmux -t"
-alias wr="source ~/dotfiles/scripts/tmux -relationshiptime"
-alias wes="source ~/dotfiles/scripts/tmux -engine-segmentation"
-alias ws="source ~/dotfiles/scripts/tmux -segmentation"
-alias wm="source ~/dotfiles/scripts/tmux -malotes"
+# alias wr="source ~/dotfiles/scripts/tmux -relationshiptime"
+# alias wes="source ~/dotfiles/scripts/tmux -engine-segmentation"
+alias segmentation="source ~/dotfiles/scripts/tmux -segmentation"
+alias malotes="source ~/dotfiles/scripts/tmux -malotes"
+alias staymap="source ~/dotfiles/scripts/tmux -staymap"
 
 alias vs="code-insiders ."
 
@@ -82,13 +83,13 @@ gsq() {
 }
 
 # Rebase and squash current commit on top of previous commit
-gsqp() {
+gsquash() {
   # We need to pass in the ref of commit that's before the previous commit due to how rebase works
   gsq $(git rev-parse @~2)
 }
 
 # Checkout from list of branches sorted by most recent commit using fzf
-gcof() {
+gcheckout() {
   local BRANCHES BRANCH
 
   BRANCHES=$(git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format="%(refname:short)") &&
@@ -108,6 +109,8 @@ bindkey -s '^[ ' '!!^M'
 
 # bindkey -s '^o' 'cd_with_fzf \n'
 # bindkey -s '^P' 'open_with_fzf \n'
-# bindkey -s '^G' 'gcof \n'
+bindkey -s '^G' 'gcheckout \n'
+bindkey -s '^W' 'staymap \n'
+bindkey -s '^A' 'tmux attach-session \n'
 # bindkey -s '^I' 'gacps -m "working in progress" \n'
 # bindkey -s '^W' 'tmux neww -n "teste" watch_auth \n'

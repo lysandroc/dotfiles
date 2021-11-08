@@ -1,6 +1,3 @@
-#export ZSH="/home/lysandroc/.oh-my-zsh"
-#source $ZSH/oh-my-zsh.sh
-
 plugins=(
   git
   fzf
@@ -20,6 +17,7 @@ plugins=(
 [ -f ~/.fzf/shell/completion.zsh ] && source ~/.fzf/shell/completion.zsh
 [ -f ~/.fzf/shell/key-bindings.zsh ] && source ~/.fzf/shell/key-bindings.zsh
 
+[ -f $(brew --prefix asdf)/libexec/asdf.sh ] && source $(brew --prefix asdf)/libexec/asdf.sh
 [ -f ~/.asdf/asdf.sh ] && source ~/.asdf/asdf.sh
 
 [ -f ~/.local_settings.zsh ] && source ~/.local_settings.zsh

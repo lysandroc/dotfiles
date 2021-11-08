@@ -1,8 +1,6 @@
 [user]
 	email = lysandroc@gmail.com
 	name = Lysandro Carioca
-[delta]
-	side-by-side = true
 [core]
 	pager = delta
 	editor = nvim
@@ -15,6 +13,7 @@
 [interactive]
   diffFilter = delta --color-only
 [delta]
+	side-by-side = true
   features = side-by-side line-numbers decorations
   whitespace-error-style = 22 reverse
   plus-color = "#012800"
@@ -24,6 +23,11 @@
   commit-decoration-style = bold yellow box ul
   file-style = bold yellow ul
   file-decoration-style = none
+  hunk-header-decoration-style = blue box
+  hunk-header-file-style = red
+  hunk-header-line-number-style = "#067a00"
+  hunk-header-style = file line-number syntax
+  commit-style = raw
 [rebase]
 	instructionFormat = (%an <%ae>) %s
 [includeIf "gitdir:~/natura/"]
