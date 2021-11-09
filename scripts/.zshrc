@@ -8,6 +8,7 @@ plugins=(
 
 [ -f ~/dotfiles/scripts/plugins.zsh ] && source ~/dotfiles/scripts/plugins.zsh
 
+[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && source /opt/homebrew/etc/profile.d/autojump.sh
 [ -f ~/.autojump/etc/profile.d/autojump.sh ] && source ~/.autojump/etc/profile.d/autojump.sh
 
 [ -f ~/dotfiles/scripts/alias_expansion.zsh ] && source ~/dotfiles/scripts/alias_expansion.zsh

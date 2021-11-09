@@ -30,7 +30,7 @@ alias tmls="tmux ls"
 alias tmks="tmux kill-session"
 alias tmksv="tmux kill-server"
 
-alias ghp="gh pr create -a lysandro-carioca"
+alias ghpr="gh pr create -a lysandroc"
 
 alias g="git"
 alias gl="git log --graph --decorate --all"
@@ -108,9 +108,6 @@ watch() {
 bindkey -s '^[ ' '!!^M' 
 
 # bindkey -s '^o' 'cd_with_fzf \n'
-# bindkey -s '^P' 'open_with_fzf \n'
+# bindkey -s '^I' 'gwip -m "working in progress" \n'
+bindkey -s '^P' 'source ~/dotfiles/scripts/tmux -openProject \n'
 bindkey -s '^G' 'gcheckout \n'
-bindkey -s '^W' 'staymap \n'
-bindkey -s '^A' 'tmux attach-session \n'
-# bindkey -s '^I' 'gacps -m "working in progress" \n'
-# bindkey -s '^W' 'tmux neww -n "teste" watch_auth \n'
