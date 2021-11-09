@@ -30,11 +30,49 @@ STAY_FRONTEND="$STAY_WORKSPACE/frontend"
 STAY_BACKEND="$STAY_WORKSPACE/backend"
 STAY_DESIGN_SYSTEM="$STAY_WORKSPACE/designsystem"
 
-#PERSONAL_SESSION="vimdeathmatch"
-#DEATHMATCH="~/personal/VimDeathmatch/server"
-#VWM="~/personal/vim-with-me/v3"
-#TVUI="~/work/tvui"
-#TVUI_AUTOMATION="~/work/tvui-automation"
+attach() {
+    session_name=$1
+    tmux has-session -t=$session_name 2> /dev/null
+
+    if [[ $? -ne 0 ]]; then
+        TMUX='' tmux new-session -d -s "$session_name"
+    fi
+
+    if [[ -z "$TMUX" ]]; then
+        tmux attach -t "$session_name"
+    else
+        tmux switch-client -t "$session_name"
+    fi
+}
+
+openProject() {
+    if [[ $# -eq 1 ]]; then
+        selected=$1
+    else
+        selected=$(find ~/projects/stay ~/projects -mindepth 1 -maxdepth 1 -type d | fzf)
+    fi
+
+    if [[ -z $selected ]]; then
+        exit 0
+    fi
+
+    selected_name=$(basename "$selected" | tr . _)
+    tmux_running=$(pgrep tmux)
+    if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+        tmux new-session -s $selected_name -c $selected
+        exit 0
+    fi
+
+    if ! tmux has-session -t $selected_name 2> /dev/null; then
+        tmux new-session -ds $selected_name -c $selected
+    fi
+
+    if [[ -z $TMUX ]]; then
+        tmux attach-session -t $selected_name
+    else
+        tmux switch-client -t $selected_name
+    fi
+}
 
 createWindow() {
     session=$1
@@ -57,10 +95,14 @@ createSession() {
     window=$2
     shift
     shift
-    cmd="tmux new -s $session -d -n $window $@ > /dev/null 2>&1"
 
-    echo "Creating Session: $cmd"
-    eval $cmd
+    if ! tmux has-session -t $session 2> /dev/null; then
+        cmd="tmux new -s $session -d -n $window $@ > /dev/null 2>&1"
+        echo "Creating Session: $cmd"
+        eval $cmd
+    else 
+        echo "Session required already exists: $session"
+    fi
 }
 
 while [ "$#" -gt 0 ]; do
@@ -68,6 +110,9 @@ while [ "$#" -gt 0 ]; do
     shift
 
     case "$curr" in
+    "-openProject")
+        openProject
+        ;;
     "-d")
         #version=$1
         #if [ -z $version ]; then
@@ -87,47 +132,44 @@ while [ "$#" -gt 0 ]; do
         createWindow 3DTauron tauron-api -c $T_BACKEND
         createWindow 3DTauron ruby-dal -c $T_DAL
         ;;
-
     "-relationshiptime")
         createSession relationship-time scripts -c $RT_PRODUCER_SQS_NODE \; tmux splitw -t relationship-time:scripts -d -c $RT_CONSUMER_SQS_PYTHON
         createWindow relationship-time producer-relationshiptime -c $RT_PRODUCER_SQS_NODE
         createWindow relationship-time consumer-relationshiptime -c $RT_CONSUMER_SQS_PYTHON
         createWindow relationship-time motor-upload -c $RT_UPLOAD
+        attach relationship-time
         ;;
     "-engine-segmentation")
         createSession engine-seg scripts -c $SEGMENTATION_ACTIVES_ENGINE \; tmux splitw -t engine-seg:scripts -d -c $SEGMENTATION_TITLES_ENGINE
         createWindow engine-seg actives-engine -c $SEGMENTATION_ACTIVES_ENGINE
         createWindow engine-seg tiltes-engine -c $SEGMENTATION_TITLES_ENGINE
         createWindow engine-seg common -c $SEGMENTATION_COMMON
+        attach engine-seg
         ;;
     "-segmentation")
         createSession segmentation scripts -c $SEGMENTATION_FRONTEND \; tmux splitw -t segmentation:scripts -d -c $SEGMENTATION_BACKEND
         createWindow segmentation seg-front -c $SEGMENTATION_FRONTEND
         createWindow segmentation seg-back -c $SEGMENTATION_BACKEND
+        attach segmentation
         ;;
     "-malotes")
         createSession malotes scripts -c $MALOTES_BACKEND \; tmux splitw -t malotes:scripts -d -c $MALOTES_FRONTEND
         createWindow malotes malotes-front -c $MALOTES_FRONTEND
         createWindow malotes malotes-back -c $MALOTES_BACKEND
         createWindow malotes parameter -c $PARAMETER_FRONTEND
+        attach malotes
         ;;
     "-staymap")
         createSession stay scripts -c $STAY_FRONTEND \; tmux splitw -t stay:scripts -d -c $STAY_BACKEND
         createWindow stay designsystem -c $STAY_DESIGN_SYSTEM
         createWindow stay stay-front -c $STAY_FRONTEND
         createWindow stay stay-back -c $STAY_BACKEND
+        attach stay
         ;;
     # "--vwm")
     #     createSession $PERSONAL_SESSION primary -c $VWM
     #     createWindow $PERSONAL_SESSION vwm -c $VWM "NVIM_LISTEN_ADDRESS=/tmp/nvim2 go run main.go"
     #     ;;
-    #
-    # "--deathmatch")
-    #     createSession $PERSONAL_SESSION primary -c $DEATHMATCH
-    #     createWindow $PERSONAL_SESSION server -c $DEATHMATCH/server "docker-compose up --build"
-    #     tmux next-window -t $PERSONAL_SESSION:primary
-    #     ;;
-
     *) echo "Unavailable workspace... $curr"
     esac
 done
