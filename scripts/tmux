@@ -28,7 +28,9 @@ PARAMETER_FRONTEND="$WORKSPACE_NATURA/commercial-parameter-management-grp"
 STAY_WORKSPACE="~/projects/stay"
 STAY_FRONTEND="$STAY_WORKSPACE/frontend"
 STAY_BACKEND="$STAY_WORKSPACE/backend"
+STAY_API="$STAY_WORKSPACE/api"
 STAY_DESIGN_SYSTEM="$STAY_WORKSPACE/designsystem"
+STAY_GEOCODER="$STAY_WORKSPACE/geocoder"
 
 attach() {
     session_name=$1
@@ -161,9 +163,11 @@ while [ "$#" -gt 0 ]; do
         ;;
     "-staymap")
         createSession stay scripts -c $STAY_FRONTEND \; tmux splitw -t stay:scripts -d -c $STAY_BACKEND
+        createWindow stay front -c $STAY_FRONTEND
+        createWindow stay back -c $STAY_BACKEND
+        createWindow stay api -c $STAY_API
         createWindow stay designsystem -c $STAY_DESIGN_SYSTEM
-        createWindow stay stay-front -c $STAY_FRONTEND
-        createWindow stay stay-back -c $STAY_BACKEND
+        createWindow stay geocoding23 -c $STAY_GEOCODER
         attach stay
         ;;
     # "--vwm")

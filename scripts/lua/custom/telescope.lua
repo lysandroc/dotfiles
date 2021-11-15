@@ -1,6 +1,7 @@
   local actions = require('telescope.actions')
   require('telescope').setup{
     defaults = {
+      file_ignore_patterns = { "node_modules", "vendor" },
       layout_config = {
         prompt_position = "top",
         horizontal = { width = 0.8, width_padding = 1000 },

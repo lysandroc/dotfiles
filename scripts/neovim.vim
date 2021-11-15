@@ -18,16 +18,14 @@ endif
 
 call plug#begin(expand('~/.config/nvim/plugged'))
 Plug 'sheerun/vim-polyglot'
-" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } "golang
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } "golang
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 Plug 'airblade/vim-gitgutter'
 Plug 'morhetz/gruvbox'
-"begin remove
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'stsewd/fzf-checkout.vim'
-"end remove
 Plug 'tpope/vim-surround'
 Plug 'tomtom/tcomment_vim'
 Plug 'sainnhe/gruvbox-material'
@@ -44,6 +42,8 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
 Plug 'p00f/nvim-ts-rainbow', {'do': ':TSUpdate'} 
 "end telescope stuffs
+
+Plug 'github/copilot.vim'
 
 call plug#end()
 
@@ -67,7 +67,7 @@ set shiftwidth=2                   " Auto-indent spaces
 set display+=lastline              " Show last line much as possible
 set guioptions-=T                  " GUI without toolbar
 set path+=**                       " Find recursive when use command :find or :tabfind
-set wildignore+=**/node_modules/** " Excluding folder for :find and :tabfind commands
+set wildignore+=**/node_modules/**,**/vendor/** " Excluding folder for :find and :tabfind commands
 set directory=~/tmp,/var/tmp,/tmp  " Save .swp file in temporary directory
 set exrc                           " Load current folder .vimrc config file
 set secure                         " Prevent :autocmd files in current folder config file
@@ -106,7 +106,7 @@ nnoremap <space>rg :Rg <C-R>=expand("<cword>")<CR><CR>
 
 let g:fzf_layout = {'window': {'width':0.9,'height':0.8}}
 let $FZF_DEFAULT_OPTS='--layout=reverse'
-let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!{.git/*,node_modules,vendor}"'
 command! -bang -nargs=? -complete=dir Files 
   \ call fzf#vim#files(
   \   <q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
@@ -149,6 +149,8 @@ vnoremap <leader>P "+P<CR>
 "git-fugitive
 nnoremap <silent> <leader>gs :G<CR> 
 nnoremap <silent> <leader>gp <ESC>:G push<CR> 
+nnoremap <silent> <leader>gB <ESC>:GBrowse<CR> 
+nnoremap <silent> <leader>gb <ESC>:GBranches<CR> 
 nnoremap <leader>gd :Gvdiffsplit<CR> 
 nnoremap <leader>gl :diffget //3<CR>
 nnoremap <leader>gh :diffget //2<CR>
@@ -191,6 +193,7 @@ let g:coc_global_extensions = [
 let g:go_def_mapping_enable=0
 nmap <leader>es :CocCommand eslint.executeAutofix<cr>
 nmap <leader>pr :CocCommand prettier.formatFile<cr>
+nmap <leader>cr :CocRestart<cr>
 
 inoremap <silent><expr> <c-space> coc#refresh()
 " Use `[g` and `]g` to navigate diagnostics
@@ -259,6 +262,11 @@ nnoremap <silent><nowait> <space>cl  :<C-u>CocListResume<CR>
   nnoremap <leader>sd :lua require('custom.telescope').search_dotfiles()<CR>
   nnoremap <leader>sw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>")  }<CR>
   nnoremap <leader>sg :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep for > ")})<CR>
-  nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
+  nnoremap <C-p> :lua require('custom.telescope-find').find_files()<CR>
   nnoremap <space><Tab> :lua require('telescope.builtin').buffers()<CR>
 "Telescope settings
+
+"Copilot settings
+let g:copilot_no_tab_map = v:true
+imap <silent><script><expr> <C-I> copilot#Accept("\<CR>")
+
