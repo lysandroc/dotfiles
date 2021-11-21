@@ -41,6 +41,10 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
 Plug 'p00f/nvim-ts-rainbow', {'do': ':TSUpdate'} 
+"dap client 
+Plug 'mfussenegger/nvim-dap'
+Plug 'nvim-telescope/telescope-dap.nvim'
+Plug 'theHamsta/nvim-dap-virtual-text'
 "end telescope stuffs
 
 Plug 'github/copilot.vim'
@@ -266,7 +270,25 @@ nnoremap <silent><nowait> <space>cl  :<C-u>CocListResume<CR>
   nnoremap <space><Tab> :lua require('telescope.builtin').buffers()<CR>
 "Telescope settings
 
+"DAP settings
+nnoremap <silent> <F5> :lua require'dap'.continue()<CR>
+nnoremap <silent> <F10> :lua require'dap'.step_over()<CR>
+nnoremap <silent> <F11> :lua require'dap'.step_into()<CR>
+nnoremap <silent> <S-F11> :lua require'dap'.step_out()<CR>
+nnoremap <silent> <leader>b :lua require'dap'.toggle_breakpoint()<CR>
+nnoremap <silent> <leader>B :lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
+nnoremap <silent> <leader>lp :lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
+nnoremap <silent> <leader>dr :lua require'dap'.repl.open()<CR>
+nnoremap <silent> <leader>dl :lua require'dap'.run_last()<CR>
+"TELESCOPE DAP SETTINGS 
+nnoremap <silent> <leader>tf :lua require'telescope'.extensions.dap.frames{}<CR>
+nnoremap <silent> <leader>tc :lua require'telescope'.extensions.dap.commands{}<CR>
+nnoremap <silent> <leader>tC :lua require'telescope'.extensions.dap.configurations{}<CR>
+nnoremap <silent> <leader>tv :lua require'telescope'.extensions.dap.variables{}<CR>
+nnoremap <silent> <leader>tb :lua require'telescope'.extensions.dap.list_breakpoints{}<CR>
+
 "Copilot settings
 let g:copilot_no_tab_map = v:true
-imap <silent><script><expr> <C-I> copilot#Accept("\<CR>")
+imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+
 
