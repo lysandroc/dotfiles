@@ -193,6 +193,8 @@ let g:coc_global_extensions = [
       \ 'coc-css',
       \ 'coc-emmet',
       \ 'coc-prettier',
+      \ 'coc-prettier',
+      \ 'coc-sumneko-lua',
       \ ]
 let g:go_def_mapping_enable=0
 nmap <leader>es :CocCommand eslint.executeAutofix<cr>
@@ -275,31 +277,29 @@ nnoremap <silent><nowait> <space>cp  :<C-u>CocPrev<CR>
 nnoremap <silent><nowait> <space>cl  :<C-u>CocListResume<CR>
 "END COC SECTION
 
+lua require("custom")
+
 "Telescope settings - it uses dotfiles/scripts/lua/custom/telescope.lua
-  lua require("custom")
-
-  nnoremap <leader>sf <cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<cr> 
-  nnoremap <leader>sh :lua require('telescope.builtin').help_tags()<CR>
-  nnoremap <leader>sc :lua require('telescope.builtin').colorscheme()<CR>
-  nnoremap <leader>sb :lua require('telescope.builtin').builtin()<CR>
-  nnoremap <leader>sd :lua require('custom.telescope').search_dotfiles()<CR>
-  nnoremap <leader>sw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>")  }<CR>
-  nnoremap <leader>sg :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep for > ")})<CR>
-  nnoremap <C-p> :lua require('custom.telescope-find').find_files()<CR>
-  nnoremap <space><Tab> :lua require('telescope.builtin').buffers()<CR>
-"Telescope settings
-
+nnoremap <leader>sf <cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<cr> 
+nnoremap <leader>sh :lua require('telescope.builtin').help_tags()<CR>
+nnoremap <leader>sc :lua require('telescope.builtin').colorscheme()<CR>
+nnoremap <leader>sb :lua require('telescope.builtin').builtin()<CR>
+nnoremap <leader>sd :lua require('custom.telescope').search_dotfiles()<CR>
+nnoremap <leader>sw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>")  }<CR>
+nnoremap <leader>sg :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep for > ")})<CR>
+nnoremap <C-p> :lua require('custom.telescope-find').find_files()<CR>
+nnoremap <space><Tab> :lua require('telescope.builtin').buffers()<CR>
 "DAP settings
 nnoremap <silent> <F5> :lua require'dap'.continue()<CR>
 nnoremap <silent> <F10> :lua require'dap'.step_over()<CR>
 nnoremap <silent> <F11> :lua require'dap'.step_into()<CR>
 nnoremap <silent> <S-F11> :lua require'dap'.step_out()<CR>
-nnoremap <silent> <leader>b :lua require'dap'.toggle_breakpoint()<CR>
-nnoremap <silent> <leader>B :lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
+nnoremap <silent> <F9> :lua require'dap'.toggle_breakpoint()<CR>
+nnoremap <silent> <S-F9> :lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
 nnoremap <silent> <leader>lp :lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
 nnoremap <silent> <leader>dr :lua require'dap'.repl.open()<CR>
 nnoremap <silent> <leader>dl :lua require'dap'.run_last()<CR>
-"TELESCOPE DAP SETTINGS 
+"TELESCOPE WITH DAP SETTINGS 
 nnoremap <silent> <leader>tf :lua require'telescope'.extensions.dap.frames{}<CR>
 nnoremap <silent> <leader>tc :lua require'telescope'.extensions.dap.commands{}<CR>
 nnoremap <silent> <leader>tC :lua require'telescope'.extensions.dap.configurations{}<CR>
