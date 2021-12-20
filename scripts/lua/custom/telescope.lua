@@ -59,7 +59,9 @@
         }
       },
       -- find_files = {
-      --   theme = "dropdown"
+      --   theme = "dropdown",
+      --   layout_strategy='vertical',
+      --   layout_config={width=0.8}
       -- }
     },
   }
@@ -78,8 +80,8 @@
             "--files",
             "--hidden",
             "--follow",
-            -- "-g",
-            -- "!.git/*"
+            "-g",
+            "!.git/*"
           }
       })
   end

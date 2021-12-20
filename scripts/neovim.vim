@@ -20,20 +20,20 @@ call plug#begin(expand('~/.config/nvim/plugged'))
 Plug 'sheerun/vim-polyglot'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } "golang
 Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
 Plug 'airblade/vim-gitgutter'
+" THEME
 Plug 'morhetz/gruvbox'
+" common
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-surround'
-Plug 'tomtom/tcomment_vim'
-Plug 'sainnhe/gruvbox-material'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+Plug 'numToStr/Comment.nvim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mattn/emmet-vim'
-
 "telescope stuffs
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -45,7 +45,6 @@ Plug 'p00f/nvim-ts-rainbow', {'do': ':TSUpdate'}
 Plug 'mfussenegger/nvim-dap'
 Plug 'nvim-telescope/telescope-dap.nvim'
 Plug 'theHamsta/nvim-dap-virtual-text'
-"end telescope stuffs
 
 Plug 'github/copilot.vim'
 
@@ -90,15 +89,14 @@ set signcolumn=yes
 
 "theme
 colorscheme gruvbox
+
 if has('termguicolors')
   set termguicolors
 endif
+
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='base16_gruvbox_dark_hard'
 let g:gruvbox_contrast_dark='hard'
-let g:gruvbox_material_background = 'hard'
-let g:gruvbox_material_diagnostic_line_highlight = 1
-let g:gruvbox_material_better_performance = 1
 
 "NERDTree Settings
 let NERDTreeShowHidden=1
@@ -124,7 +122,6 @@ function! RipgrepFzf(query, fullscreen)
 endfunction
 
 command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
-" REMOVE FZF.VIM
 
 "use ctrl+hjkl to move between split/vsplit panels
 tnoremap <A-h> <C-\><C-n><C-w>h
