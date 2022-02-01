@@ -16,18 +16,32 @@
 	side-by-side = true
   features = side-by-side line-numbers decorations
   whitespace-error-style = 22 reverse
+  ; should be deprecated soon
   plus-color = "#012800"
+  ; plus-color = syntax "#012800"
+  ; should be deprecated soon
   minus-color = "#340001"
+  ; minus-color = normal "#340001"
+  ; should be deprecated soon
   syntax-theme = Monokai Extended
+  ;theme = Monokai Extended
 [delta "decorations"]
+  ; should be deprecated soon
+  commit-style = raw
   commit-decoration-style = bold yellow box ul
+  ; commit-color = bold yellow box ul
   file-style = bold yellow ul
+  ; should be deprecated soon
   file-decoration-style = none
+  ; file-color = none
+  ; should be deprecated soon
   hunk-header-decoration-style = blue box
+  ; hunk-style = blue box
   hunk-header-file-style = red
   hunk-header-line-number-style = "#067a00"
+  ; should be deprecated soon
   hunk-header-style = file line-number syntax
-  commit-style = raw
+  ; hunk-color = file line-number syntax
 [rebase]
 	instructionFormat = (%an <%ae>) %s
 [includeIf "gitdir:~/natura/"]
