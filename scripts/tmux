@@ -27,10 +27,13 @@ PARAMETER_FRONTEND="$WORKSPACE_NATURA/commercial-parameter-management-grp"
 
 STAY_WORKSPACE="~/projects/stay"
 STAY_FRONTEND="$STAY_WORKSPACE/frontend"
-STAY_BACKEND="$STAY_WORKSPACE/backend"
 STAY_API="$STAY_WORKSPACE/api"
-STAY_DESIGN_SYSTEM="$STAY_WORKSPACE/designsystem"
 STAY_GEOCODER="$STAY_WORKSPACE/geocoder"
+STAY_HUB="$STAY_WORKSPACE/hub"
+STAY_HUBAPI="$STAY_WORKSPACE/hub-api"
+STAY_DESIGN_SYSTEM="$STAY_WORKSPACE/designsystem"
+STAY_SMARTMAP="$STAY_WORKSPACE/smartmap"
+STAY_OMNISCIENT="$STAY_WORKSPACE/omniscient"
 
 attach() {
     session_name=$1
@@ -162,12 +165,16 @@ while [ "$#" -gt 0 ]; do
         attach malotes
         ;;
     "-staymap")
-        createSession stay scripts -c $STAY_FRONTEND \; tmux splitw -t stay:scripts -d -c $STAY_BACKEND
+        # createSession stay scripts -c $STAY_SMARTMAP \; tmux splitw -t stay:scripts -d -c $STAY_OMNISCIENT
+        # createWindow stay smartmap -c $STAY_SMARTMAP
+        # createWindow stay omniscient -c $STAY_OMNISCIENT
+        # createWindow stay designsystem -c $STAY_DESIGN_SYSTEM
+        createSession stay scripts -c $STAY_FRONTEND
         createWindow stay front -c $STAY_FRONTEND
-        createWindow stay back -c $STAY_BACKEND
-        createWindow stay api -c $STAY_API
-        createWindow stay designsystem -c $STAY_DESIGN_SYSTEM
+        createWindow stay go-api -c $STAY_API
         createWindow stay geocoding23 -c $STAY_GEOCODER
+        createWindow stay hub -c $STAY_HUB
+        createWindow stay hub-api -c $STAY_HUBAPI
         attach stay
         ;;
     # "--vwm")

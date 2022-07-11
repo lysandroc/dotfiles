@@ -4,8 +4,8 @@ require('telescope').load_extension('dap')
 require('nvim-dap-virtual-text').setup()
 
 vim.g.dap_virtual_text = true
-vim.fn.sign_define("DapBreakpoint", { text = "👋", texthl = "", linehl = "", numhl = "" })
-vim.fn.sign_define("DapStopped", { text = "👉", texthl = "", linehl = "", numhl = "" })
+vim.fn.sign_define("DapBreakpoint", { text = "🛑", texthl = "", linehl = "", numhl = "" })
+vim.fn.sign_define("DapStopped", { text = "➡️", texthl = "", linehl = "", numhl = "" })
 
 local dap = require("dap")
 local api = vim.api
@@ -23,18 +23,44 @@ dap.adapters.stayGraphQL = {
 }
 
 dap.configurations.javascript = {
+  -- {
+  --   type = 'node2',
+  --   request = 'launch',
+  --   program = '${file}',
+  --   cwd = vim.fn.getcwd(),
+  --   sourceMaps = true,
+  --   protocol = 'inspector',
+  --   console = 'integratedTerminal',
+  -- },
   {
-    type = 'node2',
-    request = 'launch',
-    program = '${file}',
+    types = 'node2',
+    requrest = 'launch',
+    program = '${workspaceFolder}/${file}',
     cwd = vim.fn.getcwd(),
     sourceMaps = true,
     protocol = 'inspector',
     console = 'integratedTerminal',
   },
+  {
+    type = 'node2',
+    request = 'attach',
+    cwd = vim.fn.getcwd(),
+    sourceMaps = true,
+    protocol = 'inspector',
+    skipFiles = {'<node_internals>/**/*.js'},
+  },
 }
 
 dap.configurations.typescript = {
+  {
+    -- OG frontend
+    type= "node2",
+    request= "attach",
+    name= "OG - attach to process",
+    port= 9229,
+    restart= true,
+    stopOnEntry= false
+  },
   {
     type = "stayGraphQL";
     request = "launch";

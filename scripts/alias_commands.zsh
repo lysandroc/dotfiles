@@ -18,6 +18,7 @@ alias staymap="source ~/dotfiles/scripts/tmux -staymap"
 
 alias vs="code-insiders ."
 
+alias ovim="vim"
 alias vim="nvim"
 alias vi="nvim"
 alias v="nvim"

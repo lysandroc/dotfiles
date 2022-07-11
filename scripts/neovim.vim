@@ -18,7 +18,7 @@ endif
 
 call plug#begin(expand('~/.config/nvim/plugged'))
 Plug 'sheerun/vim-polyglot'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } "golang
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } "golang
 Plug 'scrooloose/nerdtree'
 Plug 'airblade/vim-gitgutter'
 " THEME
@@ -39,12 +39,14 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'p00f/nvim-ts-rainbow', {'do': ':TSUpdate'} 
 "dap client 
 Plug 'mfussenegger/nvim-dap'
 Plug 'nvim-telescope/telescope-dap.nvim'
 Plug 'theHamsta/nvim-dap-virtual-text'
+"migrate this to 
+Plug 'microsoft/vscode-node-debug2'
 
 Plug 'github/copilot.vim'
 
@@ -190,8 +192,7 @@ let g:coc_global_extensions = [
       \ 'coc-css',
       \ 'coc-emmet',
       \ 'coc-prettier',
-      \ 'coc-prettier',
-      \ 'coc-sumneko-lua',
+      "\ 'coc-sumneko-lua',
       \ ]
 let g:go_def_mapping_enable=0
 nmap <leader>es :CocCommand eslint.executeAutofix<cr>
@@ -231,18 +232,18 @@ function! s:show_documentation()
   endif
 endfunction
 
-function! ShowDocIfNoDiagnostic(timer_id)
-  if (coc#float#has_float() == 0 && CocHasProvider('hover') == 1)
-    silent call CocActionAsync('doHover')
-  endif
-endfunction
+" function! ShowDocIfNoDiagnostic(timer_id)
+"  if (coc#float#has_float() == 0 && CocHasProvider('hover') == 1)
+"    silent call CocActionAsync('doHover')
+"  endif
+" endfunction
 
-function! s:show_hover_doc()
-  call timer_start(1500, 'ShowDocIfNoDiagnostic')
-endfunction
+" function! s:show_hover_doc()
+"  call timer_start(1500, 'ShowDocIfNoDiagnostic')
+"endfunction
 
-autocmd CursorHoldI * :call <SID>show_hover_doc()
-autocmd CursorHold * :call <SID>show_hover_doc()
+"autocmd CursorHoldI * :call <SID>show_hover_doc()
+"autocmd CursorHold * :call <SID>show_hover_doc()
 
 "poup mapping
 inoremap <silent><expr> <TAB>

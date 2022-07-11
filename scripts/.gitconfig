@@ -13,6 +13,8 @@
 [interactive]
   diffFilter = delta --color-only
 [delta]
+  ; https://dandavison.github.io/delta/custom-themes.html
+  features = mantis-shrimp-lite
 	side-by-side = true
   features = side-by-side line-numbers decorations
   whitespace-error-style = 22 reverse
@@ -46,3 +48,5 @@
 	instructionFormat = (%an <%ae>) %s
 [includeIf "gitdir:~/natura/"]
 	path = ~/natura/.gitconfig
+[includeIf "gitdir:~/projects/stay/"]
+	path = .gitconfig-stay22
