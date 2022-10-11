@@ -30,10 +30,11 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'numToStr/Comment.nvim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'} " it will be deprecated soon 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mattn/emmet-vim'
+Plug 'b0o/schemastore.nvim'
 "telescope stuffs
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -41,14 +42,20 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'p00f/nvim-ts-rainbow', {'do': ':TSUpdate'} 
-"dap client 
+"lsp/mason/dap
+Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'mfussenegger/nvim-dap'
+Plug 'rcarriga/nvim-dap-ui' 
+Plug 'jose-elias-alvarez/typescript.nvim' " extends tsserver lsp with more commands
+Plug 'folke/lua-dev.nvim'
+" Plug 'theHamsta/nvim-dap-virtual-text'
 Plug 'nvim-telescope/telescope-dap.nvim'
-Plug 'theHamsta/nvim-dap-virtual-text'
-"migrate this to 
-Plug 'microsoft/vscode-node-debug2'
 
-Plug 'github/copilot.vim'
+Plug 'jameshiew/nvim-magic'
+Plug 'MunifTanjim/nui.nvim'
+
 
 call plug#end()
 
@@ -163,6 +170,7 @@ nnoremap <silent> <esc> :noh<return><esc>
 nnoremap <leader>n :NERDTreeToggle<cr>
 nnoremap <leader>N :NERDTreeFind<cr>
 nnoremap <leader>hl :GitGutterLineNrHighlightsToggle<cr>
+"change buffer, the native way
 nnoremap <leader><tab> :buffers<CR>:buffer<Space>
 
 "common edit/source nvim without exit to load
@@ -184,109 +192,37 @@ inoremap <silent> <A-w> <ESC>:w<CR>a
 "enable/disable spell checking
 nnoremap <silent> <leader>sp :set spell!<cr>
 
-"coc section
-let g:coc_global_extensions = [
-      \ 'coc-tsserver',
-      \ 'coc-eslint',
-      \ 'coc-json',
-      \ 'coc-css',
-      \ 'coc-emmet',
-      \ 'coc-prettier',
-      "\ 'coc-sumneko-lua',
-      \ ]
-let g:go_def_mapping_enable=0
-nmap <leader>es :CocCommand eslint.executeAutofix<cr>
-nmap <leader>pr :CocCommand prettier.formatFile<cr>
-nmap <leader>cr :CocRestart<cr>
-
-inoremap <silent><expr> <c-space> coc#refresh()
-" Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-autocmd BufWrite *.ts :CocCommand tsserver.watchBuild
-
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-" Remap keys for applying codeAction to the current buffer.
-nmap <leader>ca  <Plug>(coc-codeaction)
-" Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
-
-" Shows definition on hovering over symbol
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-" function! ShowDocIfNoDiagnostic(timer_id)
-"  if (coc#float#has_float() == 0 && CocHasProvider('hover') == 1)
-"    silent call CocActionAsync('doHover')
-"  endif
-" endfunction
-
-" function! s:show_hover_doc()
-"  call timer_start(1500, 'ShowDocIfNoDiagnostic')
-"endfunction
-
-"autocmd CursorHoldI * :call <SID>show_hover_doc()
-"autocmd CursorHold * :call <SID>show_hover_doc()
-
-"poup mapping
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Show all diagnostics.
-nnoremap <silent><nowait> <space>cd  :<C-u>CocList diagnostics<cr>
-" Manage extensions.
-nnoremap <silent><nowait> <space>ce  :<C-u>CocList extensions<cr>
-" Show commands.
-nnoremap <silent><nowait> <space>cc  :<C-u>CocList commands<cr>
-" Find symbol of current document.
-nnoremap <silent><nowait> <space>co  :<C-u>CocList outline<cr>
-" Search workspace symbols.
-nnoremap <silent><nowait> <space>cs  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent><nowait> <space>cn  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent><nowait> <space>cp  :<C-u>CocPrev<CR>
-" Resume latest coc list.
-nnoremap <silent><nowait> <space>cl  :<C-u>CocListResume<CR>
-"END COC SECTION
+" " Show all diagnostics.
+" nnoremap <silent><nowait> <space>cd  :<C-u>CocList diagnostics<cr>
+" " Manage extensions.
+" nnoremap <silent><nowait> <space>ce  :<C-u>CocList extensions<cr>
+" " Show commands.
+" nnoremap <silent><nowait> <space>cc  :<C-u>CocList commands<cr>
+" " Find symbol of current document.
+" nnoremap <silent><nowait> <space>co  :<C-u>CocList outline<cr>
+" " Search workspace symbols.
+" nnoremap <silent><nowait> <space>cs  :<C-u>CocList -I symbols<cr>
+" " Do default action for next item.
+" nnoremap <silent><nowait> <space>cn  :<C-u>CocNext<CR>
+" " Do default action for previous item.
+" nnoremap <silent><nowait> <space>cp  :<C-u>CocPrev<CR>
+" " Resume latest coc list.
+" nnoremap <silent><nowait> <space>cl  :<C-u>CocListResume<CR>
+" "END COC SECTION
 
 lua require("custom")
 
-"Telescope settings - it uses dotfiles/scripts/lua/custom/telescope.lua
+"Telescope settings
 nnoremap <leader>sf <cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<cr> 
+nnoremap <C-p> :lua require('custom.telescope').find_files()<CR>
+nnoremap <leader>sd :lua require('custom.telescope').search_dotfiles()<CR>
+nnoremap <space><Tab> :lua require('telescope.builtin').buffers()<CR>
+nnoremap <leader>sw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>")  }<CR>
+nnoremap <leader>sg :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep for > ")})<CR>
 nnoremap <leader>sh :lua require('telescope.builtin').help_tags()<CR>
 nnoremap <leader>sc :lua require('telescope.builtin').colorscheme()<CR>
 nnoremap <leader>sb :lua require('telescope.builtin').builtin()<CR>
-nnoremap <leader>sd :lua require('custom.telescope').search_dotfiles()<CR>
-nnoremap <leader>sw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>")  }<CR>
-nnoremap <leader>sg :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep for > ")})<CR>
-nnoremap <C-p> :lua require('custom.telescope-find').find_files()<CR>
-nnoremap <space><Tab> :lua require('telescope.builtin').buffers()<CR>
+
 "DAP settings
 nnoremap <silent> <F5> :lua require'dap'.continue()<CR>
 nnoremap <silent> <F10> :lua require'dap'.step_over()<CR>
@@ -297,6 +233,11 @@ nnoremap <silent> <S-F9> :lua require'dap'.set_breakpoint(vim.fn.input('Breakpoi
 nnoremap <silent> <leader>lp :lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
 nnoremap <silent> <leader>dr :lua require'dap'.repl.open()<CR>
 nnoremap <silent> <leader>dl :lua require'dap'.run_last()<CR>
+"NVIM-DAP-UI
+nnoremap <silent> <leader>dapo :lua require("dapui").open()<CR>
+nnoremap <silent> <leader>dapc :lua require("dapui").close()<CR>
+nnoremap <silent> <leader>dapt :lua require("dapui").toogle()<CR>
+
 "TELESCOPE WITH DAP SETTINGS 
 nnoremap <silent> <leader>tf :lua require'telescope'.extensions.dap.frames{}<CR>
 nnoremap <silent> <leader>tc :lua require'telescope'.extensions.dap.commands{}<CR>
@@ -304,8 +245,9 @@ nnoremap <silent> <leader>tC :lua require'telescope'.extensions.dap.configuratio
 nnoremap <silent> <leader>tv :lua require'telescope'.extensions.dap.variables{}<CR>
 nnoremap <silent> <leader>tb :lua require'telescope'.extensions.dap.list_breakpoints{}<CR>
 
-"Copilot settings
-let g:copilot_no_tab_map = v:true
-imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
-
-
+" Copilot settings
+" let g:copilot_no_tab_map = v:true
+" imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+vnoremap <silent> <C-J> <CMD>:lua require('nvim-magic.flows').append_completion(require('nvim-magic').backends.default)<CR>
+" vmap <silent> <C-J> <CMD>:lua require('nvim-magic.flows').append_completion(require('nvim-magic').backends.default)<CR>
+" vmap <silent> <C-S> <CMD>:lua require('nvim-magic.flows').suggest_alteration(require('nvim-magic').backends.default)<CR>
