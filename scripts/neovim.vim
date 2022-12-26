@@ -30,9 +30,12 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'numToStr/Comment.nvim'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'} " it will be deprecated soon 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
+Plug 'nvim-lualine/lualine.nvim'
+
+
 Plug 'mattn/emmet-vim'
 Plug 'b0o/schemastore.nvim'
 "telescope stuffs
@@ -42,20 +45,26 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'p00f/nvim-ts-rainbow', {'do': ':TSUpdate'} 
-"lsp/mason/dap
+
+"cmp/lsp/mason/dap
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'mfussenegger/nvim-dap'
 Plug 'rcarriga/nvim-dap-ui' 
 Plug 'jose-elias-alvarez/typescript.nvim' " extends tsserver lsp with more commands
-Plug 'folke/lua-dev.nvim'
+Plug 'folke/neodev.nvim'
 " Plug 'theHamsta/nvim-dap-virtual-text'
 Plug 'nvim-telescope/telescope-dap.nvim'
 
 Plug 'jameshiew/nvim-magic'
 Plug 'MunifTanjim/nui.nvim'
 
+Plug  'github/copilot.vim'
 
 call plug#end()
 
@@ -103,15 +112,16 @@ if has('termguicolors')
   set termguicolors
 endif
 
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='base16_gruvbox_dark_hard'
-let g:gruvbox_contrast_dark='hard'
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline_theme='base16_gruvbox_dark_hard'
+" let g:gruvbox_contrast_dark='hard'
 
 "NERDTree Settings
 let NERDTreeShowHidden=1
 
 "FZF.vim settings
-nnoremap <c-g> :Rg
+" nnoremap <c-g> :Rg
+nnoremap <space>/ :Rg<space>
 nnoremap <space>rg :Rg <C-R>=expand("<cword>")<CR><CR>
 " nnoremap <c-p> :Files<cr>
 
@@ -126,7 +136,7 @@ function! RipgrepFzf(query, fullscreen)
   let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
   let initial_command = printf(command_fmt, shellescape(a:query))
   let reload_command = printf(command_fmt, '{q}')
-  letec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
   call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
 endfunction
 
@@ -167,8 +177,8 @@ nnoremap <leader>gh :diffget //2<CR>
 
 "common 
 nnoremap <silent> <esc> :noh<return><esc>
-nnoremap <leader>n :NERDTreeToggle<cr>
-nnoremap <leader>N :NERDTreeFind<cr>
+nnoremap <silent><leader>n :NERDTreeToggle<cr>
+nnoremap <silent><leader>N :NERDTreeFind<cr>
 nnoremap <leader>hl :GitGutterLineNrHighlightsToggle<cr>
 "change buffer, the native way
 nnoremap <leader><tab> :buffers<CR>:buffer<Space>
@@ -246,8 +256,8 @@ nnoremap <silent> <leader>tv :lua require'telescope'.extensions.dap.variables{}<
 nnoremap <silent> <leader>tb :lua require'telescope'.extensions.dap.list_breakpoints{}<CR>
 
 " Copilot settings
-" let g:copilot_no_tab_map = v:true
-" imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
-vnoremap <silent> <C-J> <CMD>:lua require('nvim-magic.flows').append_completion(require('nvim-magic').backends.default)<CR>
+let g:copilot_no_tab_map = v:true
+imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+" vnoremap <silent> <C-J> <CMD>:lua require('nvim-magic.flows').append_completion(require('nvim-magic').backends.default)<CR>
 " vmap <silent> <C-J> <CMD>:lua require('nvim-magic.flows').append_completion(require('nvim-magic').backends.default)<CR>
 " vmap <silent> <C-S> <CMD>:lua require('nvim-magic.flows').suggest_alteration(require('nvim-magic').backends.default)<CR>

@@ -26,14 +26,16 @@ MALOTES_BACKEND="$WORKSPACE_NATURA/gem-commercial-api"
 PARAMETER_FRONTEND="$WORKSPACE_NATURA/commercial-parameter-management-grp"
 
 STAY_WORKSPACE="~/projects/stay"
-STAY_FRONTEND="$STAY_WORKSPACE/frontend"
-STAY_API="$STAY_WORKSPACE/api"
-STAY_GEOCODER="$STAY_WORKSPACE/geocoder"
+STAY_NEW_FRONTEND="$STAY_WORKSPACE/list-view"
+STAY_DESIGN_SYSTEM="$STAY_WORKSPACE/design-system"
 STAY_HUB="$STAY_WORKSPACE/hub"
 STAY_HUBAPI="$STAY_WORKSPACE/hub-api"
-STAY_DESIGN_SYSTEM="$STAY_WORKSPACE/designsystem"
-STAY_SMARTMAP="$STAY_WORKSPACE/smartmap"
-STAY_OMNISCIENT="$STAY_WORKSPACE/omniscient"
+STAY_FRONTEND="$STAY_WORKSPACE/frontend"
+STAY_API="$STAY_WORKSPACE/api"
+STAY_GEOCODER="$STAY_WORKSPACE/frontend"
+# STAY_DESIGN_SYSTEM="$STAY_WORKSPACE/designsystem"
+# STAY_SMARTMAP="$STAY_WORKSPACE/smartmap"
+# STAY_OMNISCIENT="$STAY_WORKSPACE/omniscient"
 
 attach() {
     session_name=$1
@@ -137,45 +139,54 @@ while [ "$#" -gt 0 ]; do
         createWindow 3DTauron tauron-api -c $T_BACKEND
         createWindow 3DTauron ruby-dal -c $T_DAL
         ;;
-    "-relationshiptime")
-        createSession relationship-time scripts -c $RT_PRODUCER_SQS_NODE \; tmux splitw -t relationship-time:scripts -d -c $RT_CONSUMER_SQS_PYTHON
-        createWindow relationship-time producer-relationshiptime -c $RT_PRODUCER_SQS_NODE
-        createWindow relationship-time consumer-relationshiptime -c $RT_CONSUMER_SQS_PYTHON
-        createWindow relationship-time motor-upload -c $RT_UPLOAD
-        attach relationship-time
-        ;;
-    "-engine-segmentation")
-        createSession engine-seg scripts -c $SEGMENTATION_ACTIVES_ENGINE \; tmux splitw -t engine-seg:scripts -d -c $SEGMENTATION_TITLES_ENGINE
-        createWindow engine-seg actives-engine -c $SEGMENTATION_ACTIVES_ENGINE
-        createWindow engine-seg tiltes-engine -c $SEGMENTATION_TITLES_ENGINE
-        createWindow engine-seg common -c $SEGMENTATION_COMMON
-        attach engine-seg
-        ;;
-    "-segmentation")
-        createSession segmentation scripts -c $SEGMENTATION_FRONTEND \; tmux splitw -t segmentation:scripts -d -c $SEGMENTATION_BACKEND
-        createWindow segmentation seg-front -c $SEGMENTATION_FRONTEND
-        createWindow segmentation seg-back -c $SEGMENTATION_BACKEND
-        attach segmentation
-        ;;
-    "-malotes")
-        createSession malotes scripts -c $MALOTES_BACKEND \; tmux splitw -t malotes:scripts -d -c $MALOTES_FRONTEND
-        createWindow malotes malotes-front -c $MALOTES_FRONTEND
-        createWindow malotes malotes-back -c $MALOTES_BACKEND
-        createWindow malotes parameter -c $PARAMETER_FRONTEND
-        attach malotes
-        ;;
-    "-staymap")
-        # createSession stay scripts -c $STAY_SMARTMAP \; tmux splitw -t stay:scripts -d -c $STAY_OMNISCIENT
+    # "-relationshiptime")
+    #     createSession relationship-time scripts -c $RT_PRODUCER_SQS_NODE \; tmux splitw -t relationship-time:scripts -d -c $RT_CONSUMER_SQS_PYTHON
+    #     createWindow relationship-time producer-relationshiptime -c $RT_PRODUCER_SQS_NODE
+    #     createWindow relationship-time consumer-relationshiptime -c $RT_CONSUMER_SQS_PYTHON
+    #     createWindow relationship-time motor-upload -c $RT_UPLOAD
+    #     attach relationship-time
+    #     ;;
+    # "-engine-segmentation")
+    #     createSession engine-seg scripts -c $SEGMENTATION_ACTIVES_ENGINE \; tmux splitw -t engine-seg:scripts -d -c $SEGMENTATION_TITLES_ENGINE
+    #     createWindow engine-seg actives-engine -c $SEGMENTATION_ACTIVES_ENGINE
+    #     createWindow engine-seg tiltes-engine -c $SEGMENTATION_TITLES_ENGINE
+    #     createWindow engine-seg common -c $SEGMENTATION_COMMON
+    #     attach engine-seg
+    #     ;;
+    # "-segmentation")
+    #     createSession segmentation scripts -c $SEGMENTATION_FRONTEND \; tmux splitw -t segmentation:scripts -d -c $SEGMENTATION_BACKEND
+    #     createWindow segmentation seg-front -c $SEGMENTATION_FRONTEND
+    #     createWindow segmentation seg-back -c $SEGMENTATION_BACKEND
+    #     attach segmentation
+    #     ;;
+    # "-malotes")
+    #     createSession malotes scripts -c $MALOTES_BACKEND \; tmux splitw -t malotes:scripts -d -c $MALOTES_FRONTEND
+    #     createWindow malotes malotes-front -c $MALOTES_FRONTEND
+    #     createWindow malotes malotes-back -c $MALOTES_BACKEND
+    #     createWindow malotes parameter -c $PARAMETER_FRONTEND
+    #     attach malotes
+    #     ;;
+    "-listview")
+        createSession listview scripts -c $STAY_NEW_FRONTEND \; tmux splitw -t listview:scripts -d -c $STAY_DESIGN_SYSTEM
         # createWindow stay smartmap -c $STAY_SMARTMAP
         # createWindow stay omniscient -c $STAY_OMNISCIENT
         # createWindow stay designsystem -c $STAY_DESIGN_SYSTEM
-        createSession stay scripts -c $STAY_FRONTEND
-        createWindow stay front -c $STAY_FRONTEND
-        createWindow stay go-api -c $STAY_API
-        createWindow stay geocoding23 -c $STAY_GEOCODER
-        createWindow stay hub -c $STAY_HUB
-        createWindow stay hub-api -c $STAY_HUBAPI
-        attach stay
+        createWindow listview fe -c $STAY_NEW_FRONTEND
+        createWindow listview ds -c $STAY_DESIGN_SYSTEM
+        attach listview
+        ;;
+    "-og")
+        createSession staymap scripts -c $STAY_FRONTEND \; #tmux splitw -t staymap:scripts -d -c $STAY_HUBAPI
+        createWindow staymap OG -c $STAY_FRONTEND
+        createWindow staymap API -c $STAY_API
+        createWindow staymap geocoding23 -c $STAY_GEOCODER
+        attach staymap
+        ;;
+    "-hub")
+        createSession stayhub scripts -c $STAY_HUB \; tmux splitw -t stayhub:scripts -d -c $STAY_HUBAPI
+        createWindow stayhub hub -c $STAY_HUB
+        createWindow stayhub hub-api -c $STAY_HUBAPI
+        attach stayhub
         ;;
     # "--vwm")
     #     createSession $PERSONAL_SESSION primary -c $VWM

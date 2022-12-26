@@ -26,6 +26,7 @@ function M.setup(servers, options)
   require("mason-lspconfig").setup_handlers {
     function(server_name)
       local opts = vim.tbl_deep_extend("force", options, servers[server_name] or {})
+      -- already has the capabilities and on_attach from the mason-config file
       lspconfig[server_name].setup { opts }
     end,
     ["tsserver"] = function()
@@ -38,7 +39,7 @@ function M.setup(servers, options)
     end,
     ["sumneko_lua"] = function()
       local opts = vim.tbl_deep_extend("force", options, servers["sumneko_lua"] or {})
-      lspconfig.sumneko_lua.setup(require("lua-dev").setup { opts })
+      lspconfig.sumneko_lua.setup(require("neodev").setup { opts })
     end,
     -- ["rust_analyzer"] = function()
     --   local opts = vim.tbl_deep_extend("force", options, servers["rust_analyzer"] or {})
