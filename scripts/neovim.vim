@@ -23,6 +23,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'airblade/vim-gitgutter'
 " THEME
 Plug 'morhetz/gruvbox'
+
 " common
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -31,10 +32,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'numToStr/Comment.nvim'
 
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
 Plug 'nvim-lualine/lualine.nvim'
-
+" Plug 'kyazdani42/nvim-web-devicons'
+Plug 'SmiteshP/nvim-navic'
 
 Plug 'mattn/emmet-vim'
 Plug 'b0o/schemastore.nvim'
@@ -112,9 +112,9 @@ if has('termguicolors')
   set termguicolors
 endif
 
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline_theme='base16_gruvbox_dark_hard'
-" let g:gruvbox_contrast_dark='hard'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='base16_gruvbox_dark_hard'
+let g:gruvbox_contrast_dark='hard'
 
 "NERDTree Settings
 let NERDTreeShowHidden=1

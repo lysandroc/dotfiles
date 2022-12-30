@@ -1,3 +1,6 @@
+local navic = require "nvim-navic"
+
+-- This module needs to be loaded before the lsp autocompletion definition
 require("custom.autocompletion").setup()
 
 -- READ
@@ -187,6 +190,11 @@ function M.on_attach(client, bufnr)
 
   -- Configure formatting
   -- require("config.lsp.null-ls.formatters").setup(client, bufnr)
+  
+  -- nvim-navic
+  if client.server_capabilities.documentSymbolProvider then
+    navic.attach(client, bufnr)
+  end
 
   -- tagfunc
   if client.server_capabilities.definitionProvider then
