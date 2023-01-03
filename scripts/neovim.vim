@@ -121,9 +121,9 @@ let NERDTreeShowHidden=1
 
 "FZF.vim settings
 " nnoremap <c-g> :Rg
+" nnoremap <c-p> :Files<cr>
 nnoremap <space>/ :Rg<space>
 nnoremap <space>rg :Rg <C-R>=expand("<cword>")<CR><CR>
-" nnoremap <c-p> :Files<cr>
 
 let g:fzf_layout = {'window': {'width':0.9,'height':0.8}}
 let $FZF_DEFAULT_OPTS='--layout=reverse'
@@ -136,7 +136,7 @@ function! RipgrepFzf(query, fullscreen)
   let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
   let initial_command = printf(command_fmt, shellescape(a:query))
   let reload_command = printf(command_fmt, '{q}')
-  spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
   call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
 endfunction
 
@@ -202,24 +202,6 @@ inoremap <silent> <A-w> <ESC>:w<CR>a
 "enable/disable spell checking
 nnoremap <silent> <leader>sp :set spell!<cr>
 
-" " Show all diagnostics.
-" nnoremap <silent><nowait> <space>cd  :<C-u>CocList diagnostics<cr>
-" " Manage extensions.
-" nnoremap <silent><nowait> <space>ce  :<C-u>CocList extensions<cr>
-" " Show commands.
-" nnoremap <silent><nowait> <space>cc  :<C-u>CocList commands<cr>
-" " Find symbol of current document.
-" nnoremap <silent><nowait> <space>co  :<C-u>CocList outline<cr>
-" " Search workspace symbols.
-" nnoremap <silent><nowait> <space>cs  :<C-u>CocList -I symbols<cr>
-" " Do default action for next item.
-" nnoremap <silent><nowait> <space>cn  :<C-u>CocNext<CR>
-" " Do default action for previous item.
-" nnoremap <silent><nowait> <space>cp  :<C-u>CocPrev<CR>
-" " Resume latest coc list.
-" nnoremap <silent><nowait> <space>cl  :<C-u>CocListResume<CR>
-" "END COC SECTION
-
 lua require("custom")
 
 "Telescope settings
@@ -257,7 +239,8 @@ nnoremap <silent> <leader>tb :lua require'telescope'.extensions.dap.list_breakpo
 
 " Copilot settings
 let g:copilot_no_tab_map = v:true
-imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+imap <silent><script><expr> <Tab> copilot#Accept("\<CR>")
+
 " vnoremap <silent> <C-J> <CMD>:lua require('nvim-magic.flows').append_completion(require('nvim-magic').backends.default)<CR>
 " vmap <silent> <C-J> <CMD>:lua require('nvim-magic.flows').append_completion(require('nvim-magic').backends.default)<CR>
 " vmap <silent> <C-S> <CMD>:lua require('nvim-magic.flows').suggest_alteration(require('nvim-magic').backends.default)<CR>

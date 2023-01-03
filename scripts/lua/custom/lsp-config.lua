@@ -3,12 +3,16 @@ local navic = require "nvim-navic"
 -- This module needs to be loaded before the lsp autocompletion definition
 require("custom.autocompletion").setup()
 
--- READ
--- https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion
+-- mason-config.lua module reads the mason_plugins_name property to install the depentend plugins
 local servers = {
-  gopls = {},
-  html = {},
+  ["lsp-name-for-js-debug-adapter?"] = {
+    mason_plugins_name = "js-debug-adapter",
+  },
+  gopls = {
+    mason_plugins_name = "gopls",
+  },
   jsonls = {
+    mason_plugins_name = "jsonlint json-lsp",
     settings = {
       json = {
         schemas = require("schemastore").json.schemas(),
@@ -16,24 +20,14 @@ local servers = {
       },
     },
   },
-  pyright = {
-    analysis = {
-      typeCheckingMode = "off",
-    },
-  },
   ---- pylsp = {}, -- Integration with rope for refactoring - https://github.com/python-rope/pylsp-rope
-  -- rust_analyzer = {
-  --   settings = {
-  --     ["rust-analyzer"] = {
-  --       cargo = { allFeatures = true },
-  --       checkOnSave = {
-  --         command = "clippy",
-  --         extraArgs = { "--no-deps" },
-  --       },
-  --     },
-  --   },
-  -- },
+  pyright = {
+    mason_plugins_name = "pyright",
+    analysis = {
+      typeCheckingMode = "off", },
+  },
   sumneko_lua = {
+    mason_plugins_name = "stylua lua-language-server",
     settings = {
       Lua = {
         runtime = {
@@ -63,6 +57,7 @@ local servers = {
     },
   },
   -- eslint = {
+    -- mason_plugins_name = "eslint",
   --   filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
   --   rootPatterns = { ".eslintrc.js", ".eslintrc.json", ".eslintrc.yaml", ".eslintrc.yml", ".eslintrc", "package.json" },
   --   settings = {
@@ -75,6 +70,7 @@ local servers = {
   --   },
   -- },
   tsserver = {
+    mason_plugins_name = "typescript-language-server",
     disable_formatting = true,
     commands = {
       TSServerOrganizeImports = {
@@ -109,9 +105,8 @@ local servers = {
       },
     },
   },
-  vimls = {},
-  tailwindcss = {},
   yamlls = {
+    mason_plugins_name = "yaml-language-server",
     schemastore = {
       enable = true,
     },
@@ -124,6 +119,23 @@ local servers = {
       },
     },
   },
+  vimls = {
+    mason_plugins_name = "vim-language-server"
+  },
+  -- rust_analyzer = {
+    -- mason_plugins_name = "rust_analyzer",
+  --   settings = {
+  --     ["rust-analyzer"] = {
+  --       cargo = { allFeatures = true },
+  --       checkOnSave = {
+  --         command = "clippy",
+  --         extraArgs = { "--no-deps" },
+  --       },
+  --     },
+  --   },
+  -- },
+  -- tailwindcss = {},
+  -- html = {},
   -- jdtls = {},
   -- dockerls = {},
   -- graphql = {},
@@ -168,6 +180,7 @@ function M.on_attach(client, bufnr)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action,  { noremap=true, silent=true, buffer=bufnr, desc="Code action" })
   vim.keymap.set('n', 'gr', vim.lsp.buf.references,  { noremap=true, silent=true, buffer=bufnr, desc="References" })
   vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting,  { noremap=true, silent=true, buffer=bufnr, desc="Format" })
+  
   -- shortcut for tsserver lsp
   vim.keymap.set('n', '<space>toi', ':TSServerOrganizeImports<CR>', { noremap=true, silent=true, buffer=bufnr, desc="Organize typescript imports" })
   -- telescope integration
@@ -234,9 +247,6 @@ function M.setup()
 
   -- Installer
   require("custom.mason-config").setup(servers, opts)
-
-  -- Inlay hints
-  -- require("config.lsp.inlay-hints").setup()
 end
 
 local diagnostics_active = true

@@ -13,11 +13,29 @@ function M.setup(servers, options)
     }
   })
 
+  local Package = require "mason-core.package"
+  local registry = require "mason-registry"
+  for _,value in pairs(servers) do
+    if (value.mason_plugins_name ~= nil and value.mason_plugins_name ~= "") then
+      local regular_exp_split_by_space = "([^%s]+)"
+      -- get the plugins required for each LSP server
+      for server in string.gmatch(value.mason_plugins_name, regular_exp_split_by_space) do
+        -- check if whether is installed or not
+        if server ~= nil and not registry.is_installed(server) then
+          local package_name, version = Package.Parse(server)
+          local pkg = registry.get_package(package_name)
+          -- It will install plugin
+          pkg:install { version = version, debug = true }
+        end
+      end
+    end
+  end
+
   require("mason-lspconfig").setup {
+    -- get the LSP's servers name
     ensure_installed = vim.tbl_keys(servers),
-    automatic_installation= false,
+    automatic_installation= true,
     auto_update = false,
-    --   ensure_installed = { "codelldb", "stylua", "shfmt", "shellcheck", "black", "isort", "prettierd" },
   }
 
   -- Package installation folder
