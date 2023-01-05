@@ -31,6 +31,7 @@ function M.setup(servers, options)
     end
   end
 
+  -- https://github.com/williamboman/mason-lspconfig.nvim#default-configuration
   require("mason-lspconfig").setup {
     -- get the LSP's servers name
     ensure_installed = vim.tbl_keys(servers),

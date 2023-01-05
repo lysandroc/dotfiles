@@ -6,10 +6,8 @@ require("custom.autocompletion").setup()
 -- mason-config.lua module reads the mason_plugins_name property to install the depentend plugins
 local servers = {
   ["lsp-name-for-js-debug-adapter?"] = {
+    -- https://github.com/mxsdev/nvim-dap-vscode-js
     mason_plugins_name = "js-debug-adapter",
-  },
-  gopls = {
-    mason_plugins_name = "gopls",
   },
   jsonls = {
     mason_plugins_name = "jsonlint json-lsp",
@@ -122,6 +120,9 @@ local servers = {
   vimls = {
     mason_plugins_name = "vim-language-server"
   },
+  -- gopls = {
+  --   mason_plugins_name = "gopls",
+  -- },
   -- rust_analyzer = {
     -- mason_plugins_name = "rust_analyzer",
   --   settings = {

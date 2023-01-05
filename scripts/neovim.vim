@@ -40,7 +40,7 @@ Plug 'mattn/emmet-vim'
 Plug 'b0o/schemastore.nvim'
 "telescope stuffs
 Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lua/plenary.nvim' "It is also used in mason/js-debug-adapter
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -55,10 +55,12 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'mfussenegger/nvim-dap'
+Plug 'mxsdev/nvim-dap-vscode-js'
+Plug 'mortepau/codicons.nvim'
 Plug 'rcarriga/nvim-dap-ui' 
 Plug 'jose-elias-alvarez/typescript.nvim' " extends tsserver lsp with more commands
 Plug 'folke/neodev.nvim'
-" Plug 'theHamsta/nvim-dap-virtual-text'
+Plug 'theHamsta/nvim-dap-virtual-text'
 Plug 'nvim-telescope/telescope-dap.nvim'
 
 Plug 'jameshiew/nvim-magic'
@@ -204,6 +206,10 @@ nnoremap <silent> <leader>sp :set spell!<cr>
 
 lua require("custom")
 
+" Copilot settings
+let g:copilot_no_tab_map = v:true
+imap <silent><script><expr> <Tab> copilot#Accept("\<CR>")
+
 "Telescope settings
 nnoremap <leader>sf <cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<cr> 
 nnoremap <C-p> :lua require('custom.telescope').find_files()<CR>
@@ -237,10 +243,18 @@ nnoremap <silent> <leader>tC :lua require'telescope'.extensions.dap.configuratio
 nnoremap <silent> <leader>tv :lua require'telescope'.extensions.dap.variables{}<CR>
 nnoremap <silent> <leader>tb :lua require'telescope'.extensions.dap.list_breakpoints{}<CR>
 
-" Copilot settings
-let g:copilot_no_tab_map = v:true
-imap <silent><script><expr> <Tab> copilot#Accept("\<CR>")
 
-" vnoremap <silent> <C-J> <CMD>:lua require('nvim-magic.flows').append_completion(require('nvim-magic').backends.default)<CR>
-" vmap <silent> <C-J> <CMD>:lua require('nvim-magic.flows').append_completion(require('nvim-magic').backends.default)<CR>
-" vmap <silent> <C-S> <CMD>:lua require('nvim-magic.flows').suggest_alteration(require('nvim-magic').backends.default)<CR>
+" test delete later
+" noremap <leader>dh :lua require'dap'.toggle_breakpoint)<CR> 
+" noremap <S-k> :lua require 'dap'.step_out ()<CR> 
+" noremap <S-1> :lua require'dap'.step_into()<CR> 
+" noremap <S-j> :lua require'dap'.step_over() <CR> 
+" noremap <leader>dn :lua require'dap'.continue() <CR> 
+" noremap <Leader>d_ :lua require'dap'.run_last() <CR> 
+" noremap <leader>dr :lua require'dap'.repl.open({}, 'vsplit')<CR><C-w>l
+" noremap <leader>di :lua require'dap.ui.variables'.hover.(function () return vim.fn.expand("<cexpr›") end)<CR> 
+" vnoremap <Leader>di :lua require'dap.ui.variables'.visual_hover()<CR> 
+" noremap <Leader>d? :lua require'dap.ui.variables'.scopes()<CR> 
+" noremap <leader>de :lua require'dap'.set_exception_breakpoints({"all"}) <CR>
+" " noremap <leader>da :lua require'debugHelper'.attach()<CR>
+

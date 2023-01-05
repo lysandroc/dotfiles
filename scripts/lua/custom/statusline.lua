@@ -20,10 +20,17 @@ M.setup = function ()
       globalstatus = true,
       disabled_filetypes = {
         statusline = {},
-        winbar = {},
+        winbar = {
+          "dap-repl",
+          "dapui_console",
+          "dapui_watches",
+          "dapui_stacks",
+          "dapui_breakpoints",
+          "dapui_scopes",
+        },
       },
     },
-    extensions = { "nvim-tree", "toggleterm", "quickfix", "fugitive", "nvim-dap-ui" },
+    extensions = { "nerdtree", "fzf", "symbols-outline", "nvim-tree", "toggleterm", "quickfix", "fugitive", "nvim-dap-ui" },
     sections = {
       -- always use the bg from the theme to define the color's mode
       lualine_a = { { "mode", color = { bg = theme.insert.a.bg } } },
@@ -35,12 +42,15 @@ M.setup = function ()
           sources = { "nvim_diagnostic" },
           symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'},
           -- colored = true,
+          on_click = function()
+            vim.diagnostic.setloclist()
+          end,
         },
       },
       lualine_c = {
         {
           function (opt)
-            opt.icons = {}
+            -- opt.icons = {}
             opt.highlight = false
             opt.separator = " > "
             opt.depth_limit = 5
