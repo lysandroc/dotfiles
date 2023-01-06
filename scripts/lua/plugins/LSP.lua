@@ -1,9 +1,9 @@
 local navic = require "nvim-navic"
 
 -- This module needs to be loaded before the lsp autocompletion definition
-require("custom.autocompletion").setup()
+require("plugins.autocompletion").setup()
 
--- mason-config.lua module reads the mason_plugins_name property to install the depentend plugins
+-- mason.lua module reads the mason_plugins_name property to install the depentend plugins
 local servers = {
   ["lsp-name-for-js-debug-adapter?"] = {
     -- https://github.com/mxsdev/nvim-dap-vscode-js
@@ -247,7 +247,7 @@ function M.setup()
   -- require("config.lsp.null-ls").setup(opts)
 
   -- Installer
-  require("custom.mason-config").setup(servers, opts)
+  require("plugins.mason").setup(servers, opts)
 end
 
 local diagnostics_active = true

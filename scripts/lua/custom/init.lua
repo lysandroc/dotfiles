@@ -1,6 +1,0 @@
-require("custom.statusline").setup()
-require("custom.telescope").setup()
-require("custom.treesitter-configs").setup()
-require("custom.lsp-config").setup()
-require("custom.dap").setup()
-require("custom.comment").setup()

@@ -13,6 +13,7 @@ function M.setup(servers, options)
     }
   })
 
+  -- It will install mason plugins defined in the servers variable from LSP servers definition
   local Package = require "mason-core.package"
   local registry = require "mason-registry"
   for _,value in pairs(servers) do
@@ -45,14 +46,18 @@ function M.setup(servers, options)
   require("mason-lspconfig").setup_handlers {
     function(server_name)
       local opts = vim.tbl_deep_extend("force", options, servers[server_name] or {})
-      -- already has the capabilities and on_attach from the mason-config file
+      -- already has the capabilities and on_attach from the mason.lua file
       lspconfig[server_name].setup { opts }
     end,
     ["tsserver"] = function()
       local opts = vim.tbl_deep_extend("force", options, servers["tsserver"] or {})
+      -- https://github.com/jose-elias-alvarez/typescript.nvim
       require("typescript").setup {
         disable_commands = false,
         debug = false,
+        go_to_source_definition = {
+          fallback = true, -- fall back to standard LSP definition on failure
+        },
         server = opts,
       }
     end,
