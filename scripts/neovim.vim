@@ -1,8 +1,5 @@
 let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
 
-let g:vim_bootstrap_langs = "go,html,javascript,typescript"
-let g:vim_bootstrap_editor = "nvim"				" nvim or vim
-
 if !filereadable(vimplug_exists)
   if !executable("curl")
     echoerr "You have to install curl or first install vim-plug yourself!"
@@ -70,55 +67,7 @@ Plug  'github/copilot.vim'
 
 call plug#end()
 
-" set number                         " Line numbers
-" set spelllang=en_us                " dictionary
-" set linebreak                      " Break line without break word
-" set smartcase                      " If have any uppercase, active case sensitive
-" set gdefault                       " Always substitute all letters, dont just first
-" set smartindent                    " Auto-indent
-" set cursorline                     " Active line with other color
-" set incsearch                      " Find when you typing
-" set tags=tags;                     " Use ctags file in current directory or parent
-" set backspace=2                    " Default backspace behaviour
-" set wildmode=full                  " Command complete display all list
-" set wildchar=<Tab> wildmenu        " Autocomplete commands on command mode
-" set mouse=a                        " Mouse will use vim behavior
-" set hidden                         " To edit multiple buffers without save
-" set expandtab                      " Indent with white spaces
-" set tabstop=2                      " Indent spaces
-" set shiftwidth=2                   " Auto-indent spaces
-" set display+=lastline              " Show last line much as possible
-" set guioptions-=T                  " GUI without toolbar
-" set path+=**                       " Find recursive when use command :find or :tabfind
-" set wildignore+=**/node_modules/**,**/vendor/** " Excluding folder for :find and :tabfind commands
-" set directory=~/tmp,/var/tmp,/tmp  " Save .swp file in temporary directory
-" set exrc                           " Load current folder .vimrc config file
-" set secure                         " Prevent :autocmd files in current folder config file
-" set encoding=utf-8
-" set splitbelow                     " Always create splits below or to the right
-" set splitright                     " Always create splits below or to the right
-" set background=dark
-" set undofile                       " Vim undo persists after file is closed
-" set undodir=$HOME/.vimdid/         " Directory where state will be saved
-" set inccommand=nosplit             " Updates in realtime like :s/old/new
-" set ignorecase                     " Ignore word case on search
-" set scrolloff=3                    " M
-" set number relativenumber         " turn hybrid line numbers on
-" "set colorcolumn=80
-" set signcolumn=yes
-
 lua require("core.options")
-
-"theme
-colorscheme gruvbox
-
-if has('termguicolors')
-  set termguicolors
-endif
-
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='base16_gruvbox_dark_hard'
-let g:gruvbox_contrast_dark='hard'
 
 "NERDTree Settings
 let NERDTreeShowHidden=1
@@ -210,7 +159,7 @@ lua require("plugins")
 
 " Copilot settings
 let g:copilot_no_tab_map = v:true
-imap <silent><script><expr> <Tab> copilot#Accept("\<CR>")
+imap <silent><script><expr> <space><Tab> copilot#Accept("\<CR>")
 
 "Telescope settings
 nnoremap <leader>sf <cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<cr> 
@@ -245,7 +194,6 @@ nnoremap <silent> <leader>tC :lua require'telescope'.extensions.dap.configuratio
 nnoremap <silent> <leader>tv :lua require'telescope'.extensions.dap.variables{}<CR>
 nnoremap <silent> <leader>tb :lua require'telescope'.extensions.dap.list_breakpoints{}<CR>
 
-
 " test delete later
 " noremap <leader>dh :lua require'dap'.toggle_breakpoint)<CR> 
 " noremap <S-k> :lua require 'dap'.step_out ()<CR> 
@@ -259,4 +207,3 @@ nnoremap <silent> <leader>tb :lua require'telescope'.extensions.dap.list_breakpo
 " noremap <Leader>d? :lua require'dap.ui.variables'.scopes()<CR> 
 " noremap <leader>de :lua require'dap'.set_exception_breakpoints({"all"}) <CR>
 " " noremap <leader>da :lua require'debugHelper'.attach()<CR>
-

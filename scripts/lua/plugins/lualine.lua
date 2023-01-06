@@ -1,6 +1,4 @@
 local lualine = require('lualine')
-local theme = require('lualine.themes.gruvbox-material')
-
 local navic = require('nvim-navic')
 
 -- mimic the exact green color from my gruvbox theme
@@ -15,25 +13,17 @@ M.setup = function ()
   lualine.setup {
     options = {
       icons_enabled = false,
-      theme = 'gruvbox-material',
+      theme = 'gruvbox',
       always_divide_middle = true,
       globalstatus = true,
       disabled_filetypes = {
         statusline = {},
-        winbar = {
-          "dap-repl",
-          "dapui_console",
-          "dapui_watches",
-          "dapui_stacks",
-          "dapui_breakpoints",
-          "dapui_scopes",
-        },
+        winbar = {},
       },
     },
     extensions = { "nerdtree", "fzf", "symbols-outline", "nvim-tree", "toggleterm", "quickfix", "fugitive", "nvim-dap-ui" },
     sections = {
-      -- always use the bg from the theme to define the color's mode
-      lualine_a = { { "mode", color = { bg = theme.insert.a.bg } } },
+      lualine_a = { { "mode" } },
       lualine_b = {
         "branch",
         "diff",
@@ -48,25 +38,12 @@ M.setup = function ()
         },
       },
       lualine_c = {
-        {
-          function (opt)
-            -- opt.icons = {}
-            opt.highlight = false
-            opt.separator = " > "
-            opt.depth_limit = 5
-            opt.depth_limit_indicator = "(...)"
-            return navic.get_location(opt)
-          end,
-          -- navic.get_location,
-          cond = navic.is_available,
-          color = { gui = "bold", fg = colors.yellow },
-        },
         -- { function() return "%=" end },
         -- { lsp_client, color = { fg = "#a9a1e1", gui = "bold" } },
         -- { lsp_progress },
       },
       lualine_x = {
-        { "filename", "encoding" }
+        { "filename" },  { "encoding" }
       },
       lualine_y = { "progress" },
       lualine_z = { "location" },
@@ -82,7 +59,7 @@ M.setup = function ()
     inactive_winbar = {
       lualine_a = {},
       lualine_b = {},
-      lualine_c = { { "filename", path= 1, shorting_target = 20 } },
+      lualine_c = {},
       lualine_x = {},
       lualine_y = {},
       lualine_z = {},
@@ -90,11 +67,45 @@ M.setup = function ()
     winbar = {
       lualine_a = {},
       lualine_b = {},
-      lualine_c = { { "filename", path= 1, shorting_target = 20, color =  { gui = "bold", fg =  colors.green } } },
+      lualine_c = { {
+          navic.get_location,
+          -- function (opt)
+          --   -- opt.icons = {}
+          --   opt.highlight = false
+          --   opt.separator = " > "
+          --   -- opt.depth_limit = 5
+          --   opt.depth_limit_indicator = "(...)"
+          --   return navic.get_location(opt)
+          -- end,
+          cond = navic.is_available,
+          color = { gui = "bold", fg = colors.yellow },
+        } },
       lualine_x = {},
       lualine_y = {},
       lualine_z = {},
     },
+    -- https://github.com/kdheepak/tabline.nvim
+    tabline = {
+      lualine_c = {
+         {
+            'buffers',
+            show_filename_only = false, -- show shortened relative path
+            mode = 4, -- Show buf name+number
+            max_length = vim.o.columns * 4 / 5,
+         },
+      },
+      -- lualine_x = {
+      --   {
+      --     'tabs',
+      --     mode=1, -- show only buf name
+      --     max_length = vim.o.columns / 5,
+      --     tabs_color = {
+      --       active = 'lualine_c_normal',     -- Color for active buffer.
+      --       inactive = 'lualine_c_inactive', -- Color for inactive buffer.
+      --     }
+      --   },
+      -- },
+   },
   }
 end
 
