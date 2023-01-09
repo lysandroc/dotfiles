@@ -42,9 +42,3 @@ opt.signcolumn="yes"                     -- Always show the signcolumn, otherwis
 -- retrocompatibility with my previous vimconf file
 vim.cmd('set wildchar=<Tab> wildmenu')  -- Autocomplete commands on command mode
 vim.cmd("set guioptions-=T")            -- GUI without toolbar
-
-vim.g.vim_bootstrap_langs = "go,html,javascript,typescript"
-vim.g.vim_bootstrap_editor = "nvim"
-
-vim.g.mapleader = " "
-

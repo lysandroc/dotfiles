@@ -1,3 +1,5 @@
+vim.g.mapleader = " "
+
 local Mode = {
     NORMAL = 'n',
     INSERT = 'i',
@@ -9,8 +11,8 @@ local Mode = {
 
 local keymap = vim.keymap
 
-keymap.set('n', '<leader>edit', ':vsplit $MYVIMRC<CR>',  { noremap=true, silent=true, desc = "Open the vim file to edit" })
-keymap.set('n', '<leader>src', ':x<cr>:source $MYVIMRC<cr>',  { noremap=true, silent=true, desc = "Open the vim file to edit" })
+--keymap.set('n', '<leader>edit', ':vsplit $MYVIMRC<CR>',  { noremap=true, silent=true, desc = "Open the vim file to edit" })
+--keymap.set('n', '<leader>src', ':x<cr>:source $MYVIMRC<cr>',  { noremap=true, silent=true, desc = "Open the vim file to edit" })
 
 -- use ctrl+hjkl to move between split/vsplit panels
 keymap.set(Mode.NORMAL, '<A-h>', '<C-w>h',  { noremap=true, silent=true, desc = "Jump to the right panel" })
