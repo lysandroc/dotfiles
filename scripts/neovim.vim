@@ -1,72 +1,73 @@
-let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
+" let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
+"
+" if !filereadable(vimplug_exists)
+"   if !executable("curl")
+"     echoerr "You have to install curl or first install vim-plug yourself!"
+"     execute "q!"
+"   endif
+"   echo "Installing Vim-Plug..."
+"   echo ""
+"   silent exec "!\curl -fLo " . vimplug_exists . " --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+"   let g:not_finish_vimplug = "yes"
+"
+"   autocmd VimEnter * PlugInstall
+" endif
+"
+" call plug#begin(expand('~/.config/nvim/plugged'))
+" Plug 'sheerun/vim-polyglot'
+" " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } "golang
+" Plug 'scrooloose/nerdtree'
+" Plug 'airblade/vim-gitgutter'
+" " THEME
+" Plug 'morhetz/gruvbox'
+"
+" " common
+" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+" Plug 'junegunn/fzf.vim'
+" Plug 'tpope/vim-surround'
+" Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-rhubarb'
+" Plug 'numToStr/Comment.nvim'
+"
+" Plug 'nvim-lualine/lualine.nvim'
+" " Plug 'kyazdani42/nvim-web-devicons'
+" Plug 'SmiteshP/nvim-navic'
+"
+" Plug 'mattn/emmet-vim'
+" Plug 'b0o/schemastore.nvim'
+" "telescope stuffs
+" Plug 'nvim-lua/popup.nvim'
+" Plug 'nvim-lua/plenary.nvim' "It is also used in mason/js-debug-adapter
+" Plug 'nvim-telescope/telescope.nvim'
+" Plug 'nvim-telescope/telescope-fzy-native.nvim'
+" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+" Plug 'p00f/nvim-ts-rainbow', {'do': ':TSUpdate'} 
+"
+" "cmp/lsp/mason/dap
+" Plug 'hrsh7th/nvim-cmp'
+" Plug 'hrsh7th/cmp-nvim-lsp'
+" Plug 'L3MON4D3/LuaSnip'
+" Plug 'saadparwaiz1/cmp_luasnip'
+" Plug 'neovim/nvim-lspconfig'
+" Plug 'williamboman/mason.nvim'
+" Plug 'williamboman/mason-lspconfig.nvim'
+" Plug 'mfussenegger/nvim-dap'
+" Plug 'mxsdev/nvim-dap-vscode-js'
+" Plug 'mortepau/codicons.nvim'
+" Plug 'rcarriga/nvim-dap-ui' 
+" Plug 'jose-elias-alvarez/typescript.nvim' " extends tsserver lsp with more commands
+" Plug 'folke/neodev.nvim'
+" Plug 'theHamsta/nvim-dap-virtual-text'
+" Plug 'nvim-telescope/telescope-dap.nvim'
+"
+" Plug 'jameshiew/nvim-magic'
+" Plug 'MunifTanjim/nui.nvim'
+"
+" Plug  'github/copilot.vim'
+"
+" call plug#end()
 
-if !filereadable(vimplug_exists)
-  if !executable("curl")
-    echoerr "You have to install curl or first install vim-plug yourself!"
-    execute "q!"
-  endif
-  echo "Installing Vim-Plug..."
-  echo ""
-  silent exec "!\curl -fLo " . vimplug_exists . " --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-  let g:not_finish_vimplug = "yes"
-
-  autocmd VimEnter * PlugInstall
-endif
-
-call plug#begin(expand('~/.config/nvim/plugged'))
-Plug 'sheerun/vim-polyglot'
-" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } "golang
-Plug 'scrooloose/nerdtree'
-Plug 'airblade/vim-gitgutter'
-" THEME
-Plug 'morhetz/gruvbox'
-
-" common
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
-Plug 'numToStr/Comment.nvim'
-
-Plug 'nvim-lualine/lualine.nvim'
-" Plug 'kyazdani42/nvim-web-devicons'
-Plug 'SmiteshP/nvim-navic'
-
-Plug 'mattn/emmet-vim'
-Plug 'b0o/schemastore.nvim'
-"telescope stuffs
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim' "It is also used in mason/js-debug-adapter
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzy-native.nvim'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'p00f/nvim-ts-rainbow', {'do': ':TSUpdate'} 
-
-"cmp/lsp/mason/dap
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'L3MON4D3/LuaSnip'
-Plug 'saadparwaiz1/cmp_luasnip'
-Plug 'neovim/nvim-lspconfig'
-Plug 'williamboman/mason.nvim'
-Plug 'williamboman/mason-lspconfig.nvim'
-Plug 'mfussenegger/nvim-dap'
-Plug 'mxsdev/nvim-dap-vscode-js'
-Plug 'mortepau/codicons.nvim'
-Plug 'rcarriga/nvim-dap-ui' 
-Plug 'jose-elias-alvarez/typescript.nvim' " extends tsserver lsp with more commands
-Plug 'folke/neodev.nvim'
-Plug 'theHamsta/nvim-dap-virtual-text'
-Plug 'nvim-telescope/telescope-dap.nvim'
-
-Plug 'jameshiew/nvim-magic'
-Plug 'MunifTanjim/nui.nvim'
-
-Plug  'github/copilot.vim'
-
-call plug#end()
-
+lua require("core.packer")
 lua require("core.options")
 
 "NERDTree Settings
