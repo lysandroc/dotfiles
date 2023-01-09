@@ -12,7 +12,7 @@ local M = {}
 M.setup = function ()
   lualine.setup {
     options = {
-      icons_enabled = false,
+      icons_enabled = true,
       theme = 'gruvbox',
       always_divide_middle = true,
       globalstatus = true,

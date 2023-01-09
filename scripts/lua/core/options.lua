@@ -13,7 +13,8 @@ opt.smartindent=true                    -- Auto-indent
 opt.cursorline=true                     -- Active line with other color
 opt.incsearch=true                      -- Find when you typing
 opt.tags:append(".tags", ".git/tags")   -- Use ctags file in current directory or parent
-opt.backspace="indent,eol,start"        -- Default backspace behaviour
+opt.backspace="2"        -- Default backspace behaviour
+--opt.backspace="indent,eol,start"        -- Default backspace behaviour
 opt.wildmode="full"                     -- Command complete display all list
 opt.mouse="a"                           -- Mouse will use vim behavior
 opt.hidden=true                         -- To edit multiple buffers without save
@@ -44,3 +45,6 @@ vim.cmd("set guioptions-=T")            -- GUI without toolbar
 
 vim.g.vim_bootstrap_langs = "go,html,javascript,typescript"
 vim.g.vim_bootstrap_editor = "nvim"
+
+vim.g.mapleader = " "
+

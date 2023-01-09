@@ -1,6 +1,0 @@
-require("plugins.telescope").setup()
-require("plugins.treesitter").setup()
-require("plugins.LSP").setup()
-require("plugins.DAP").setup()
-require("plugins.comment").setup()
-require("plugins.lualine").setup()

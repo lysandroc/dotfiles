@@ -1,14 +1,12 @@
 local navic = require "nvim-navic"
 
+local keymaps = require('core.keymaps')
+
 -- This module needs to be loaded before the lsp autocompletion definition
-require("plugins.autocompletion").setup()
+require("config.autocompletion").setup()
 
 -- mason.lua module reads the mason_plugins_name property to install the depentend plugins
 local servers = {
-  ["lsp-name-for-js-debug-adapter?"] = {
-    -- https://github.com/mxsdev/nvim-dap-vscode-js
-    mason_plugins_name = "js-debug-adapter",
-  },
   jsonls = {
     mason_plugins_name = "jsonlint json-lsp",
     settings = {
@@ -68,7 +66,7 @@ local servers = {
   --   },
   -- },
   tsserver = {
-    mason_plugins_name = "typescript-language-server",
+    mason_plugins_name = "typescript-language-server js-debug-adapter",
     disable_formatting = true,
     commands = {
       TSServerOrganizeImports = {
@@ -151,10 +149,7 @@ local servers = {
   -- ["css-lsp"] = {},
 }
 
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float,  { noremap=true, silent=true, desc = "Show diagnostics" })
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev,  { noremap=true, silent=true, desc="Go to previous diagnostic" })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next,  { noremap=true, silent=true, desc="Go to next diagnostic"})
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist,  { noremap=true, silent=true, desc="Set diagnostic list"})
+keymaps.LSP_diagnostic_keymaps()
 
 local M = {}
 -- Use an on_attach function to only map the following keys
@@ -164,43 +159,13 @@ function M.on_attach(client, bufnr)
   -- See `:help omnifunc` and `:help ins-completion` for more information.
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { noremap=true, silent=true, buffer=bufnr, desc = "Go to declaration" })
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition,  { noremap=true, silent=true, buffer=bufnr, desc = "Go to definition" })
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover,  { noremap=true, silent=true, buffer=bufnr, desc = "Show hover" })
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation,  { noremap=true, silent=true, buffer=bufnr, desc = "Go to implementation" })
-  vim.keymap.set('n', '<c-k>', vim.lsp.buf.signature_help,  { noremap=true, silent=true, buffer=bufnr, desc = "Show signature help" })
-  vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder,  { noremap=true, silent=true, buffer=bufnr, desc = "Add workspace folder" })
-  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder,  { noremap=true, silent=true, buffer=bufnr, desc = "Remove workspace folder"})
-  vim.keymap.set('n', '<space>wl', function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end,  { noremap=true, silent=true, buffer=bufnr, desc = "List workspace folders" })
-  vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition,  { noremap=true, silent=true, buffer=bufnr, desc="Go to type definition" })
-  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename,  { noremap=true, silent=true, buffer=bufnr, desc="Rename"})
-  vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action,  { noremap=true, silent=true, buffer=bufnr, desc="Code action" })
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references,  { noremap=true, silent=true, buffer=bufnr, desc="References" })
-  vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting,  { noremap=true, silent=true, buffer=bufnr, desc="Format" })
-  
-  -- shortcut for tsserver lsp
-  vim.keymap.set('n', '<space>toi', ':TSServerOrganizeImports<CR>', { noremap=true, silent=true, buffer=bufnr, desc="Organize typescript imports" })
-  -- telescope integration
-  vim.keymap.set('n', '<space>ws', function()
-    require('telescope.builtin').lsp_workspace_symbols()
-  end,  { noremap=true, silent=true, buffer=bufnr, desc="Workspace symbols" })
-  vim.keymap.set('n', '<space>ds', function()
-    require('telescope.builtin').lsp_document_symbols()
-  end, { noremap=true, silent=true, buffer=bufnr, desc="Document symbols" })
-
   -- Use LSP as the handler for formatexpr.
   -- See `:help formatexpr` for more information.
   vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
 
   -- Configure key mappings
-  -- require("config.lsp.keymaps").setup(client, bufnr)
-
-  -- Configure highlighting
-  -- require("config.lsp.highlighter").setup(client, bufnr)
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  keymaps.LSP_buf_keymaps(bufnr)
 
   -- Configure formatting
   -- require("config.lsp.null-ls.formatters").setup(client, bufnr)
@@ -247,7 +212,7 @@ function M.setup()
   -- require("config.lsp.null-ls").setup(opts)
 
   -- Installer
-  require("plugins.mason").setup(servers, opts)
+  require("config.mason").setup(servers, opts)
 end
 
 local diagnostics_active = true

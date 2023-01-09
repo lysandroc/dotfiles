@@ -1,0 +1,5 @@
+require("config.telescope").setup()
+require("config.treesitter").setup()
+require("config.LSP").setup()
+require("config.DAP").setup()
+require("config.lualine").setup()
