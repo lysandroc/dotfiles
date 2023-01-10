@@ -11,9 +11,6 @@ local Mode = {
 
 local keymap = vim.keymap
 
---keymap.set('n', '<leader>edit', ':vsplit $MYVIMRC<CR>',  { noremap=true, silent=true, desc = "Open the vim file to edit" })
---keymap.set('n', '<leader>src', ':x<cr>:source $MYVIMRC<cr>',  { noremap=true, silent=true, desc = "Open the vim file to edit" })
-
 -- use ctrl+hjkl to move between split/vsplit panels
 keymap.set(Mode.NORMAL, '<A-h>', '<C-w>h',  { noremap=true, silent=true, desc = "Jump to the right panel" })
 keymap.set(Mode.NORMAL, '<A-j>', '<C-w>j',  { noremap=true, silent=true, desc = "Jump to the left panel" })
@@ -39,29 +36,32 @@ keymap.set(Mode.VISUAL, '<leader>P', '\"+P<CR>',  { noremap=true, silent=true, d
 keymap.set(Mode.VISUAL_BLOCK, '<leader>P', '\"+P<CR>',  { noremap=true, silent=true, desc = "paste from the OS in visual mode" })
 
 -- native
-keymap.set(Mode.NORMAL, '<esc>', ':noh<return><esc>',  { noremap=true, silent=true, desc = "Remove hightlight selection" })
+keymap.set(Mode.NORMAL, '<esc>', ':noh<return><esc>',  { noremap=true, silent=true, desc = "Hides the hightlight selection" })
 keymap.set(Mode.NORMAL, '<leader>sp', '<leader>sp :set spell!<cr>',  { noremap=true, silent=true, desc = "Enable the native check spelling" })
 keymap.set(Mode.NORMAL, '<leader><tab>', ':buffers<CR>:buffer<Space>',  { noremap=true, silent=true, desc = "Switch between buffers natively" })
-keymap.set(Mode.NORMAL, '<leader>sv', ':ls<cr>:vsp<space>\\|<space>b<space>',  { noremap=true, silent=true, desc = "Duplicate the panel vertically" })
-keymap.set(Mode.NORMAL, '<leader>sh', ':ls<cr>:sp<space>\\|<space>b<space>',  { noremap=true, silent=true, desc = "Duplicate the panel horizontally" })
+keymap.set(Mode.NORMAL, '<leader>sv', ':ls<cr>:vsp<space>\\|<space>b<space>',  { noremap=true, silent=true, desc = "Duplicates the panel vertically" })
+keymap.set(Mode.NORMAL, '<leader>sh', ':ls<cr>:sp<space>\\|<space>b<space>',  { noremap=true, silent=true, desc = "Duplicates the panel horizontally" })
 
 -- use alt + char to quit
-keymap.set(Mode.NORMAL, '<A-q>', ':q<CR>',  { noremap=true, silent=true, desc = "quit file" })
-keymap.set(Mode.NORMAL, '<A-x>', ':x<CR>',  { noremap=true, silent=true, desc = "quit saving the file" })
-keymap.set(Mode.NORMAL, '<A-w>', ':w<CR>',  { noremap=true, silent=true, desc = "save file" })
-keymap.set(Mode.INSERT, '<A-q>', '<ESC>:q<CR>',  { noremap=true, silent=true, desc = "quit file" })
-keymap.set(Mode.INSERT, '<A-x>', '<ESC>:x<CR>',  { noremap=true, silent=true, desc = "quit saving the file " })
-keymap.set(Mode.INSERT, '<A-w>', '<ESC>:w<CR>',  { noremap=true, silent=true, desc = "save file" })
+keymap.set(Mode.NORMAL, '<A-q>', ':q<CR>',  { noremap=true, silent=true, desc = "quits file" })
+keymap.set(Mode.NORMAL, '<A-x>', ':x<CR>',  { noremap=true, silent=true, desc = "quits saving the file" })
+keymap.set(Mode.NORMAL, '<A-w>', ':w<CR>',  { noremap=true, silent=true, desc = "saves file" })
+keymap.set(Mode.INSERT, '<A-q>', '<ESC>:q<CR>',  { noremap=true, silent=true, desc = "quits file" })
+keymap.set(Mode.INSERT, '<A-x>', '<ESC>:x<CR>',  { noremap=true, silent=true, desc = "quits saving the file " })
+keymap.set(Mode.INSERT, '<A-w>', '<ESC>:w<CR>',  { noremap=true, silent=true, desc = "saves file" })
 
 -- shortcut for git plugins
-keymap.set(Mode.NORMAL, '<leader>hl', ':GitGutterLineNrHighlightsToggle<cr>',  { noremap=true, silent=true, desc = "Toogle git line hightlight " })
-keymap.set(Mode.NORMAL, '<leader>gs', ':G<CR>',  { noremap=true, silent=true, desc = "Show git untracking/staged files" })
+keymap.set(Mode.NORMAL, '<leader>hl', ':GitGutterLineNrHighlightsToggle<cr>',  { noremap=true, silent=true, desc = "Toogles git line hightlight " })
+keymap.set(Mode.NORMAL, '<leader>gs', ':G<CR>',  { noremap=true, silent=true, desc = "Shows git untracking/staged files" })
 keymap.set(Mode.NORMAL, '<leader>gp', '<ESC>:G push<CR>',  { noremap=true, silent=true, desc = "Git push" })
-keymap.set(Mode.NORMAL, '<leader>gB', '<ESC>:GBrowse<CR>',  { noremap=true, silent=true, desc = "Open github page's file" })
-keymap.set(Mode.NORMAL, '<leader>gb', '<ESC>:GBranches<CR>',  { noremap=true, silent=true, desc = "Checkout to another branch" })
-keymap.set(Mode.NORMAL, '<leader>gd', ':Gvdiffsplit<CR>',  { noremap=true, silent=true, desc = "Show git diff" })
-keymap.set(Mode.NORMAL, '<leader>gl', ':diffget //3<CR>',  { noremap=true, silent=true, desc = "Add on stage(tracking) the current line from the right side file" })
-keymap.set(Mode.NORMAL, '<leader>gh', ':diffget //2<CR>',  { noremap=true, silent=true, desc = "Add on stage(tracking) the current line from the left side file" })
+keymap.set(Mode.NORMAL, '<leader>gB', '<ESC>:GBrowse<CR>',  { noremap=true, silent=true, desc = "Opens github page's file" })
+keymap.set(Mode.NORMAL, '<leader>gb', '<ESC>:GBranches<CR>',  { noremap=true, silent=true, desc = "Checkouts to another branch" })
+keymap.set(Mode.NORMAL, '<leader>gd', ':Gvdiffsplit<CR>',  { noremap=true, silent=true, desc = "Shows git diff" })
+keymap.set(Mode.NORMAL, '<leader>gl', ':diffget //3<CR>',  { noremap=true, silent=true, desc = "Adds on stage(tracking) the current line from the right side file" })
+keymap.set(Mode.NORMAL, '<leader>gh', ':diffget //2<CR>',  { noremap=true, silent=true, desc = "Adds on stage(tracking) the current line from the left side file" })
+
+keymap.set(Mode.VISUAL, 'J',  ":m '>+1<CR>gv=gv",  { noremap=true, silent=true, desc = "Moves the hightlighted lines to the bottom" })
+keymap.set(Mode.VISUAL, 'K', ":m '<-2<CR>gv=gv",  { noremap=true, silent=true, desc = "Moves the hightlighted lines to the top" })
 
 local M = {}
 

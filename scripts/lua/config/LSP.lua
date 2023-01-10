@@ -2,8 +2,11 @@ local navic = require "nvim-navic"
 
 local keymaps = require('core.keymaps')
 
+--local lsp_status = require('lsp-status')
+--lsp_status.register_progress()
+
 -- This module needs to be loaded before the lsp autocompletion definition
-require("config.autocompletion").setup()
+require("config.cmp").setup()
 
 -- mason.lua module reads the mason_plugins_name property to install the depentend plugins
 local servers = {
@@ -52,21 +55,21 @@ local servers = {
       },
     },
   },
-  -- eslint = {
-    -- mason_plugins_name = "eslint",
-  --   filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
-  --   rootPatterns = { ".eslintrc.js", ".eslintrc.json", ".eslintrc.yaml", ".eslintrc.yml", ".eslintrc", "package.json" },
-  --   settings = {
-  --     languages = {
-  --       javascript = { eslint = { enable = true} },
-  --       javascriptreact = { eslint = { enable = true } },
-  --       typescript = { eslint = { enable = true } },
-  --       typescriptreact = { eslint = { enable = true } },
-  --     },
-  --   },
-  -- },
+  eslint = {
+    mason_plugins_name = "eslint-lsp",
+    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+    rootPatterns = { ".eslintrc.js", ".eslintrc.json", ".eslintrc.yaml", ".eslintrc.yml", ".eslintrc", "package.json" },
+    settings = {
+      languages = {
+        javascript = { eslint = { enable = true} },
+        javascriptreact = { eslint = { enable = true } },
+        typescript = { eslint = { enable = true } },
+        typescriptreact = { eslint = { enable = true } },
+      },
+    },
+  },
   tsserver = {
-    mason_plugins_name = "typescript-language-server js-debug-adapter",
+    mason_plugins_name = "typescript-language-server js-debug-adapter prettier prettierd",
     disable_formatting = true,
     commands = {
       TSServerOrganizeImports = {
@@ -209,7 +212,7 @@ local opts = {
 
 function M.setup()
   -- null-ls
-  -- require("config.lsp.null-ls").setup(opts)
+  require("config.null-ls").setup(opts)
 
   -- Installer
   require("config.mason").setup(servers, opts)

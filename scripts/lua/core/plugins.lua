@@ -13,11 +13,11 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
   -- 'scrooloose/nerdtree'
-  'sheerun/vim-polyglot'
+  'github/copilot.vim'
+  , 'sheerun/vim-polyglot'
   , 'tpope/vim-surround'
   , 'b0o/schemastore.nvim'
   , 'mattn/emmet-vim'
-  , { 'github/copilot.vim', lazy = false }
   , {
       'tpope/vim-fugitive',
       dependencies = {
@@ -28,6 +28,12 @@ local plugins = {
   , {
       'numToStr/Comment.nvim',
       config = function() require("Comment").setup() end
+    }
+  , {
+      'nvim-treesitter/nvim-treesitter',
+      dependencies = { 'nvim-treesitter/playground' },
+      build = ':TSUpdate',
+      lazy = false
     }
   , {
       'ellisonleao/gruvbox.nvim', 
@@ -41,11 +47,6 @@ local plugins = {
       end,
       lazy=false,
       priority=999,
-    }
-  , {
-      'nvim-treesitter/nvim-treesitter',
-      build = ':TSUpdate',
-      lazy = false
     }
   , { 'p00f/nvim-ts-rainbow' }
   , {
@@ -62,7 +63,7 @@ local plugins = {
       dependencies = {
         'nvim-lua/popup.nvim',
         'nvim-lua/plenary.nvim',
-        'nvim-telescope/telescope-fzy-native.nvim',
+        { 'nvim-telescope/telescope-fzy-native.nvim', run = 'make' },
         'nvim-treesitter/nvim-treesitter'
       },
       lazy=false
@@ -71,12 +72,20 @@ local plugins = {
   , {
       'neovim/nvim-lspconfig',
       dependencies = {
+        --'nvim-lua/lsp-status.nvim',
         'hrsh7th/nvim-cmp',
         'hrsh7th/cmp-nvim-lsp',
-        'L3MON4D3/LuaSnip',
-        'saadparwaiz1/cmp_luasnip',
+        'hrsh7th/cmp-nvim-lua',
+        'ray-x/cmp-treesitter',
+        -- this can be interesting to migrate my resume to neovim 
+        -- https://github.com/kdheepak/cmp-latex-symbols
+        {
+          'L3MON4D3/LuaSnip',
+          dependencies = { 'rafamadriz/friendly-snippets', 'saadparwaiz1/cmp_luasnip' }
+        },
         'williamboman/mason.nvim',
         'williamboman/mason-lspconfig.nvim',
+        'jose-elias-alvarez/null-ls.nvim',
         'jose-elias-alvarez/typescript.nvim'
       },
       lazy=false
@@ -93,6 +102,22 @@ local plugins = {
         'nvim-telescope/telescope-dap.nvim'
       }
     }
+  -- , { 'zbirenbaum/copilot-cmp', dependencies = {
+  --     {
+  --       'zbirenbaum/copilot.lua',
+  --       cmd='Copilot',
+  --       lazy = false,
+  --       event='InsertEnter',
+  --       config = function()
+  --         vim.schedule(function()
+  --           require('copilot').setup({
+  --             suggestion = { enabled = true },
+  --             panel = { enabled = true }
+  --           })
+  --         end)
+  --       end
+  --     },
+  --   }, lazy=false}
   , {
       'nvim-tree/nvim-tree.lua',
       config = function()
