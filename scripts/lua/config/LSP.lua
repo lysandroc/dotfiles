@@ -2,13 +2,12 @@ local navic = require "nvim-navic"
 
 local keymaps = require('core.keymaps')
 
---local lsp_status = require('lsp-status')
---lsp_status.register_progress()
-
 -- This module needs to be loaded before the lsp autocompletion definition
 require("config.cmp").setup()
 
--- mason.lua module reads the mason_plugins_name property to install the depentend plugins
+-- The object key name will be used as the server's name and the value as configuration
+-- Mason config reads the mason_plugins_name property to install the LSP servers plugins available on it
+-- :help lspconfig-all
 local servers = {
   jsonls = {
     mason_plugins_name = "jsonlint json-lsp",
@@ -19,7 +18,6 @@ local servers = {
       },
     },
   },
-  ---- pylsp = {}, -- Integration with rope for refactoring - https://github.com/python-rope/pylsp-rope
   pyright = {
     mason_plugins_name = "pyright",
     analysis = {
@@ -40,32 +38,71 @@ local servers = {
           globals = { "vim", "describe", "it", "before_each", "after_each", "packer_plugins" },
           -- disable = { "lowercase-global", "undefined-global", "unused-local", "unused-vararg", "trailing-space" },
         },
-        -- workspace = {
-        --   -- Make the server aware of Neovim runtime files
-        --   library = {
-        --     [vim.fn.expand "$VIMRUNTIME/lua"] = true,
-        --     [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
-        --   },
-        --   -- library = vim.api.nvim_get_runtime_file("", true),
-        --   maxPreload = 2000,
-        --   preloadFileSize = 50000,
-        -- },
+        workspace = {
+          -- Make the server aware of Neovim runtime files
+          library = {
+            [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+            [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
+          },
+          -- library = vim.api.nvim_get_runtime_file("", true),
+          maxPreload = 2000,
+          preloadFileSize = 50000,
+        },
         completion = { callSnippet = "Both" },
         telemetry = { enable = false },
       },
     },
   },
+  -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
   eslint = {
     mason_plugins_name = "eslint-lsp",
-    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
-    rootPatterns = { ".eslintrc.js", ".eslintrc.json", ".eslintrc.yaml", ".eslintrc.yml", ".eslintrc", "package.json" },
+    filetypes ={ "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "vue", "svelte", "astro" },
+    -- rootPatterns = { ".eslintrc.js", ".eslintrc.json", ".eslintrc.yaml", ".eslintrc.yml", ".eslintrc", "package.json" },
+    -- root_dir = function(startpath)
+    --     local matcher = {}
+    --     return M.search_ancestors(startpath, matcher)
+    --   end,
+    -- on_new_config = function(config, new_root_dir)
+    --   -- The "workspaceFolder" is a VSCode concept. It limits how far the
+    --   -- server will traverse the file system when locating the ESLint config
+    --   -- file (e.g., .eslintrc).
+    --   config.settings.workspaceFolder = {
+    --     uri = new_root_dir,
+    --     name = vim.fn.fnamemodify(new_root_dir, ':t'),
+    --   }
+    -- end,
     settings = {
-      languages = {
-        javascript = { eslint = { enable = true} },
-        javascriptreact = { eslint = { enable = true } },
-        typescript = { eslint = { enable = true } },
-        typescriptreact = { eslint = { enable = true } },
-      },
+      -- codeAction = {
+      --   disableRuleComment = {
+      --     enable = true,
+      --     location = "separateLine"
+      --   },
+      --   showDocumentation = {
+      --     enable = true
+      --   }
+      -- },
+      -- codeActionOnSave = {
+      --   enable = false,
+      --   mode = "all"
+      -- },
+      -- experimental = {
+      --   useFlatConfig = false
+      -- },
+      -- format = true,
+      -- nodePath = "",
+      -- onIgnoredFiles = "off",
+      -- packageManager = "npm",
+      -- problems = {
+      --   shortenToSingleLine = false
+      -- },
+      -- quiet = false,
+      -- rulesCustomizations = {},
+      -- run = "onType",
+      -- useESLintClass = false,
+      -- validate = "on",
+      -- workingDirectory = {
+      --   mode = "location"
+      -- }
     },
   },
   tsserver = {
@@ -80,6 +117,7 @@ local servers = {
       },
     },
     settings = {
+      format = { enable = false },
       javascript = {
         inlayHints = {
           includeInlayEnumMemberValueHints = true,
@@ -121,6 +159,12 @@ local servers = {
   vimls = {
     mason_plugins_name = "vim-language-server"
   },
+  -- grammarly = {
+  --   mason_plugins_name = "grammarly-languageserver",
+  --   settings = {
+  --     clientId = ""
+  --   }
+  -- }
   -- gopls = {
   --   mason_plugins_name = "gopls",
   -- },
@@ -136,6 +180,7 @@ local servers = {
   --     },
   --   },
   -- },
+  -- pylsp = {},
   -- tailwindcss = {},
   -- html = {},
   -- jdtls = {},
@@ -168,11 +213,11 @@ function M.on_attach(client, bufnr)
 
   -- Configure key mappings
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  keymaps.LSP_buf_keymaps(bufnr)
+  keymaps.LSP_buf_keymaps(client, bufnr)
 
   -- Configure formatting
   -- require("config.lsp.null-ls.formatters").setup(client, bufnr)
-  
+
   -- nvim-navic
   if client.server_capabilities.documentSymbolProvider then
     navic.attach(client, bufnr)
@@ -184,37 +229,33 @@ function M.on_attach(client, bufnr)
   end
 end
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.foldingRange = {
+
+local new_capabilities = require("cmp_nvim_lsp").default_capabilities()
+new_capabilities.textDocument.completion.completionItem.snippetSupport = true
+new_capabilities.textDocument.foldingRange = {
   dynamicRegistration = false,
   lineFoldingOnly = true,
 }
-capabilities.textDocument.completion.completionItem.resolveSupport = {
+new_capabilities.textDocument.completion.completionItem.resolveSupport = {
   properties = {
     "documentation",
     "detail",
     "additionalTextEdits",
   },
 }
-M.capabilities = capabilities
 
 local opts = {
   on_attach = M.on_attach,
-  capabilities = M.capabilities,
+  capabilities = new_capabilities,
   flags = {
     debounce_text_changes = 150,
   },
 }
 
--- Setup LSP handlers
--- require("config.lsp.handlers").setup()
-
 function M.setup()
-  -- null-ls
   require("config.null-ls").setup(opts)
-
-  -- Installer
+  -- Send servers will enable to Mason config to read the mason_plugins_name and install them
+  -- and also, will allow mason to setup lsp servers using mason-lspconfig
   require("config.mason").setup(servers, opts)
 end
 

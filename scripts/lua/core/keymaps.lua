@@ -11,6 +11,12 @@ local Mode = {
 
 local keymap = vim.keymap
 
+-- local function map(mode, lhs, rhs, opts)
+--     local options = { noremap = true, silent = true }
+--     if opts then options = vim.tbl_extend('force', options, opts) end
+--     vim.keymap(mode, lhs, rhs, options)
+-- end
+
 -- use ctrl+hjkl to move between split/vsplit panels
 keymap.set(Mode.NORMAL, '<A-h>', '<C-w>h',  { noremap=true, silent=true, desc = "Jump to the right panel" })
 keymap.set(Mode.NORMAL, '<A-j>', '<C-w>j',  { noremap=true, silent=true, desc = "Jump to the left panel" })
@@ -42,7 +48,7 @@ keymap.set(Mode.NORMAL, '<leader><tab>', ':buffers<CR>:buffer<Space>',  { norema
 keymap.set(Mode.NORMAL, '<leader>sv', ':ls<cr>:vsp<space>\\|<space>b<space>',  { noremap=true, silent=true, desc = "Duplicates the panel vertically" })
 keymap.set(Mode.NORMAL, '<leader>sh', ':ls<cr>:sp<space>\\|<space>b<space>',  { noremap=true, silent=true, desc = "Duplicates the panel horizontally" })
 
--- use alt + char to quit
+-- use alt + (q/x/w) to quit, quit saving or just save
 keymap.set(Mode.NORMAL, '<A-q>', ':q<CR>',  { noremap=true, silent=true, desc = "quits file" })
 keymap.set(Mode.NORMAL, '<A-x>', ':x<CR>',  { noremap=true, silent=true, desc = "quits saving the file" })
 keymap.set(Mode.NORMAL, '<A-w>', ':w<CR>',  { noremap=true, silent=true, desc = "saves file" })
@@ -72,7 +78,7 @@ function M.tree_keymaps()
 end
 
 -- Attach these keymaps in the LSP plugin
-function M.LSP_buf_keymaps(bufnr)
+function M.LSP_buf_keymaps(client, bufnr)
   local buf = vim.lsp.buf
   keymap.set('n', 'gD', buf.declaration, { noremap=true, silent=true, buffer=bufnr, desc = "Go to declaration" })
   keymap.set('n', 'gd', buf.definition,  { noremap=true, silent=true, buffer=bufnr, desc = "Go to definition" })
@@ -90,7 +96,6 @@ function M.LSP_buf_keymaps(bufnr)
   keymap.set('n', 'gr', buf.references,  { noremap=true, silent=true, buffer=bufnr, desc="References" })
   keymap.set('n', '<space>f', function() buf.format { async = true } end, { noremap=true, silent=true, buffer=bufnr, desc="Format" })
   -- shortcut for tsserver lsp
-  keymap.set('n', '<space>toi', ':TSServerOrganizeImports<CR>', { noremap=true, silent=true, buffer=bufnr, desc="Organize typescript imports" })
   -- telescope integration
   keymap.set('n', '<space>ws', function()
     require('telescope.builtin').lsp_workspace_symbols()
@@ -98,6 +103,13 @@ function M.LSP_buf_keymaps(bufnr)
   keymap.set('n', '<space>ds', function()
     require('telescope.builtin').lsp_document_symbols()
   end, { noremap=true, silent=true, buffer=bufnr, desc="Document symbols" })
+
+  if client.name == 'tsserver' then
+    keymap.set('n', '<space>tsff', ':TSLspFixCurrent<CR>', { noremap=true, silent=true, buffer=bufnr, desc="Fix current" })
+    keymap.set('n', '<space>tsrf', ':TSLspRenameFile<CR>', { noremap=true, silent=true, buffer=bufnr, desc="Rename file" })
+    keymap.set('n', '<space>tsoi', ':TSLspOrganize<CR>', { noremap=true, silent=true, buffer=bufnr, desc="Organize imports" })
+    keymap.set('n', '<space>tscoi', ':TSServerOrganizeImports<CR>', { noremap=true, silent=true, buffer=bufnr, desc="Customized organize imports" })
+  end
 end
 
 -- Used to enable keymaps for diagnostics

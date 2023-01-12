@@ -13,8 +13,7 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
   -- 'scrooloose/nerdtree'
-  'github/copilot.vim'
-  , 'sheerun/vim-polyglot'
+  'sheerun/vim-polyglot'
   , 'tpope/vim-surround'
   , 'b0o/schemastore.nvim'
   , 'mattn/emmet-vim'
@@ -63,7 +62,7 @@ local plugins = {
       dependencies = {
         'nvim-lua/popup.nvim',
         'nvim-lua/plenary.nvim',
-        { 'nvim-telescope/telescope-fzy-native.nvim', run = 'make' },
+        'nvim-telescope/telescope-fzy-native.nvim',
         'nvim-treesitter/nvim-treesitter'
       },
       lazy=false
@@ -86,7 +85,8 @@ local plugins = {
         'williamboman/mason.nvim',
         'williamboman/mason-lspconfig.nvim',
         'jose-elias-alvarez/null-ls.nvim',
-        'jose-elias-alvarez/typescript.nvim'
+        'jose-elias-alvarez/typescript.nvim',
+        { 'onsails/lspkind.nvim',  dependencies = { 'mortepau/codicons.nvim' } }
       },
       lazy=false
     }
@@ -102,22 +102,28 @@ local plugins = {
         'nvim-telescope/telescope-dap.nvim'
       }
     }
-  -- , { 'zbirenbaum/copilot-cmp', dependencies = {
-  --     {
-  --       'zbirenbaum/copilot.lua',
-  --       cmd='Copilot',
-  --       lazy = false,
-  --       event='InsertEnter',
-  --       config = function()
-  --         vim.schedule(function()
-  --           require('copilot').setup({
-  --             suggestion = { enabled = true },
-  --             panel = { enabled = true }
-  --           })
-  --         end)
-  --       end
-  --     },
-  --   }, lazy=false}
+  -- ,'github/copilot.vim'
+  , { 'zbirenbaum/copilot-cmp', dependencies = {
+      {
+        'zbirenbaum/copilot.lua',
+        cmd='Copilot',
+        -- event='InsertEnter',
+        config = function()
+            require('copilot').setup({
+              suggestion = {
+                enabled = true,
+                auto_refresh = true,
+                auto_trigger = true,
+                debounce = 75,
+                keymap = {
+                  accept = "<leader>C",
+                }
+              },
+              panel = { enable = false }
+            })
+        end
+      },
+    }, lazy=false}
   , {
       'nvim-tree/nvim-tree.lua',
       config = function()

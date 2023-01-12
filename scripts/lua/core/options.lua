@@ -13,8 +13,8 @@ opt.smartindent=true                    -- Auto-indent
 opt.cursorline=true                     -- Active line with other color
 opt.incsearch=true                      -- Find when you typing
 opt.tags:append(".tags", ".git/tags")   -- Use ctags file in current directory or parent
-opt.backspace="2"        -- Default backspace behaviour
---opt.backspace="indent,eol,start"        -- Default backspace behaviour
+-- opt.backspace="2"        -- Default backspace behaviour
+opt.backspace="indent,eol,start"        -- Default backspace behaviour
 opt.wildmode="full"                     -- Command complete display all list
 opt.mouse="a"                           -- Mouse will use vim behavior
 opt.hidden=true                         -- To edit multiple buffers without save
@@ -34,7 +34,8 @@ opt.undofile=true                       -- Vim undo persists after file is close
 opt.undodir=os.getenv("HOME")..'/.vimdid/'  -- Directory where state will be saved
 opt.inccommand="nosplit"                -- Updates in realtime like :s/old/new
 opt.scrolloff=3                         -- Lines of context         
-opt.signcolumn="yes"                     -- Always show the signcolumn, otherwise it would shift the text each time
+opt.signcolumn="yes"                    -- Always show the signcolumn, otherwise it would shift the text each time
+opt.updatetime=50                       -- Faster completion
 -- opt.iskeyword:append("-")               -- Treat separated words as a word text object
 --opt.colorcolumn=80
 --opt.clipboard:append('unnamedplus')     -- Copy and paste to system clipboard

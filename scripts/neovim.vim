@@ -1,10 +1,6 @@
 lua require("core")
 lua require("config")
 
-" Copilot settings
-let g:copilot_no_tab_map = v:true
-imap <silent><script><expr> <SPACE><Tab> copilot#Accept("\<CR>")
-
 "Telescope settings
 nnoremap <leader>sf <cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<cr> 
 nnoremap <C-p> :lua require('config.telescope').find_files()<CR>

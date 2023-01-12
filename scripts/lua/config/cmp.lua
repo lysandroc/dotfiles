@@ -1,5 +1,7 @@
-local cmp = require 'cmp'
-local luasnip = require 'luasnip'
+local cmp = require('cmp')
+local luasnip = require('luasnip')
+local lspkind = require('lspkind')
+local copilot_cmp = require("copilot_cmp")
 
 local has_words_before = function()
   if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
@@ -10,31 +12,32 @@ end
 local M = {}
 
 M.setup = function()
-  -- https://github.com/rafamadriz/friendly-snippets/issues/105
-	-- Have to do this before loading snippets
-  luasnip.filetype_extend("javascript", { "javascriptreact" })
-	luasnip.filetype_extend("typescript", { "javascript" })
-
   require("luasnip.loaders.from_vscode").lazy_load()
   --My custom snippets written in lua
   --require("luasnip.loaders.from_lua").load({ paths = root .. "/lua/core/snippets/" })
-  
-  local confirming_choice = {
-    i = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false },
-    c = function(fallback)
-      if cmp.visible() then
-        cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false }
-      else
-        fallback()
-      end
-    end,
-  }
 
-  -- require("copilot_cmp").setup {
-  --   method = "getCompletionsCycling",
-  -- }
+  copilot_cmp.setup({
+    method = "getCompletionsCycling",
+  })
+
+  -- Define copilot color's icon in the cmp option list
+  vim.api.nvim_set_hl(0, "CmpItemKindCopilot", {fg ="#26C281"})
 
   cmp.setup {
+    formatting = {
+      format = lspkind.cmp_format({
+       symbol_map = { Copilot = "" },
+        mode = 'symbol_text',
+        maxwidth = 30, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+        ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+
+        -- The function below will be called before any actual modifications from lspkind
+        -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+        before = function (entry, vim_item)
+          return vim_item
+        end
+      })
+    },
     snippet = {
       expand = function(args)
         luasnip.lsp_expand(args.body)
@@ -63,15 +66,32 @@ M.setup = function()
       ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
       ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
       ["<C-e>"] = cmp.mapping { i = cmp.mapping.close(), c = cmp.mapping.close() },
-      ["<tab>"] = cmp.mapping(confirming_choice),
-      ["<CR>"] = cmp.mapping(confirming_choice),
+      ["<TAB>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false }
+      --   elseif luasnip.expand_or_jumpable() then
+      --     luasnip.expand_or_jump()
+      --   -- elseif has_words_before() then
+      --   --   cmp.complete()
+          else
+            fallback()
+          end
+        end, { "i" }),
+      ["<CR>"] = cmp.mapping({
+        i = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false },
+        c = function(fallback)
+          if cmp.visible() then
+            cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false }
+          else
+            fallback()
+          end
+        end,
+      }),
       ["<C-j>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
         elseif luasnip.expand_or_jumpable() then
           luasnip.expand_or_jump()
-        -- elseif neogen.jumpable() then
-        --   neogen.jump_next()
         elseif has_words_before() then
           cmp.complete()
         else
@@ -87,8 +107,6 @@ M.setup = function()
           cmp.select_prev_item()
         elseif luasnip.jumpable(-1) then
           luasnip.jump(-1)
-        -- elseif neogen.jumpable(true) then
-        --   neogen.jump_prev()
         else
           fallback()
         end
@@ -100,26 +118,42 @@ M.setup = function()
       ["<C-y>"] = {
         i = cmp.mapping.confirm { select = false },
       },
-      ["<C-n>"] = {
-        i = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-      },
       ["<C-p>"] = {
-        i = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+        i = function()
+          if cmp.visible() then
+            return cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
+          end
+        end
+      },
+      ["<C-n>"] = {
+        i = function()
+          if cmp.visible() then
+            return cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+          else
+            return cmp.complete()
+            -- return cmp.complete({ config = { sources = { { name = 'copilot', keyword_length=0 } } } })
+          end
+        end
       },
     },
     sources = {
-      -- { name = "copilot" },
+      { name = "copilot", keyword_length = 0 },
       { name = "nvim_lsp" },
       { name = "nvim_lsp_signature_help" },
       { name = "luasnip" },
       { name = "nvim_lua" },
       { name = "treesitter" },
       { name = "rg" },
-      { name = "buffer" },
       { name = "path" },
-      { name = "crates" },
-      { name = "spell" },
-      { name =  "vsnip" }
+      { name = "buffer" },
+      -- { name = "crates" },
+      -- { name = "spell" },
+      -- { name =  "vsnip" }
+    },
+    completion = {
+      completeopt = "menu,menuone,noinsert",
+      keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)]],
+      --keyword_length = 0,
     },
   }
 end

@@ -19,6 +19,8 @@ local with_root_file = function(builtin, file)
 end
 
 local sources = {
+  require("typescript.extensions.null-ls.code-actions"), -- https://github.com/jose-elias-alvarez/typescript.nvim
+
   -- formatting
   b.formatting.prettier,
   b.formatting.shfmt,
@@ -28,11 +30,11 @@ local sources = {
   with_root_file(b.formatting.stylua, "stylua.toml"),
 
   -- diagnostics
-  b.diagnostics.write_good,
-  b.diagnostics.markdownlint,
-  b.diagnostics.flake8,
-  -- b.diagnostics.eslint_d,
-  b.diagnostics.tsc,
+  --b.diagnostics.write_good,
+  --b.diagnostics.markdownlint,
+  --b.diagnostics.flake8,
+  --b.diagnostics.eslint_d,
+  --b.diagnostics.tsc,
   with_root_file(b.diagnostics.selene, "selene.toml"),
   with_diagnostics_code(b.diagnostics.shellcheck),
 
