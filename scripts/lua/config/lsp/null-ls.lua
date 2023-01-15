@@ -5,17 +5,17 @@ local nullls = require("null-ls")
 local nls_utils = require("null-ls.utils")
 
 local with_diagnostics_code = function(builtin)
-  return builtin.with {
+  return builtin.with({
     diagnostics_format = "#{m} [#{c}]",
-  }
+  })
 end
 
 local with_root_file = function(builtin, file)
-  return builtin.with {
+  return builtin.with({
     condition = function(utils)
       return utils.root_has_file(file)
     end,
-  }
+  })
 end
 
 local formatting = nullls.builtins.formatting
@@ -30,12 +30,12 @@ local sources = {
   formatting.prettier,
   formatting.shfmt,
   formatting.fixjson,
-  formatting.black.with { extra_args = { "--fast" } },
+  formatting.black.with({ extra_args = { "--fast" } }),
   formatting.isort,
   with_root_file(formatting.stylua, "stylua.toml"),
 
   -- diagnostics
-  diagnostics.eslint_d,
+  -- diagnostics.eslint_d,
   --diagnostics.write_good,
   --diagnostics.markdownlint,
   --diagnostics.flake8,
@@ -44,7 +44,7 @@ local sources = {
   with_diagnostics_code(diagnostics.shellcheck),
 
   -- code actions
-  code_actions.eslint_d,
+  -- code_actions.eslint_d,
 
   -- hover
   hover.dictionary,
@@ -58,19 +58,19 @@ function M.setup(opts)
     ensure_installed = nil, -- resolve with all available plugins
     automatic_installation = true,
     automatic_setup = true, -- Recommended, but optional
-})
+  })
 
-  nullls.setup {
+  nullls.setup({
     -- debug = true,
     debounce = 150,
     save_after_format = false,
     sources = sources,
     on_attach = opts.on_attach,
-    root_dir = nls_utils.root_pattern ".git",
-  }
+    root_dir = nls_utils.root_pattern(".git"),
+  })
 
-  -- Appends available builtin functionalities on top of the existents "sources" defined manually 
-  mason_nullls.setup_handlers() 
+  -- Appends available builtin functionalities on top of the existents "sources" defined manually
+  mason_nullls.setup_handlers()
 end
 
 return M

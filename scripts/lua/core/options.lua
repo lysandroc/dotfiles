@@ -1,5 +1,6 @@
 local opt = vim.opt
 
+opt.guifont="Operator Mono Lig, Fira Code:h16" -- Font
 opt.termguicolors=true                  -- Enable 24-bit RGB colors
 opt.encoding="utf-8"                    -- The encoding displayed
 opt.number=true                         -- Line numbers

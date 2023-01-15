@@ -1,19 +1,19 @@
-local lualine = require('lualine')
-local navic = require('nvim-navic')
+local lualine = require("lualine")
+local navic = require("nvim-navic")
 
 -- mimic the exact green color from my gruvbox theme
 local colors = {
   green = "#98971a",
-  yellow = "#d79921"
+  yellow = "#d79921",
 }
 
 local M = {}
 
-M.setup = function ()
-  lualine.setup {
+M.setup = function()
+  lualine.setup({
     options = {
       icons_enabled = true,
-      theme = 'gruvbox',
+      theme = "gruvbox",
       always_divide_middle = true,
       globalstatus = true,
       disabled_filetypes = {
@@ -21,7 +21,16 @@ M.setup = function ()
         winbar = {},
       },
     },
-    extensions = { "nerdtree", "fzf", "symbols-outline", "nvim-tree", "toggleterm", "quickfix", "fugitive", "nvim-dap-ui" },
+    extensions = {
+      "nerdtree",
+      "fzf",
+      "symbols-outline",
+      "nvim-tree",
+      "toggleterm",
+      "quickfix",
+      "fugitive",
+      "nvim-dap-ui",
+    },
     sections = {
       lualine_a = { { "mode" } },
       lualine_b = {
@@ -30,7 +39,7 @@ M.setup = function ()
         {
           "diagnostics",
           sources = { "nvim_diagnostic" },
-          symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'},
+          symbols = { error = "E", warn = "W", info = "I", hint = "H" },
           -- colored = true,
           on_click = function()
             vim.diagnostic.setloclist()
@@ -43,7 +52,8 @@ M.setup = function ()
         -- { lsp_progress },
       },
       lualine_x = {
-        { "filename" },  { "encoding" }
+        { "filename" },
+        { "encoding" },
       },
       lualine_y = { "progress" },
       lualine_z = { "location" },
@@ -67,7 +77,8 @@ M.setup = function ()
     winbar = {
       lualine_a = {},
       lualine_b = {},
-      lualine_c = { {
+      lualine_c = {
+        {
           navic.get_location,
           -- function (opt)
           --   -- opt.icons = {}
@@ -79,7 +90,8 @@ M.setup = function ()
           -- end,
           cond = navic.is_available,
           color = { gui = "bold", fg = colors.yellow },
-        } },
+        },
+      },
       lualine_x = {},
       lualine_y = {},
       lualine_z = {},
@@ -87,12 +99,12 @@ M.setup = function ()
     -- https://github.com/kdheepak/tabline.nvim
     tabline = {
       lualine_c = {
-         {
-            'buffers',
-            show_filename_only = false, -- show shortened relative path
-            mode = 4, -- Show buf name+number
-            max_length = vim.o.columns * 4 / 5,
-         },
+        {
+          "buffers",
+          show_filename_only = false, -- show shortened relative path
+          mode = 4, -- Show buf name+number
+          max_length = vim.o.columns * 4 / 5,
+        },
       },
       -- lualine_x = {
       --   {
@@ -105,8 +117,8 @@ M.setup = function ()
       --     }
       --   },
       -- },
-   },
-  }
+    },
+  })
 end
 
 return M

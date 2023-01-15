@@ -1,6 +1,6 @@
-local navic = require "nvim-navic"
+local navic = require("nvim-navic")
 
-local keymaps = require('core.keymaps')
+local keymaps = require("core.keymaps")
 
 -- This module needs to be loaded before the lsp autocompletion definition
 require("config.lsp.cmp").setup()
@@ -15,7 +15,7 @@ local servers = {
   cssls = {
     -- additional_mason_plugins = "stylelint-lsp css-lsp",
   },
-  ['cssmodules_ls'] = {
+  ["cssmodules_ls"] = {
     -- additional_mason_plugins = "",
   },
   tailwindcss = {
@@ -26,14 +26,15 @@ local servers = {
     settings = {
       json = {
         schemas = require("schemastore").json.schemas(),
-        -- validate = { enable = true }, -- I should enable this 
+        -- validate = { enable = true }, -- I should enable this
       },
     },
   },
   pyright = {
     --additional_mason_plugins = "pyright",
     analysis = {
-      typeCheckingMode = "off", },
+      typeCheckingMode = "off",
+    },
   },
   sumneko_lua = {
     -- additional_mason_plugins = "stylua lua-language-server",
@@ -53,8 +54,8 @@ local servers = {
         workspace = {
           -- Make the server aware of Neovim runtime files
           library = {
-            [vim.fn.expand "$VIMRUNTIME/lua"] = true,
-            [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
+            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+            [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
           },
           -- library = vim.api.nvim_get_runtime_file("", true),
           maxPreload = 2000,
@@ -124,7 +125,10 @@ local servers = {
       -- Experimenting how to create a custom command
       TSServerOrganizeImports = {
         function()
-          vim.lsp.buf.execute_command { command = "_typescript.organizeImports", arguments = { vim.api.nvim_buf_get_name(0) } }
+          vim.lsp.buf.execute_command({
+            command = "_typescript.organizeImports",
+            arguments = { vim.api.nvim_buf_get_name(0) },
+          })
         end,
         description = "Organize Imports",
       },
@@ -182,7 +186,7 @@ local servers = {
   --   additional_mason_plugins = "gopls",
   -- },
   -- rust_analyzer = {
-    -- additional_mason_plugins = "rust_analyzer",
+  -- additional_mason_plugins = "rust_analyzer",
   --   settings = {
   --     ["rust-analyzer"] = {
   --       cargo = { allFeatures = true },
@@ -218,7 +222,7 @@ local M = {}
 function M.on_attach(client, bufnr)
   -- Enable completion triggered by <C-X><C-O>
   -- See `:help omnifunc` and `:help ins-completion` for more information.
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
   -- Use LSP as the handler for formatexpr.
   -- See `:help formatexpr` for more information.
@@ -241,7 +245,6 @@ function M.on_attach(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "tagfunc", "v:lua.vim.lsp.tagfunc")
   end
 end
-
 
 local new_capabilities = require("cmp_nvim_lsp").default_capabilities()
 new_capabilities.textDocument.completion.completionItem.snippetSupport = true
