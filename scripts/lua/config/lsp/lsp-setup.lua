@@ -3,14 +3,26 @@ local navic = require "nvim-navic"
 local keymaps = require('core.keymaps')
 
 -- This module needs to be loaded before the lsp autocompletion definition
-require("config.cmp").setup()
+require("config.lsp.cmp").setup()
 
 -- The object key name will be used as the server's name and the value as configuration
--- Mason config reads the mason_plugins_name property to install the LSP servers plugins available on it
+-- Mason config reads the additional_mason_plugins property to install the LSP servers plugins available on it
 -- :help lspconfig-all
 local servers = {
+  html = {
+    -- additional_mason_plugins = "html-lsp",
+  },
+  cssls = {
+    -- additional_mason_plugins = "stylelint-lsp css-lsp",
+  },
+  ['cssmodules_ls'] = {
+    -- additional_mason_plugins = "",
+  },
+  tailwindcss = {
+    -- additional_mason_plugins = 'tailwindcss-language-server',
+  },
   jsonls = {
-    mason_plugins_name = "jsonlint json-lsp",
+    -- additional_mason_plugins = "jsonlint json-lsp",
     settings = {
       json = {
         schemas = require("schemastore").json.schemas(),
@@ -19,12 +31,12 @@ local servers = {
     },
   },
   pyright = {
-    mason_plugins_name = "pyright",
+    --additional_mason_plugins = "pyright",
     analysis = {
       typeCheckingMode = "off", },
   },
   sumneko_lua = {
-    mason_plugins_name = "stylua lua-language-server",
+    -- additional_mason_plugins = "stylua lua-language-server",
     settings = {
       Lua = {
         runtime = {
@@ -55,9 +67,9 @@ local servers = {
   },
   -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
   eslint = {
-    mason_plugins_name = "eslint-lsp",
-    filetypes ={ "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "vue", "svelte", "astro" },
-    -- rootPatterns = { ".eslintrc.js", ".eslintrc.json", ".eslintrc.yaml", ".eslintrc.yml", ".eslintrc", "package.json" },
+    -- additional_mason_plugins = "eslint-lsp eslint_d",
+    additional_mason_plugins = "eslint-lsp",
+    -- filetypes ={ "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "vue", "svelte", "astro" },
     -- root_dir = function(startpath)
     --     local matcher = {}
     --     return M.search_ancestors(startpath, matcher)
@@ -106,9 +118,10 @@ local servers = {
     },
   },
   tsserver = {
-    mason_plugins_name = "typescript-language-server js-debug-adapter prettier prettierd",
+    -- additional_mason_plugins = "typescript-language-server js-debug-adapter prettier",
     disable_formatting = true,
     commands = {
+      -- Experimenting how to create a custom command
       TSServerOrganizeImports = {
         function()
           vim.lsp.buf.execute_command { command = "_typescript.organizeImports", arguments = { vim.api.nvim_buf_get_name(0) } }
@@ -143,7 +156,7 @@ local servers = {
     },
   },
   yamlls = {
-    mason_plugins_name = "yaml-language-server",
+    -- additional_mason_plugins = "yaml-language-server",
     schemastore = {
       enable = true,
     },
@@ -157,19 +170,19 @@ local servers = {
     },
   },
   vimls = {
-    mason_plugins_name = "vim-language-server"
+    -- additional_mason_plugins = "vim-language-server"
   },
   -- grammarly = {
-  --   mason_plugins_name = "grammarly-languageserver",
+  --   additional_mason_plugins = "grammarly-languageserver",
   --   settings = {
   --     clientId = ""
   --   }
   -- }
   -- gopls = {
-  --   mason_plugins_name = "gopls",
+  --   additional_mason_plugins = "gopls",
   -- },
   -- rust_analyzer = {
-    -- mason_plugins_name = "rust_analyzer",
+    -- additional_mason_plugins = "rust_analyzer",
   --   settings = {
   --     ["rust-analyzer"] = {
   --       cargo = { allFeatures = true },
@@ -253,10 +266,10 @@ local opts = {
 }
 
 function M.setup()
-  require("config.null-ls").setup(opts)
-  -- Send servers will enable to Mason config to read the mason_plugins_name and install them
-  -- and also, will allow mason to setup lsp servers using mason-lspconfig
-  require("config.mason").setup(servers, opts)
+  require("config.lsp.null-ls").setup(opts)
+  -- Send servers will enable to Mason config to read the additional_mason_plugins and install them
+  -- and also, moreover, mason will setup lsp servers using mason-lspconfig
+  require("config.lsp.mason").setup(servers, opts)
 end
 
 local diagnostics_active = true

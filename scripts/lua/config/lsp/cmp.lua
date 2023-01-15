@@ -130,8 +130,8 @@ M.setup = function()
           if cmp.visible() then
             return cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
           else
-            return cmp.complete()
-            -- return cmp.complete({ config = { sources = { { name = 'copilot', keyword_length=0 } } } })
+            -- return cmp.complete()
+            return cmp.complete({ config = { sources = { { name = 'copilot', keyword_length=0 } } } })
           end
         end
       },

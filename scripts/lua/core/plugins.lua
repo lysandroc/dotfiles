@@ -67,7 +67,6 @@ local plugins = {
       },
       lazy=false
     }
-  , { 'williamboman/mason.nvim' }
   , {
       'neovim/nvim-lspconfig',
       dependencies = {
@@ -82,11 +81,12 @@ local plugins = {
           'L3MON4D3/LuaSnip',
           dependencies = { 'rafamadriz/friendly-snippets', 'saadparwaiz1/cmp_luasnip' }
         },
-        'williamboman/mason.nvim',
-        'williamboman/mason-lspconfig.nvim',
-        'jose-elias-alvarez/null-ls.nvim',
-        'jose-elias-alvarez/typescript.nvim',
-        { 'onsails/lspkind.nvim',  dependencies = { 'mortepau/codicons.nvim' } }
+        'williamboman/mason.nvim', -- Mason is a plugin manager for Neovim
+        'williamboman/mason-lspconfig.nvim', -- Setup the integration between mason and lspconfig
+        'jay-babu/mason-null-ls.nvim', -- Setup available null-ls settings automatically
+        'jose-elias-alvarez/null-ls.nvim', -- sources of diagnostics, code actions, and other code manipulation functions.
+        'jose-elias-alvarez/typescript.nvim', -- TypeScript support for null-ls
+        { 'onsails/lspkind.nvim',  dependencies = { 'mortepau/codicons.nvim' } } -- vscode-like pictograms for neovim lsp completion items
       },
       lazy=false
     }
@@ -138,4 +138,4 @@ local plugins = {
     }
 }
 
- return require("lazy").setup(plugins)
+require("lazy").setup(plugins)
