@@ -78,9 +78,11 @@ M.setup = function()
         else
           fallback()
         end
-      end, { "i" }),
+      end, { "i", "c", "s" }),
       ["<CR>"] = cmp.mapping({
         i = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
+        -- s = cmp.mapping.confirm({ select = false })
+        s = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
         c = function(fallback)
           if cmp.visible() then
             cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
@@ -89,6 +91,8 @@ M.setup = function()
           end
         end,
       }),
+      -- ['<CR>'] = cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }, { "i", "c" }), -- cmp.mapping.confirm({ select = false }),
+      -- ['<TAB>'] = cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }, { "i", "c"}), --cmp.mapping.confirm({ select = false }),
       ["<C-j>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
@@ -109,8 +113,11 @@ M.setup = function()
           cmp.select_prev_item()
         elseif luasnip.jumpable(-1) then
           luasnip.jump(-1)
+        -- elseif has_words_before() then
         else
-          fallback()
+          cmp.complete()
+        -- else
+        --   fallback()
         end
       end, {
         "i",
@@ -121,10 +128,11 @@ M.setup = function()
         i = cmp.mapping.confirm({ select = false }),
       },
       ["<C-p>"] = {
-        i = function()
+        i = function(fallback)
           if cmp.visible() then
             return cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
           end
+          fallback()
         end,
       },
       ["<C-n>"] = {
@@ -132,14 +140,13 @@ M.setup = function()
           if cmp.visible() then
             return cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
           else
-            -- return cmp.complete()
-            return cmp.complete({ config = { sources = { { name = "copilot", keyword_length = 0 } } } })
+            return vim.schedule_wrap(cmp.complete())
           end
         end,
       },
     }),
     sources = {
-      { name = "copilot", keyword_length = 0 },
+      { name = "copilot" },
       { name = "nvim_lsp" },
       { name = "nvim_lsp_signature_help" },
       { name = "luasnip" },
@@ -148,15 +155,33 @@ M.setup = function()
       { name = "rg" },
       { name = "path" },
       { name = "buffer" },
-      -- { name = "crates" },
-      -- { name = "spell" },
-      -- { name =  "vsnip" }
+      { name = "crates" },
+      { name = "spell" },
+      { name =  "vsnip" }
     },
     completion = {
       completeopt = "menu,menuone,noinsert",
       keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)]],
-      --keyword_length = 0,
+      -- keyword_length = 0,
     },
+  })
+
+  -- Autocomplete when using search "/"
+  cmp.setup.cmdline('/', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+      { name = 'buffer' }
+    }
+  })
+
+  -- Autocomplete when using search ":"
+  cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    })
   })
 end
 

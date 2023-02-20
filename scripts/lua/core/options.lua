@@ -1,5 +1,8 @@
 local opt = vim.opt
 
+-- retrocompatibility with my previous vimconf file
+vim.cmd("set guioptions-=T")            -- GUI without toolbar
+
 opt.guifont="Operator Mono Lig, Fira Code:h16" -- Font
 opt.termguicolors=true                  -- Enable 24-bit RGB colors
 opt.encoding="utf-8"                    -- The encoding displayed
@@ -16,7 +19,7 @@ opt.incsearch=true                      -- Find when you typing
 opt.tags:append(".tags", ".git/tags")   -- Use ctags file in current directory or parent
 -- opt.backspace="2"        -- Default backspace behaviour
 opt.backspace="indent,eol,start"        -- Default backspace behaviour
-opt.wildmode="full"                     -- Command complete display all list
+--opt.wildmode="full"                     -- Command complete display all list
 opt.mouse="a"                           -- Mouse will use vim behavior
 opt.hidden=true                         -- To edit multiple buffers without save
 opt.expandtab=true                      -- Indent with white spaces
@@ -41,6 +44,3 @@ opt.updatetime=50                       -- Faster completion
 --opt.colorcolumn=80
 --opt.clipboard:append('unnamedplus')     -- Copy and paste to system clipboard
 
--- retrocompatibility with my previous vimconf file
-vim.cmd('set wildchar=<Tab> wildmenu')  -- Autocomplete commands on command mode
-vim.cmd("set guioptions-=T")            -- GUI without toolbar

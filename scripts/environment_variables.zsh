@@ -19,7 +19,11 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-messages -g "!{.gi
 # export PATH="/Users/lysandroc/.pyenv/bin:$PATH"
 # eval "$(pyenv init -)"
 # eval "$(pyenv virtualenv-init -)"
-# export PATH="/usr/local/opt/python@3.8/bin:$PATH"
+# # export PATH="/usr/local/opt/python@3.8/bin:$PATH"
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
 
 # export OPENAI_API_KEY=""
 export NVIM_MAGIC_LOGLEVEL='debug'

@@ -172,17 +172,17 @@ keymap.set(
 local M = {}
 
 -- Attach these keymaps after tree(sidemenu) is initialized
-function M.tree_keymaps()
+function M.nerdtree_keymaps()
   keymap.set(
     "n",
     "<leader>n",
-    ":NvimTreeToggle<CR>",
+    ":NERDTreeToggle<CR>",
     { noremap = true, silent = true, desc = "Open or close the tree. Takes an optional path argument" }
   )
   keymap.set(
     "n",
     "<leader>N",
-    ":NvimTreeFindFile<CR>",
+    ":NERDTreeFind<CR>",
     {
       noremap = true,
       silent = true,

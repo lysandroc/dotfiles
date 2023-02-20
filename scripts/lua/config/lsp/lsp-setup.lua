@@ -36,13 +36,13 @@ local servers = {
       typeCheckingMode = "off",
     },
   },
-  sumneko_lua = {
+  lua_ls = {
     -- additional_mason_plugins = "stylua lua-language-server",
     settings = {
       Lua = {
         runtime = {
           -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-          version = "Lua 5.4.4",
+          version = "Lua 5.4.3",
           -- Setup your lua path
           path = vim.split(package.path, ";"),
         },

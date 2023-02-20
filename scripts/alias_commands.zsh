@@ -20,9 +20,7 @@ alias og="source ~/dotfiles/scripts/tmux -og"
 
 alias vs="code-insiders ."
 
-alias ovim="vim"
 alias vim="nvim"
-alias vi="nvim"
 alias v="nvim"
 
 alias tm="tmux"
@@ -33,8 +31,6 @@ alias tmls="tmux ls"
 alias tmks="tmux kill-session"
 alias tmksv="tmux kill-server"
 
-alias ghpr="gh pr create -a lysandroc"
-
 alias g="git"
 alias gl="git log --graph --decorate --all"
 alias gds="git diff --staged"
@@ -44,10 +40,14 @@ alias grm="git reset --hard origin/master"
 alias gri="git rebase --i origin/master"
 alias gc="git checkout"
 alias gs="git status"
+alias gpu="git pull"
 alias gp="git push"
 alias gpf="git push --set-upstream origin \$(git symbolic-ref --short HEAD)"
+# alias gai="git-aicommit --openAiKey=$OPENAI_API_KEY --completionPromptParams.temperature=0.3 --no-autocommit"
 
+alias ghpr="gh pr create -a lysandroc"
 alias ct="bat ~/dotfiles/scripts/commit-types.txt"
+alias cy="yarn run cypress:open"
 
 ialias fzf="fzf --color=16 --preview 'bat --style=numbers --color=always {}'"
 

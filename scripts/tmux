@@ -171,8 +171,9 @@ while [ "$#" -gt 0 ]; do
         # createWindow stay smartmap -c $STAY_SMARTMAP
         # createWindow stay omniscient -c $STAY_OMNISCIENT
         # createWindow stay designsystem -c $STAY_DESIGN_SYSTEM
-        createWindow listview fe -c $STAY_NEW_FRONTEND
+        createWindow listview lv -c $STAY_NEW_FRONTEND
         createWindow listview ds -c $STAY_DESIGN_SYSTEM
+        createWindow listview fe -c $STAY_FRONTEND
         attach listview
         ;;
     "-og")

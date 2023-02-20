@@ -12,7 +12,13 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
-  -- 'scrooloose/nerdtree'
+  {
+    "scrooloose/nerdtree",
+    config = function()
+      require("core.keymaps").nerdtree_keymaps()
+    end,
+    lazy = false,
+  },
   "sheerun/vim-polyglot",
   "tpope/vim-surround",
   "b0o/schemastore.nvim",
@@ -34,7 +40,7 @@ local plugins = {
     "nvim-treesitter/nvim-treesitter",
     dependencies = { "nvim-treesitter/playground" },
     build = ":TSUpdate",
-    lazy = false,
+    -- lazy = false,
   },
   {
     "ellisonleao/gruvbox.nvim",
@@ -70,10 +76,34 @@ local plugins = {
     lazy = false,
   },
   {
+    -- "zbirenbaum/copilot-cmp",
+    "lysandroc/copilot-cmp-fix",
+    dependencies = {
+      {
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        -- event='InsertEnter',
+        config = function()
+          require("copilot").setup({
+            suggestion = {
+              enabled = false, -- enabling it causes delay when typing
+              keymap = {
+                accept = "<leader>C",
+              },
+            },
+            panel = { enable = false },
+          })
+        end,
+      },
+    },
+    lazy = false,
+  },
+  {
     "neovim/nvim-lspconfig",
     dependencies = {
       --'nvim-lua/lsp-status.nvim',
       "hrsh7th/nvim-cmp",
+      "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-nvim-lua",
       "ray-x/cmp-treesitter",
@@ -103,44 +133,6 @@ local plugins = {
       "nvim-telescope/telescope.nvim",
       "nvim-telescope/telescope-dap.nvim",
     },
-  } -- ,'github/copilot.vim'
-  ,
-  {
-    "zbirenbaum/copilot-cmp",
-    dependencies = {
-      {
-        "zbirenbaum/copilot.lua",
-        cmd = "Copilot",
-        -- event='InsertEnter',
-        config = function()
-          require("copilot").setup({
-            suggestion = {
-              enabled = true,
-              auto_refresh = true,
-              auto_trigger = true,
-              debounce = 75,
-              keymap = {
-                accept = "<leader>C",
-              },
-            },
-            panel = { enable = false },
-          })
-        end,
-      },
-    },
-    lazy = false,
-  },
-  {
-    "nvim-tree/nvim-tree.lua",
-    config = function()
-      require("nvim-tree").setup({
-        view = {
-          adaptive_size = true,
-        },
-      })
-      require("core.keymaps").tree_keymaps()
-    end,
-    tag = "nightly",
   },
 }
 
