@@ -112,6 +112,7 @@ local plugins = {
       --'nvim-lua/lsp-status.nvim',
       "hrsh7th/nvim-cmp",
       "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-nvim-lua",
       "ray-x/cmp-treesitter",

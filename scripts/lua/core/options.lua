@@ -20,6 +20,7 @@ opt.tags:append(".tags", ".git/tags")   -- Use ctags file in current directory o
 -- opt.backspace="2"        -- Default backspace behaviour
 opt.backspace="indent,eol,start"        -- Default backspace behaviour
 --opt.wildmode="full"                     -- Command complete display all list
+--opt.wildoptions = "pum"                 --
 opt.mouse="a"                           -- Mouse will use vim behavior
 opt.hidden=true                         -- To edit multiple buffers without save
 opt.expandtab=true                      -- Indent with white spaces
@@ -43,4 +44,3 @@ opt.updatetime=50                       -- Faster completion
 -- opt.iskeyword:append("-")               -- Treat separated words as a word text object
 --opt.colorcolumn=80
 --opt.clipboard:append('unnamedplus')     -- Copy and paste to system clipboard
-

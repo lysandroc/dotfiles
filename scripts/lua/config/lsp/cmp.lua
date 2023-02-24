@@ -46,6 +46,7 @@ M.setup = function()
       end,
     },
     mapping = cmp.mapping.preset.insert({
+      ["<C-e>"] = cmp.mapping({ i = cmp.mapping.close(), c = cmp.mapping.close() }),
       ["<C-l>"] = cmp.mapping({
         i = function(fallback)
           if luasnip.choice_active() then
@@ -67,7 +68,6 @@ M.setup = function()
       ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
       ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
       ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-      ["<C-e>"] = cmp.mapping({ i = cmp.mapping.close(), c = cmp.mapping.close() }),
       ["<TAB>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
@@ -166,7 +166,7 @@ M.setup = function()
     },
   })
 
-  -- Autocomplete when using search "/"
+  -- -- Autocomplete when using search "/"
   cmp.setup.cmdline('/', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = {
@@ -174,9 +174,10 @@ M.setup = function()
     }
   })
 
-  -- Autocomplete when using search ":"
+  -- -- Autocomplete when using search ":"
   cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
+    -- view = { entries = "wildmenu" },
     sources = cmp.config.sources({
       { name = 'path' }
     }, {
