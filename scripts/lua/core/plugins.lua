@@ -92,6 +92,14 @@ local plugins = {
               },
             },
             panel = { enable = false },
+            server_opts_overrides = {
+              trace = "verbose",
+              settings = {
+                advanced = {
+                  inlineSuggestCount = 4, -- #completions for getCompletions
+                },
+              },
+            },
           })
         end,
       },
