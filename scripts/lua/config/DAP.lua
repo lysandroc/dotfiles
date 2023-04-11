@@ -3,6 +3,7 @@ require("codicons").setup()
 require("dapui").setup()
 require("nvim-dap-virtual-text").setup()
 
+-- https://github.com/mxsdev/nvim-dap-vscode-js
 vim.g.dap_virtual_text = true
 
 local M = {}

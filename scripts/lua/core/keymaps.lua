@@ -17,6 +17,18 @@ local keymap = vim.keymap
 --     vim.keymap(mode, lhs, rhs, options)
 -- end
 
+-- local function test()
+--     local a = require('nvim-json2ts').setup()
+--     print(vim.fn.printf("nvim-json2ts: %s", vim.inspect(a)))
+-- end
+--
+-- keymap.set(
+--   "n",
+--   "<space>M",
+--   test,
+--   { noremap = true, silent = true, desc = "TEST" }
+-- )
+
 -- use ctrl+hjkl to move between split/vsplit panels
 keymap.set(Mode.NORMAL, "<A-h>", "<C-w>h", { noremap = true, silent = true, desc = "Jump to the right panel" })
 keymap.set(Mode.NORMAL, "<A-j>", "<C-w>j", { noremap = true, silent = true, desc = "Jump to the left panel" })
@@ -109,9 +121,11 @@ keymap.set(
 )
 
 -- use alt + (q/x/w) to quit, quit saving or just save
+keymap.set(Mode.NORMAL, "<A-Q>", ":qa!<CR>", { noremap = true, silent = true, desc = "force quit" })
 keymap.set(Mode.NORMAL, "<A-q>", ":q<CR>", { noremap = true, silent = true, desc = "quits file" })
 keymap.set(Mode.NORMAL, "<A-x>", ":x<CR>", { noremap = true, silent = true, desc = "quits saving the file" })
 keymap.set(Mode.NORMAL, "<A-w>", ":w<CR>", { noremap = true, silent = true, desc = "saves file" })
+keymap.set(Mode.INSERT, "<A-Q>", "<ESC>:qa!<CR>", { noremap = true, silent = true, desc = "force quit" })
 keymap.set(Mode.INSERT, "<A-q>", "<ESC>:q<CR>", { noremap = true, silent = true, desc = "quits file" })
 keymap.set(Mode.INSERT, "<A-x>", "<ESC>:x<CR>", { noremap = true, silent = true, desc = "quits saving the file " })
 keymap.set(Mode.INSERT, "<A-w>", "<ESC>:w<CR>", { noremap = true, silent = true, desc = "saves file" })
@@ -188,6 +202,28 @@ function M.nerdtree_keymaps()
       silent = true,
       desc = "Move the cursor in the tree for the current buffer, opening folders if needed",
     }
+  )
+end
+
+function M.jester_keymaps()
+  local jester = require("jester")
+  keymap.set(
+    "n",
+    "<leader>jr",
+    jester.run,
+    { noremap = true, silent = true, desc = "Run jest" }
+  )
+  keymap.set(
+    "n",
+    "<leader>jrf",
+    jester.run_file,
+    { noremap = true, silent = true, desc = "Run jest" }
+  )
+  keymap.set(
+    "n",
+    "<leader>jd",
+    jester.debug,
+    { noremap = true, silent = true, desc = "Run jest" }
   )
 end
 

@@ -12,6 +12,14 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
+  { "David-Kunz/jester",
+    config = function()
+      require("jester").setup({
+        path_to_jest_run = "~/.asdf/shims/node node_modules/.bin/jest",
+      })
+      require("core.keymaps").jester_keymaps()
+    end,
+  },
   {
     "scrooloose/nerdtree",
     config = function()
@@ -38,7 +46,7 @@ local plugins = {
   },
   {
     "nvim-treesitter/nvim-treesitter",
-    dependencies = { "nvim-treesitter/playground" },
+    dependencies = { "nvim-treesitter/playground", "nvim-treesitter/nvim-treesitter-context" },
     build = ":TSUpdate",
     -- lazy = false,
   },
@@ -77,12 +85,14 @@ local plugins = {
   },
   {
     -- "zbirenbaum/copilot-cmp",
-    "lysandroc/copilot-cmp-fix",
+    "lysandroc/copilot-cmp",
+    dev = true,
     dependencies = {
       {
         "zbirenbaum/copilot.lua",
+        dev = true,
         cmd = "Copilot",
-        -- event='InsertEnter',
+        event='InsertEnter',
         config = function()
           require("copilot").setup({
             suggestion = {
@@ -143,6 +153,24 @@ local plugins = {
       "nvim-telescope/telescope-dap.nvim",
     },
   },
+  -- {
+  --   "lysandroc/nvim-json2ts",
+  --   dev=true,
+  --   lazy=false,
+  --   config = function()
+  --     print(vim.fn.printf('Loading %s', '- nvim-json2ts'))
+  --     -- local a = require("nvim-json2ts")
+  --     -- print(vim.fn.printf("nvim-json2ts: %s", vim.inspect(a)))
+  --   end
+  -- },
 }
 
-require("lazy").setup(plugins)
+require("lazy").setup(plugins, {
+  dev = {
+    -- directory where you store your local plugin projects
+    path = "~/projects",
+    ---@type string[] plugins that match these patterns will use your local versions instead of being fetched from GitHub
+    patterns = {}, -- For example {"folke"}
+    fallback = false, -- Fallback to git when local plugin doesn't exist
+  },
+})

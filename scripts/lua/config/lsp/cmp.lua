@@ -65,7 +65,7 @@ M.setup = function()
           end
         end,
       }),
-      ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
+      ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs( -4), { "i", "c" }),
       ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
       ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
       ["<TAB>"] = cmp.mapping(function(fallback)
@@ -111,13 +111,13 @@ M.setup = function()
       ["<C-k>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_prev_item()
-        elseif luasnip.jumpable(-1) then
-          luasnip.jump(-1)
-        -- elseif has_words_before() then
+        elseif luasnip.jumpable( -1) then
+          luasnip.jump( -1)
+          -- elseif has_words_before() then
         else
           cmp.complete()
-        -- else
-        --   fallback()
+          -- else
+          --   fallback()
         end
       end, {
         "i",
@@ -146,7 +146,11 @@ M.setup = function()
       },
     }),
     sources = {
-      { name = "copilot" },
+      {
+        name = "copilot",
+        max_item_count = 3,
+        group_index = 2,
+      },
       { name = "nvim_lsp" },
       { name = "nvim_lsp_signature_help" },
       { name = "luasnip" },
@@ -155,34 +159,67 @@ M.setup = function()
       { name = "rg" },
       { name = "path" },
       { name = "buffer" },
-      { name = "crates" },
-      { name = "spell" },
+      -- { name = "crates" },
+      -- { name = "spell" },
       { name =  "vsnip" }
     },
+    sorting = {
+      priority_weight = 2,
+      comparators = {
+        require("copilot_cmp.comparators").prioritize,
+        require("copilot_cmp.comparators").score,
+
+        -- Below is the default comparitor list and order for nvim-cmp
+        cmp.config.compare.offset,
+        -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
+        cmp.config.compare.exact,
+        cmp.config.compare.score,
+        cmp.config.compare.recently_used,
+        cmp.config.compare.locality,
+        cmp.config.compare.kind,
+        cmp.config.compare.sort_text,
+        cmp.config.compare.length,
+        cmp.config.compare.order,
+      },
+    },
+    -- sources = {
+    --   { name = "copilot" },
+    --   { name = "nvim_lsp" },
+    --   { name = "nvim_lsp_signature_help" },
+    --   { name = "luasnip" },
+    --   { name = "nvim_lua" },
+    --   { name = "treesitter" },
+    --   { name = "rg" },
+    --   { name = "path" },
+    --   { name = "buffer" },
+    --   -- { name = "crates" },
+    --   -- { name = "spell" },
+    --   { name =  "vsnip" }
+    -- },
     completion = {
       completeopt = "menu,menuone,noinsert",
       keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)]],
-      -- keyword_length = 0,
+      keyword_length = 0,
     },
   })
 
   -- -- Autocomplete when using search "/"
-  cmp.setup.cmdline('/', {
+  cmp.setup.cmdline("/", {
     mapping = cmp.mapping.preset.cmdline(),
     sources = {
-      { name = 'buffer' }
-    }
+      { name = "buffer" },
+    },
   })
 
   -- -- Autocomplete when using search ":"
-  cmp.setup.cmdline(':', {
+  cmp.setup.cmdline(":", {
     mapping = cmp.mapping.preset.cmdline(),
     -- view = { entries = "wildmenu" },
     sources = cmp.config.sources({
-      { name = 'path' }
+      { name = "path" },
     }, {
-      { name = 'cmdline' }
-    })
+      { name = "cmdline" },
+    }),
   })
 end
 

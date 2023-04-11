@@ -68,8 +68,8 @@ local servers = {
   },
   -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
   eslint = {
-    -- additional_mason_plugins = "eslint-lsp eslint_d",
-    additional_mason_plugins = "eslint-lsp",
+    additional_mason_plugins = "eslint-lsp eslint_d",
+    -- additional_mason_plugins = "eslint-lsp",
     -- filetypes ={ "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "vue", "svelte", "astro" },
     -- root_dir = function(startpath)
     --     local matcher = {}

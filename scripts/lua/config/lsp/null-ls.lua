@@ -44,7 +44,7 @@ local sources = {
   with_diagnostics_code(diagnostics.shellcheck),
 
   -- code actions
-  -- code_actions.eslint_d,
+  code_actions.eslint_d,
 
   -- hover
   hover.dictionary,
@@ -58,6 +58,7 @@ function M.setup(opts)
     ensure_installed = nil, -- resolve with all available plugins
     automatic_installation = true,
     automatic_setup = true, -- Recommended, but optional
+    handlers = {}
   })
 
   nullls.setup({
@@ -69,8 +70,9 @@ function M.setup(opts)
     root_dir = nls_utils.root_pattern(".git"),
   })
 
+  -- deprecated https://github.com/jay-babu/mason-null-ls.nvim/commit/a0c4dc10106521e5956f106a5ab6a2541737fde1
   -- Appends available builtin functionalities on top of the existents "sources" defined manually
-  mason_nullls.setup_handlers()
+  -- mason_nullls.setup_handlers()
 end
 
 return M
