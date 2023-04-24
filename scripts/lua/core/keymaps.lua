@@ -13,8 +13,7 @@ local keymap = vim.keymap
 
 -- local function map(mode, lhs, rhs, opts)
 --     local options = { noremap = true, silent = true }
---     if opts then options = vim.tbl_extend('force', options, opts) end
---     vim.keymap(mode, lhs, rhs, options)
+--     if opts then options = vim.tbl_extend('force', options, opts) end vim.keymap(mode, lhs, rhs, options)
 -- end
 
 -- local function test()
@@ -202,6 +201,15 @@ function M.nerdtree_keymaps()
       silent = true,
       desc = "Move the cursor in the tree for the current buffer, opening folders if needed",
     }
+  )
+end
+
+function M.git_blame()
+  keymap.set(
+    "n",
+    "<space>gbb", --git blame brwoser
+    ":GitBlameOpenCommitURL<CR>",
+    { noremap = true, silent = true, desc = "Opens the commit under the cursor in the browser" }
   )
 end
 

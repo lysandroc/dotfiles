@@ -11,6 +11,8 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local keymaps = require("core.keymaps")
+
 local plugins = {
   { "David-Kunz/jester",
     config = function()
@@ -37,6 +39,12 @@ local plugins = {
       "tpope/vim-rhubarb",
       "airblade/vim-gitgutter",
     },
+  },
+  {
+    "f-person/git-blame.nvim",
+    config = function()
+      keymaps.git_blame()
+    end
   },
   {
     "numToStr/Comment.nvim",
