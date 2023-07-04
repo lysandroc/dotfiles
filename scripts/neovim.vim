@@ -2,7 +2,7 @@ lua require("core")
 lua require("config")
 
 "Telescope settings
-nnoremap <leader>sf <cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<cr> 
+nnoremap <leader>sf <cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files,--glob=!**/.git/*,--glob=!**/node_modules/*<cr> 
 nnoremap <C-p> :lua require('config.telescope').find_files()<CR>
 nnoremap <leader>sd :lua require('config.telescope').search_dotfiles()<CR>
 nnoremap <space><Tab> :lua require('telescope.builtin').buffers()<CR>

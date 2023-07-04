@@ -19,6 +19,7 @@ M.setup = function()
       "dockerfile",
       "graphql",
       "json",
+      "http",
       "markdown",
       "typescript",
       "javascript",

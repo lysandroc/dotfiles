@@ -23,15 +23,22 @@ local plugins = {
     end,
   },
   {
-    "scrooloose/nerdtree",
+    -- "scrooloose/nerdtree",
+    "nvim-tree/nvim-tree.lua",
     config = function()
-      require("core.keymaps").nerdtree_keymaps()
+      require('nvim-tree').setup({})
+      require("core.keymaps").tree_keymaps()
     end,
     lazy = false,
   },
   "sheerun/vim-polyglot",
   "tpope/vim-surround",
   "b0o/schemastore.nvim",
+   {
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    opts = {}, -- this is equalent to setup({}) function
+  },
   "mattn/emmet-vim",
   {
     "tpope/vim-fugitive",
@@ -43,6 +50,7 @@ local plugins = {
   {
     "f-person/git-blame.nvim",
     config = function()
+      vim.g.gitblame_message_when_not_committed = ''
       keymaps.git_blame()
     end
   },
@@ -149,6 +157,13 @@ local plugins = {
     },
     lazy = false,
   },
+  -- {
+  --   "pmizio/typescript-tools.nvim",
+  --   dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+  --   config = function()
+  --     require("typescript-tools").setup {}
+  --   end,
+  -- },
   {
     "mfussenegger/nvim-dap",
     dependencies = {
