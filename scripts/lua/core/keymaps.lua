@@ -43,49 +43,30 @@ keymap.set(
   { noremap = true, silent = true, desc = "Jump to the bottom panel" }
 )
 
--- adjust panel's size using arrow keys
-keymap.set(Mode.NORMAL, "<up>", "10<C-W>+", { noremap = true, silent = true, desc = "Motion - 10 times up" })
-keymap.set(Mode.NORMAL, "<down>", "10<C-W>-", { noremap = true, silent = true, desc = "Motion - 10 times down" })
-keymap.set(Mode.NORMAL, "<left>", "3<C-W>>", { noremap = true, silent = true, desc = "Motion - 3 times left" })
-keymap.set(Mode.NORMAL, "<right>", "3<C-W><", { noremap = true, silent = true, desc = "Motion - 3 times right" })
+-- resizing with arrow keys
+for _, mode in ipairs({ Mode.COMMAND, Mode.NORMAL }) do
+  keymap.set(mode, "<up>", "10<C-W>+", { noremap = true, silent = true, desc = "Motion - 10 times up" })
+  keymap.set(mode, "<down>", "10<C-W>-", { noremap = true, silent = true, desc = "Motion - 10 times down" })
+  keymap.set(mode, "<left>", "3<C-W>>", { noremap = true, silent = true, desc = "Motion - 3 times left" })
+  keymap.set(mode, "<right>", "3<C-W><", { noremap = true, silent = true, desc = "Motion - 3 times right" })
+end
 
--- clipboard
-keymap.set(
-  Mode.NORMAL,
-  "<leader>y",
-  '"+y<CR>',
-  { noremap = true, silent = true, desc = "yank to the OS in normal mode" }
-)
-keymap.set(
-  Mode.VISUAL,
-  "<leader>y",
-  '"+y<CR>',
-  { noremap = true, silent = true, desc = "yank to the OS in visual mode" }
-)
-keymap.set(
-  Mode.VISUAL_BLOCK,
-  "<leader>y",
-  '"+y<CR>',
-  { noremap = true, silent = true, desc = "yank to the OS in visual mode" }
-)
-keymap.set(
-  Mode.NORMAL,
-  "<leader>P",
-  '"+P<CR>',
-  { noremap = true, silent = true, desc = "paste from the OS in normal mode" }
-)
-keymap.set(
-  Mode.VISUAL,
-  "<leader>P",
-  '"+P<CR>',
-  { noremap = true, silent = true, desc = "paste from the OS in visual mode" }
-)
-keymap.set(
-  Mode.VISUAL_BLOCK,
-  "<leader>P",
-  '"+P<CR>',
-  { noremap = true, silent = true, desc = "paste from the OS in visual mode" }
-)
+for _, mode in ipairs({ Mode.NORMAL, Mode.VISUAL, Mode.VISUAL_BLOCK, Mode.COMMAND  }) do
+  -- clipboard
+  keymap.set(
+    mode,
+    "<leader>y",
+    '"+y<CR>',
+    { noremap = true, silent = true, desc = "yank to the OS in visual mode" }
+  )
+
+  keymap.set(
+    mode,
+    "<leader>P",
+    '"+P<CR>',
+    { noremap = true, silent = true, desc = "paste from the OS in normal mode" }
+  )
+end
 
 -- native
 keymap.set(
