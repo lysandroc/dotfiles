@@ -18,6 +18,7 @@ local plugins = {
     config = function()
       require("jester").setup({
         path_to_jest_run = "~/.asdf/shims/node node_modules/.bin/jest",
+        terminal_cmd = ":split | terminal", -- used to spawn a terminal for running tests, for debugging refer to nvim-dap's config
       })
       require("core.keymaps").jester_keymaps()
     end,
