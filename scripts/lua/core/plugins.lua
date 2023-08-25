@@ -81,11 +81,13 @@ local plugins = {
     priority = 999,
   },
   { "p00f/nvim-ts-rainbow" },
-  {
-    "junegunn/fzf",
-    dependencies = { "junegunn/fzf.vim" },
-    lazy = false,
-  },
+  -- to be deleted, old way of search/browse before start migrating to telescope 
+  -- :Rg 
+  -- {
+  --   "junegunn/fzf",
+  --   dependencies = { "junegunn/fzf.vim" },
+  --   lazy = false,
+  -- },
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "SmiteshP/nvim-navic", "kyazdani42/nvim-web-devicons" },
@@ -102,31 +104,26 @@ local plugins = {
   },
   {
     -- "zbirenbaum/copilot-cmp",
+    -- local modified version 
     "lysandroc/copilot-cmp",
     dev = true,
     dependencies = {
       {
         "zbirenbaum/copilot.lua",
+        lazy = false,
         dev = true,
         cmd = "Copilot",
         event='InsertEnter',
         config = function()
           require("copilot").setup({
             suggestion = {
-              enabled = false, -- enabling it causes delay when typing
-              keymap = {
-                accept = "<leader>C",
-              },
+              enabled = true,
+              auto_trigger = true,
+              -- debounce = 75,
             },
-            panel = { enable = false },
-            server_opts_overrides = {
-              trace = "verbose",
-              settings = {
-                advanced = {
-                  inlineSuggestCount = 4, -- #completions for getCompletions
-                },
-              },
-            },
+            config = function()
+              keymaps.copilot_keymaps()
+            end
           })
         end,
       },
