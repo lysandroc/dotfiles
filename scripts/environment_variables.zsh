@@ -27,3 +27,5 @@ eval "$(pyenv init -)"
 
 # export OPENAI_API_KEY=""
 export NVIM_MAGIC_LOGLEVEL='debug'
+
+source "$HOME/.cargo/env"
