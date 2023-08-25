@@ -4,7 +4,7 @@ local actions = require("telescope.actions")
 function M.setup()
   require("telescope").setup({
     defaults = {
-      file_ignore_patterns = { "node_modules", "vendor" },
+      file_ignore_patterns = { "node_modules", "vendor", "assets" },
       layout_config = {
         prompt_position = "top",
         horizontal = { width = 0.8, width_padding = 1000 },
@@ -67,30 +67,6 @@ function M.setup()
     },
   })
   require("telescope").load_extension("fzy_native")
-end
-
-M.find_files = function()
-  local opts = {}
-  local ok = pcall(require("telescope.builtin").git_files, opts)
-  if not ok then
-    require("telescope.builtin").find_files(opts)
-  end
-end
-
-M.search_dotfiles = function()
-  require("telescope.builtin").find_files({
-    prompt_title = "< dotfiles repository >",
-    cwd = "$HOME/dotfiles",
-    find_command = {
-      "rg",
-      "--smart-case",
-      "--files",
-      "--hidden",
-      "--follow",
-      "-g",
-      "!.git/*",
-    },
-  })
 end
 
 return M

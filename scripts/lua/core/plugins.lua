@@ -14,7 +14,8 @@ vim.opt.rtp:prepend(lazypath)
 local keymaps = require("core.keymaps")
 
 local plugins = {
-  { "David-Kunz/jester",
+  {
+    "David-Kunz/jester",
     config = function()
       require("jester").setup({
         path_to_jest_run = "~/.asdf/shims/node node_modules/.bin/jest",
@@ -27,7 +28,7 @@ local plugins = {
     -- "scrooloose/nerdtree",
     "nvim-tree/nvim-tree.lua",
     config = function()
-      require('nvim-tree').setup({})
+      require("nvim-tree").setup({})
       require("core.keymaps").tree_keymaps()
     end,
     lazy = false,
@@ -35,8 +36,8 @@ local plugins = {
   "sheerun/vim-polyglot",
   "tpope/vim-surround",
   "b0o/schemastore.nvim",
-   {
-    'windwp/nvim-autopairs',
+  {
+    "windwp/nvim-autopairs",
     event = "InsertEnter",
     opts = {}, -- this is equalent to setup({}) function
   },
@@ -51,9 +52,9 @@ local plugins = {
   {
     "f-person/git-blame.nvim",
     config = function()
-      vim.g.gitblame_message_when_not_committed = ''
+      vim.g.gitblame_message_when_not_committed = ""
       keymaps.git_blame()
-    end
+    end,
   },
   {
     "numToStr/Comment.nvim",
@@ -81,8 +82,8 @@ local plugins = {
     priority = 999,
   },
   { "p00f/nvim-ts-rainbow" },
-  -- to be deleted, old way of search/browse before start migrating to telescope 
-  -- :Rg 
+  -- to be deleted, old way of search/browse before start migrating to telescope
+  -- :Rg
   -- {
   --   "junegunn/fzf",
   --   dependencies = { "junegunn/fzf.vim" },
@@ -100,11 +101,14 @@ local plugins = {
       "nvim-telescope/telescope-fzy-native.nvim",
       "nvim-treesitter/nvim-treesitter",
     },
+    config = function()
+      keymaps.telescope_keymaps()
+    end,
     lazy = false,
   },
   {
     -- "zbirenbaum/copilot-cmp",
-    -- local modified version 
+    -- local modified version
     "lysandroc/copilot-cmp",
     dev = true,
     dependencies = {
@@ -113,7 +117,7 @@ local plugins = {
         lazy = false,
         dev = true,
         cmd = "Copilot",
-        event='InsertEnter',
+        event = "InsertEnter",
         config = function()
           require("copilot").setup({
             suggestion = {
@@ -123,7 +127,7 @@ local plugins = {
             },
             config = function()
               keymaps.copilot_keymaps()
-            end
+            end,
           })
         end,
       },
