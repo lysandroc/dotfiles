@@ -187,6 +187,18 @@ function M.tree_keymaps()
   )
 end
 
+-- TEMPORARY DISABLED
+-- function M.copilot_keymaps()
+--   local copilot_suggestion = require("copilot.suggestion")
+--
+--   keymap.set(
+--     Mode.INSERT,
+--     "<CTRL-S>",
+--     copilot_suggestion.next,
+--     { noremap = true, silent = true, desc = "Next Copilot Suggestion" }
+--   )
+-- end
+
 function M.git_blame()
   keymap.set(
     "n",
@@ -200,19 +212,19 @@ function M.jester_keymaps()
   local jester = require("jester")
   keymap.set(
     "n",
-    "<leader>jr",
+    "<leader>jjr",
     jester.run,
     { noremap = true, silent = true, desc = "Run jest" }
   )
   keymap.set(
     "n",
-    "<leader>jrf",
+    "<leader>jjf",
     jester.run_file,
     { noremap = true, silent = true, desc = "Run jest" }
   )
   keymap.set(
     "n",
-    "<leader>jd",
+    "<leader>jjd",
     jester.debug,
     { noremap = true, silent = true, desc = "Run jest" }
   )
