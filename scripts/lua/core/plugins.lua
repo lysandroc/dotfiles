@@ -198,4 +198,6 @@ require("lazy").setup(plugins, {
     patterns = {}, -- For example {"folke"}
     fallback = false, -- Fallback to git when local plugin doesn't exist
   },
+  -- plugins are versioned, to know more read setup.sh
+  lockfile = vim.fn.stdpath("config") .. "/nvim/lazy-lock.json"
 })
