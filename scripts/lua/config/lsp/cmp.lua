@@ -68,17 +68,34 @@ M.setup = function()
       ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs( -4), { "i", "c" }),
       ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
       ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-      ["<TAB>"] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-          --   elseif luasnip.expand_or_jumpable() then
-          --     luasnip.expand_or_jump()
-          --   -- elseif has_words_before() then
-          --   --   cmp.complete()
+      -- ["<TAB>"] = cmp.mapping(function(fallback)
+      --   if cmp.visible() then
+      --     cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+      --     --   elseif luasnip.expand_or_jumpable() then
+      --     --     luasnip.expand_or_jump()
+      --     --   -- elseif has_words_before() then
+      --     --   --   cmp.complete()
+      --   else
+      --     fallback()
+      --   end
+      -- end, { "i", "c", "s" }),
+      ["<Tab>"] = cmp.mapping(function(fallback)
+        if require("copilot.suggestion").is_visible() then
+          require("copilot.suggestion").accept()
+        elseif cmp.visible() then
+          cmp.select_next_item({ behavior = cmp.SelectBehavior.Replace, select = false })
+        elseif luasnip.expandable() then
+          luasnip.expand()
+        elseif has_words_before() then
+          cmp.complete()
         else
           fallback()
         end
-      end, { "i", "c", "s" }),
+      end, {
+        -- "c",
+        "i",
+        "s",
+      }),
       ["<CR>"] = cmp.mapping({
         i = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
         -- s = cmp.mapping.confirm({ select = false })
@@ -205,7 +222,7 @@ M.setup = function()
 
   -- -- Autocomplete when using search "/"
   cmp.setup.cmdline("/", {
-    mapping = cmp.mapping.preset.cmdline(),
+    -- mapping = cmp.mapping.preset.cmdline(),
     sources = {
       { name = "buffer" },
     },
@@ -213,7 +230,7 @@ M.setup = function()
 
   -- -- Autocomplete when using search ":"
   cmp.setup.cmdline(":", {
-    mapping = cmp.mapping.preset.cmdline(),
+    -- mapping = cmp.mapping.preset.cmdline(),
     -- view = { entries = "wildmenu" },
     sources = cmp.config.sources({
       { name = "path" },
@@ -221,6 +238,14 @@ M.setup = function()
       { name = "cmdline" },
     }),
   })
+
+  cmp.event:on("menu_opened", function()
+    vim.b.copilot_suggestion_hidden = true
+  end)
+
+  cmp.event:on("menu_closed", function()
+    vim.b.copilot_suggestion_hidden = false
+  end)
 end
 
 return M
