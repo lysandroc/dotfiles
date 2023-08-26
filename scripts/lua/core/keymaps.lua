@@ -1,4 +1,3 @@
----@diagnostic disable: undefined_variable
 vim.g.mapleader = " "
 
 local Mode = {
