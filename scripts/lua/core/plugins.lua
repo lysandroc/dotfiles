@@ -107,10 +107,10 @@ local plugins = {
     lazy = false,
   },
   {
-    -- "zbirenbaum/copilot-cmp",
+    "zbirenbaum/copilot-cmp",
     -- local modified version
-    "lysandroc/copilot-cmp",
-    dev = true,
+    -- "lysandroc/copilot-cmp",
+    -- dev = true,
     dependencies = {
       {
         "zbirenbaum/copilot.lua",

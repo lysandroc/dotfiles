@@ -1,33 +1,12 @@
 local M = {}
 
 M.setup = function()
-  require("nvim-treesitter.configs").setup({
+  require('nvim-treesitter.configs').setup {
     auto_install = true,
     sync_install = false,
     -- ensure_installed = 'all',
-    ensure_installed = {
-      "c",
-      "cpp",
-      "go",
-      "lua",
-      "python",
-      "rust",
-      "tsx",
-      "latex",
-      "bash",
-      "dot",
-      "dockerfile",
-      "graphql",
-      "json",
-      "http",
-      "markdown",
-      "typescript",
-      "javascript",
-      "html",
-      "help",
-      "query",
-    },
-    indent = { enable = true, disable = { "python" } },
+    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'latex', 'bash', 'dot', 'dockerfile', 'graphql', 'json', 'markdown', 'typescript', 'javascript', 'html', 'query' },
+    indent = { enable = true, disable = { 'python' } },
     rainbow = {
       enable = true,
       extended_mode = true,
@@ -45,10 +24,10 @@ M.setup = function()
     incremental_selection = {
       enable = true,
       keymaps = {
-        init_selection = "<c-space>",
-        node_incremental = "<c-space>",
-        scope_incremental = "<c-s>",
-        node_decremental = "<c-backspace>",
+        init_selection = '<c-space>',
+        node_incremental = '<c-space>',
+        scope_incremental = '<c-s>',
+        node_decremental = '<c-backspace>',
       },
     },
     autotag = {
@@ -66,18 +45,18 @@ M.setup = function()
       updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
       persist_queries = false, -- Whether the query persists across vim sessions
       keybindings = {
-        toggle_query_editor = "o",
-        toggle_hl_groups = "i",
-        toggle_injected_languages = "t",
-        toggle_anonymous_nodes = "a",
-        toggle_language_display = "I",
-        focus_language = "f",
-        unfocus_language = "F",
-        update = "R",
-        goto_node = "<cr>",
-        show_help = "?",
+        toggle_query_editor = 'o',
+        toggle_hl_groups = 'i',
+        toggle_injected_languages = 't',
+        toggle_anonymous_nodes = 'a',
+        toggle_language_display = 'I',
+        focus_language = 'f',
+        unfocus_language = 'F',
+        update = 'R',
+        goto_node = '<cr>',
+        show_help = '?',
       },
-    },
+    }
     -- textsubjects = { SETUP HERE }
     -- swap = { SETUP HERE }
     -- move = { SETUP HERE }
@@ -125,7 +104,7 @@ M.setup = function()
     --     },
     --   },
     -- },
-  })
+  }
 end
 
 return M
