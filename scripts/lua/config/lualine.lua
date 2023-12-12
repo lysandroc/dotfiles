@@ -1,19 +1,14 @@
 local lualine = require("lualine")
 local navic = require("nvim-navic")
 
--- mimic the exact green color from my gruvbox theme
-local colors = {
-  green = "#98971a",
-  yellow = "#d79921",
-}
-
 local M = {}
 
 M.setup = function()
   lualine.setup({
     options = {
       icons_enabled = true,
-      theme = "gruvbox",
+      -- theme = "gruvbox",
+      theme = "solarized_dark",
       always_divide_middle = true,
       globalstatus = true,
       disabled_filetypes = {
@@ -89,7 +84,8 @@ M.setup = function()
           --   return navic.get_location(opt)
           -- end,
           cond = navic.is_available,
-          color = { gui = "bold", fg = colors.yellow },
+          -- //
+          -- color = { gui = "bold", fg = colors.yellow },
         },
       },
       lualine_x = {},

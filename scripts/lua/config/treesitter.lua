@@ -7,11 +7,11 @@ M.setup = function()
     -- ensure_installed = 'all',
     ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'latex', 'bash', 'dot', 'dockerfile', 'graphql', 'json', 'markdown', 'typescript', 'javascript', 'html', 'query' },
     indent = { enable = true, disable = { 'python' } },
-    rainbow = {
-      enable = true,
-      extended_mode = true,
-      max_file_lines = nil,
-    },
+    -- rainbow = {
+    --   enable = true,
+    --   extended_mode = true,
+    --   max_file_lines = nil,
+    -- },
     highlight = {
       -- `false` will disable the whole extension
       enable = true,

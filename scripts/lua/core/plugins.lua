@@ -69,29 +69,24 @@ local plugins = {
     -- lazy = false,
   },
   {
-    "ellisonleao/gruvbox.nvim",
-    dependencies = {
-      "rktjmp/lush.nvim",
-      "nvim-treesitter/nvim-treesitter",
-    },
-    config = function()
-      require("gruvbox").setup()
-      vim.cmd([[colorscheme gruvbox]])
-    end,
+    "craftzdog/solarized-osaka.nvim",
     lazy = false,
-    priority = 999,
+    priority = 1000,
+    opts = {},
+    config = function()
+      require("solarized-osaka").setup({
+        transparent = false,
+      })
+      vim.cmd[[colorscheme solarized-osaka]]
+    end,
   },
-  { "p00f/nvim-ts-rainbow" },
-  -- to be deleted, old way of search/browse before start migrating to telescope
-  -- :Rg
-  -- {
-  --   "junegunn/fzf",
-  --   dependencies = { "junegunn/fzf.vim" },
-  --   lazy = false,
-  -- },
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "SmiteshP/nvim-navic", "kyazdani42/nvim-web-devicons" },
+    config = function()
+      require("config.lualine").setup()
+    end,
+    event = "VeryLazy"
   },
   {
     "nvim-telescope/telescope.nvim",

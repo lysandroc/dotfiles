@@ -1,15 +1,16 @@
 [user]
 	email = lysandroc@gmail.com
 	name = Lysandro Carioca
+	signingkey = ~/.ssh/gh.pub
 [core]
 	pager = delta
 	editor = nvim
 	autocrlf = false
 [pager]
-    diff = delta
-    log = delta
-    reflog = delta
-    show = delta
+  diff = delta
+  log = delta
+  reflog = delta
+  show = delta
 [interactive]
   diffFilter = delta --color-only
 [delta]
@@ -50,3 +51,7 @@
 	path = ~/natura/.gitconfig
 [includeIf "gitdir:~/projects/stay/"]
 	path = .gitconfig-stay22
+[commit]
+	gpgsign = true
+[gpg]
+	format = ssh

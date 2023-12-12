@@ -17,7 +17,7 @@
     "Green Component" : 0.6926688551902771
   },
   "Use Italic Font" : true,
-  "HotKey Characters" : "\r",
+  "HotKey Characters" : "",
   "Foreground Color" : {
     "Red Component" : 0.90061241388320923,
     "Color Space" : "Calibrated",
@@ -108,7 +108,7 @@
   },
   "Unlimited Scrollback" : false,
   "Custom Command" : "No",
-  "HotKey Key Code" : 36,
+  "HotKey Key Code" : 0,
   "Keyboard Map" : {
     "0xf712-0x40000" : {
       "Action" : 10,
@@ -374,7 +374,7 @@
   "Window Type" : 0,
   "Allow Title Reporting" : true,
   "Use Bright Bold" : true,
-  "Has Hotkey" : true,
+  "Has Hotkey" : false,
   "HotKey Modifier Activation" : 2,
   "Cursor Text Color" : {
     "Red Component" : 0.11759927868843079,
@@ -436,7 +436,7 @@
   "Cursor Type" : 0,
   "Session Close Undo Timeout" : 10,
   "Blur" : false,
-  "Normal Font" : "OperatorMonoLig-Book 17",
+  "Normal Font" : "PlemolJP-TextItalic 16",
   "Application Keypad Allowed" : false,
   "Vertical Spacing" : 1,
   "Ansi 7 Color" : {
@@ -454,7 +454,7 @@
   "Option Key Sends" : 2,
   "Only The Default BG Color Uses Transparency" : false,
   "HotKey Window Animates" : true,
-  "HotKey Modifier Flags" : 524288,
+  "HotKey Modifier Flags" : 0,
   "Ansi 15 Color" : {
     "Red Component" : 0.90061241388320923,
     "Color Space" : "Calibrated",
@@ -480,9 +480,10 @@
     "Alpha Component" : 1,
     "Green Component" : 0.11759573966264725
   },
+  "Unicode Version" : 9,
   "Screen" : 0,
-  "HotKey Characters Ignoring Modifiers" : "\r",
-  "Non Ascii Font" : "HackNerdFontComplete-Regular 17",
+  "HotKey Characters Ignoring Modifiers" : "",
+  "Non Ascii Font" : "PlemolJPHS-LightItalic 16",
   "Mouse Reporting allow mouse wheel" : true,
   "Ansi 13 Color" : {
     "Red Component" : 0.78096956014633179,
@@ -495,6 +496,7 @@
   "HotKey Alternate Shortcuts" : [
 
   ],
+  "Unicode Normalization" : 0,
   "Visual Bell" : true,
   "Custom Directory" : "No",
   "Ansi 5 Color" : {
