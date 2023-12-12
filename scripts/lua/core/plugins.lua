@@ -106,6 +106,7 @@ local plugins = {
     -- local modified version
     -- "lysandroc/copilot-cmp",
     -- dev = true,
+    event = "VeryLazy",
     dependencies = {
       {
         "zbirenbaum/copilot.lua",
@@ -144,6 +145,9 @@ local plugins = {
       {
         "L3MON4D3/LuaSnip",
         dependencies = { "rafamadriz/friendly-snippets", "saadparwaiz1/cmp_luasnip" },
+        version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+        -- install jsregexp (optional!).
+        build = "make install_jsregexp"
       },
       "williamboman/mason.nvim", -- Mason is a plugin manager for Neovim
       "williamboman/mason-lspconfig.nvim", -- Setup the integration between mason and lspconfig
@@ -194,5 +198,5 @@ require("lazy").setup(plugins, {
     fallback = false, -- Fallback to git when local plugin doesn't exist
   },
   -- plugins are versioned, to know more read setup.sh
-  lockfile = vim.fn.stdpath("config") .. "/nvim/lazy-lock.json"
+  lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json"
 })
