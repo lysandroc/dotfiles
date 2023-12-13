@@ -179,7 +179,8 @@ local plugins = {
   --   dev=true,
   --   lazy=false,
   --   config = function()
-  --     print(vim.fn.printf('Loading %s', '- nvim-json2ts'))
+  --     require("notify")("plugin loaded")
+  --     -- print(vim.fn.printf('Loading %s', '- nvim-json2ts'))
   --     -- local a = require("nvim-json2ts")
   --     -- print(vim.fn.printf("nvim-json2ts: %s", vim.inspect(a)))
   --   end
