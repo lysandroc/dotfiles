@@ -118,47 +118,47 @@ local servers = {
       -- }
     },
   },
-  tsserver = {
-    -- additional_mason_plugins = "typescript-language-server js-debug-adapter prettier",
-    disable_formatting = true,
-    commands = {
-      -- Experimenting how to create a custom command
-      TSServerOrganizeImports = {
-        function()
-          vim.lsp.buf.execute_command({
-            command = "_typescript.organizeImports",
-            arguments = { vim.api.nvim_buf_get_name(0) },
-          })
-        end,
-        description = "Organize Imports",
-      },
-    },
-    settings = {
-      format = { enable = false },
-      javascript = {
-        inlayHints = {
-          includeInlayEnumMemberValueHints = true,
-          includeInlayFunctionLikeReturnTypeHints = true,
-          includeInlayFunctionParameterTypeHints = true,
-          includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
-          includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-          includeInlayPropertyDeclarationTypeHints = true,
-          includeInlayVariableTypeHints = true,
-        },
-      },
-      typescript = {
-        inlayHints = {
-          includeInlayEnumMemberValueHints = true,
-          includeInlayFunctionLikeReturnTypeHints = true,
-          includeInlayFunctionParameterTypeHints = true,
-          includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
-          includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-          includeInlayPropertyDeclarationTypeHints = true,
-          includeInlayVariableTypeHints = true,
-        },
-      },
-    },
-  },
+  -- tsserver = {
+  --   -- additional_mason_plugins = "typescript-language-server js-debug-adapter prettier",
+  --   disable_formatting = true,
+  --   commands = {
+  --     -- Experimenting how to create a custom command
+  --     TSServerOrganizeImports = {
+  --       function()
+  --         vim.lsp.buf.execute_command({
+  --           command = "_typescript.organizeImports",
+  --           arguments = { vim.api.nvim_buf_get_name(0) },
+  --         })
+  --       end,
+  --       description = "Organize Imports",
+  --     },
+  --   },
+  --   settings = {
+  --     format = { enable = false },
+  --     javascript = {
+  --       inlayHints = {
+  --         includeInlayEnumMemberValueHints = true,
+  --         includeInlayFunctionLikeReturnTypeHints = true,
+  --         includeInlayFunctionParameterTypeHints = true,
+  --         includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+  --         includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+  --         includeInlayPropertyDeclarationTypeHints = true,
+  --         includeInlayVariableTypeHints = true,
+  --       },
+  --     },
+  --     typescript = {
+  --       inlayHints = {
+  --         includeInlayEnumMemberValueHints = true,
+  --         includeInlayFunctionLikeReturnTypeHints = true,
+  --         includeInlayFunctionParameterTypeHints = true,
+  --         includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+  --         includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+  --         includeInlayPropertyDeclarationTypeHints = true,
+  --         includeInlayVariableTypeHints = true,
+  --       },
+  --     },
+  --   },
+  -- },
   yamlls = {
     -- additional_mason_plugins = "yaml-language-server",
     schemastore = {

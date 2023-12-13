@@ -150,7 +150,7 @@ local plugins = {
       "williamboman/mason-lspconfig.nvim", -- Setup the integration between mason and lspconfig
       "jay-babu/mason-null-ls.nvim", -- Setup available null-ls settings automatically
       "jose-elias-alvarez/null-ls.nvim", -- sources of diagnostics, code actions, and other code manipulation functions.
-      "jose-elias-alvarez/typescript.nvim", -- TypeScript support for null-ls
+      -- "jose-elias-alvarez/typescript.nvim", -- TypeScript support for null-ls
       { "onsails/lspkind.nvim", dependencies = { "mortepau/codicons.nvim" } }, -- vscode-like pictograms for neovim lsp completion items
     },
     lazy = false,

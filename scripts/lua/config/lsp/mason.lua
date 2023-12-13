@@ -52,14 +52,14 @@ function M.setup(servers, options)
     ["tsserver"] = function()
       local opts = vim.tbl_deep_extend("force", options, servers["tsserver"] or {})
       -- https://github.com/jose-elias-alvarez/typescript.nvim
-      require("typescript").setup({
-        disable_commands = false,
-        debug = false,
-        go_to_source_definition = {
-          fallback = true, -- fall back to standard LSP definition on failure
-        },
-        server = opts,
-      })
+      -- require("typescript").setup({
+      --   disable_commands = false,
+      --   debug = false,
+      --   go_to_source_definition = {
+      --     fallback = true, -- fall back to standard LSP definition on failure
+      --   },
+      --   server = opts,
+      -- })
     end,
     ["lua_ls"] = function()
       local opts = vim.tbl_deep_extend("force", options, servers["lua_ls"] or {})
