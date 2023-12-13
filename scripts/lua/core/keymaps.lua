@@ -160,28 +160,6 @@ keymap.set(
 
 local M = {}
 
--- Attach these keymaps after tree(sidemenu) is initialized
-function M.tree_keymaps()
-  keymap.set(
-    Mode.NORMAL,
-    "<leader>n",
-    -- ":NERDTreeToggle<CR>",
-    ":NvimTreeToggle<CR>",
-    { noremap = true, silent = true, desc = "Open or close the tree. Takes an optional path argument" }
-  )
-  keymap.set(
-    Mode.NORMAL,
-    "<leader>N",
-    -- ":NERDTreeFind<CR>",
-    ":NvimTreeFindFile<CR>",
-    {
-      noremap = true,
-      silent = true,
-      desc = "Move the cursor in the tree for the current buffer, opening folders if needed",
-    }
-  )
-end
-
 -- TEMPORARY DISABLED
 -- function M.copilot_keymaps()
 --   local copilot_suggestion = require("copilot.suggestion")
@@ -396,6 +374,16 @@ function M.telescope_keymaps()
     keymap.set(mode, "<leader>sh", telescope.help_tags, { noremap = true, silent = true, desc = "Help tags" })
     keymap.set(mode, "<leader>sc", telescope.colorscheme, { noremap = true, silent = true, desc = "Color scheme" })
     keymap.set(mode, "<leader>sb", telescope.builtin, { noremap = true, silent = true, desc = "Built in" })
+
+    keymap.set(mode, "<leader>se", function()
+      local function telescope_buffer_dir()
+        return vim.fn.expand("%:p:h")
+      end
+
+      require("telescope").extensions.file_browser.file_browser({
+        cwd = telescope_buffer_dir(),
+      })
+    end, { noremap = true, silent = true, desc = "File Browser" })
   end
 end
 

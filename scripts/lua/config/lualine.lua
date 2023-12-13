@@ -20,7 +20,6 @@ M.setup = function()
       "nerdtree",
       "fzf",
       "symbols-outline",
-      "nvim-tree",
       "toggleterm",
       "quickfix",
       "fugitive",

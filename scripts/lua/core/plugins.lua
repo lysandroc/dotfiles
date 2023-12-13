@@ -24,15 +24,6 @@ local plugins = {
       require("core.keymaps").jester_keymaps()
     end,
   },
-  {
-    -- "scrooloose/nerdtree",
-    "nvim-tree/nvim-tree.lua",
-    config = function()
-      require("nvim-tree").setup({})
-      require("core.keymaps").tree_keymaps()
-    end,
-    lazy = false,
-  },
   "sheerun/vim-polyglot",
   "tpope/vim-surround",
   "b0o/schemastore.nvim",
@@ -94,6 +85,12 @@ local plugins = {
       "nvim-lua/popup.nvim",
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-fzy-native.nvim",
+      {
+        "nvim-telescope/telescope-file-browser.nvim",
+        dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim",
+          { "rcarriga/nvim-notify", config = function() require("notify").setup() end },
+        }
+      },
       "nvim-treesitter/nvim-treesitter",
     },
     config = function()

@@ -1,5 +1,6 @@
 local M = {}
 local actions = require("telescope.actions")
+local fb_actions = require ("telescope").extensions.file_browser.actions
 
 function M.setup()
   require("telescope").setup({
@@ -33,14 +34,63 @@ function M.setup()
           ["<esc>"] = actions.close,
           ["<C-s>"] = actions.select_horizontal,
           ["<C-v>"] = actions.select_vertical,
-          ["<C-q>"] = actions.send_to_qflist,
           ["<C-j>"] = actions.move_selection_next,
           ["<C-k>"] = actions.move_selection_previous,
+          -- keybinding conflict
+          ["<A-q>"] = false,
+          ["<C-q>"] = actions.send_to_qflist,
         },
+        n = {
+          ["<esc>"] = actions.close,
+          -- keybinding conflict
+          ["q"] = actions.close,
+          ["<A-q>"] = actions.close,
+          ["<C-q>"] = actions.send_to_qflist,
+        }
       },
-      extensions = {
-        fzf = {
-          -- use the defaults one
+    },
+    extensions = {
+      fzf = {
+        -- use the defaults one
+      },
+      file_browser = {
+        hidden = true,
+        grouped = true,
+        previewer = false,
+        -- disables netrw and use telescope-file-browser in its place
+        hijack_netrw = true,
+        initial_browser = "tree",
+        auto_depth = true,
+        depth = 1,
+        initial_mode = "normal",
+        respect_gitignore = false,
+        layout_config = { height = 50 },
+
+        mappings = {
+          i = {
+            ["<C-p>"] = actions.move_selection_previous,
+            ["<C-n>"] = actions.move_selection_next,
+            ["<esc>"] = function()
+              -- dont close window, instead go back to normal mode
+              vim.cmd("stopinsert")
+            end,
+            ["<C-c>"] = function()
+              local file = require("telescope.actions.state").get_selected_entry().value
+              require("notify")("Copied " .. file)
+              vim.cmd("let @+='" .. file .. "'")
+            end,
+          },
+          n = {
+            ["<C-p>"] = actions.move_selection_previous,
+            ["<C-n>"] = actions.move_selection_next,
+            ["n"] = fb_actions.create,
+            ["<leader>"] = actions.toggle_selection,
+            ["<C-c>"] = function()
+              local file = require("telescope.actions.state").get_selected_entry().value
+              require("notify")("Copied " .. file)
+              vim.cmd("let @+='" .. file .. "'")
+            end,
+          },
         },
       },
     },
@@ -67,6 +117,7 @@ function M.setup()
     },
   })
   require("telescope").load_extension("fzy_native")
+  require("telescope").load_extension("file_browser")
 end
 
 return M
