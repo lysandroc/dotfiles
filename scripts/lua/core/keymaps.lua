@@ -358,9 +358,9 @@ function M.telescope_keymaps()
       })
     end, { noremap = true, silent = true, desc = "File Browser" })
 
-    map(mode, "<leader>@", function()
-      require("telescope").extensions.telescope_chat.telescope_chat()
-    end, { noremap = true, silent = true, desc = "Telescope chat" })
+    -- map(mode, "<leader>@", function()
+    --   require("telescope").extensions.telescope_chat.telescope_chat()
+    -- end, { noremap = true, silent = true, desc = "Telescope chat" })
   end
 end
 

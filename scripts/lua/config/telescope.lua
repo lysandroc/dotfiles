@@ -2,7 +2,7 @@ local M = {}
 local actions = require("telescope.actions")
 local fb_actions = require ("telescope").extensions.file_browser.actions
 
-local tc_actions = require("telescope").extensions.telescope_chat.actions
+-- local tc_actions = require("telescope").extensions.telescope_chat.actions
 
 function M.setup()
   require("telescope").setup({
@@ -94,16 +94,16 @@ function M.setup()
           },
         },
       },
-      telescope_chat = {
-        mappings = {
-          i = {
-            ["+"] = tc_actions.search,
-          },
-          n = {
-            ["s"] = tc_actions.search,
-          }
-        },
-      },
+      -- telescope_chat = {
+      --   mappings = {
+      --     i = {
+      --       ["+"] = tc_actions.search,
+      --     },
+      --     n = {
+      --       ["s"] = tc_actions.search,
+      --     }
+      --   },
+      -- },
     },
     pickers = {
       -- Your special builtin config goes in here
@@ -129,7 +129,7 @@ function M.setup()
   })
   require("telescope").load_extension("fzy_native")
   require("telescope").load_extension("file_browser")
-  require("telescope").load_extension("telescope_chat")
+  -- require("telescope").load_extension("telescope_chat")
 end
 
 return M
