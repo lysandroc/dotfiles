@@ -24,7 +24,7 @@ local code_actions = nullls.builtins.code_actions
 local hover = nullls.builtins.hover
 
 local sources = {
-  -- require("typescript.extensions.null-ls.code-actions"), -- https://github.com/jose-elias-alvarez/typescript.nvim
+  require("typescript.extensions.null-ls.code-actions"), -- https://github.com/jose-elias-alvarez/typescript.nvim
 
   -- formatting
   formatting.prettier,
