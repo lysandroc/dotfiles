@@ -36,6 +36,25 @@ local servers = {
       typeCheckingMode = "off",
     },
   },
+  pylsp = {
+    additional_mason_plugins = "python-lsp-server",
+    settings = {
+      pylsp = {
+        plugins = {
+          pycodestyle = {
+            ignore = {'W391'},
+            maxLineLength = 100
+          }
+        }
+      }
+    }
+    -- plugins = {
+    --   pycodestyle = {
+    --     ignore = {'W391'},
+    --     maxLineLength = 100
+    --   }
+    -- }
+  },
   lua_ls = {
     -- additional_mason_plugins = "stylua lua-language-server",
     settings = {
@@ -185,18 +204,21 @@ local servers = {
   -- gopls = {
   --   additional_mason_plugins = "gopls",
   -- },
-  -- rust_analyzer = {
-  -- additional_mason_plugins = "rust_analyzer",
-  --   settings = {
-  --     ["rust-analyzer"] = {
-  --       cargo = { allFeatures = true },
-  --       checkOnSave = {
-  --         command = "clippy",
-  --         extraArgs = { "--no-deps" },
-  --       },
-  --     },
-  --   },
-  -- },
+  -- automatically installed by 'simrat39/rust-tools.nvim' package
+  rust_analyzer = {
+    additional_mason_plugins = "rust-analyzer",
+    filetypes ={ "rust" },
+    root_dir = require("lspconfig.util").root_pattern("Cargo.toml"),
+    settings = {
+      ["rust-analyzer"] = {
+        cargo = { allFeatures = true },
+        checkOnSave = {
+          command = "clippy",
+          extraArgs = { "--no-deps" },
+        },
+      },
+    },
+  },
   -- pylsp = {},
   -- tailwindcss = {},
   -- html = {},

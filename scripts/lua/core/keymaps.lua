@@ -29,6 +29,9 @@ end
 --   { noremap = true, silent = true, desc = "TEST" }
 -- )
 
+map(Mode.NORMAL, "<leader>src", ":source $MYVIMRC<CR>", { noremap = true, silent = true, desc = "Reload config" })
+
+
 -- use ctrl+hjkl to move between split/vsplit panels
 map(Mode.NORMAL, "<A-h>", "<C-w>h", { noremap = true, silent = true, desc = "Jump to the right panel" })
 map(Mode.NORMAL, "<A-j>", "<C-w>j", { noremap = true, silent = true, desc = "Jump to the left panel" })
@@ -238,32 +241,32 @@ function M.LSP_buf_keymaps(client, bufnr)
     require("telescope.builtin").lsp_document_symbols()
   end, { noremap = true, silent = true, buffer = bufnr, desc = "Document symbols" })
 
-  if client.name == "tsserver" then
-    map(
-      Mode.NORMAL,
-      "<space>tsff",
-      ":TSLspFixCurrent<CR>",
-      { noremap = true, silent = true, buffer = bufnr, desc = "Fix current" }
-    )
-    map(
-      Mode.NORMAL,
-      "<space>tsrf",
-      ":TSLspRenameFile<CR>",
-      { noremap = true, silent = true, buffer = bufnr, desc = "Rename file" }
-    )
-    map(
-      Mode.NORMAL,
-      "<space>tsoi",
-      ":TSLspOrganize<CR>",
-      { noremap = true, silent = true, buffer = bufnr, desc = "Organize imports" }
-    )
-    map(
-      Mode.NORMAL,
-      "<space>tscoi",
-      ":TSServerOrganizeImports<CR>",
-      { noremap = true, silent = true, buffer = bufnr, desc = "Customized organize imports" }
-    )
-  end
+  -- if client.name == "tsserver" then
+  --   map(
+  --     Mode.NORMAL,
+  --     "<space>tsff",
+  --     ":TSLspFixCurrent<CR>",
+  --     { noremap = true, silent = true, buffer = bufnr, desc = "Fix current" }
+  --   )
+  --   map(
+  --     Mode.NORMAL,
+  --     "<space>tsrf",
+  --     ":TSLspRenameFile<CR>",
+  --     { noremap = true, silent = true, buffer = bufnr, desc = "Rename file" }
+  --   )
+  --   map(
+  --     Mode.NORMAL,
+  --     "<space>tsoi",
+  --     ":TSLspOrganize<CR>",
+  --     { noremap = true, silent = true, buffer = bufnr, desc = "Organize imports" }
+  --   )
+  --   map(
+  --     Mode.NORMAL,
+  --     "<space>tscoi",
+  --     ":TSServerOrganizeImports<CR>",
+  --     { noremap = true, silent = true, buffer = bufnr, desc = "Customized organize imports" }
+  --   )
+  -- end
 end
 
 -- Used to enable keymaps for diagnostics
@@ -346,15 +349,18 @@ function M.telescope_keymaps()
     map(mode, "<leader>sc", telescope.colorscheme, { noremap = true, silent = true, desc = "Color scheme" })
     map(mode, "<leader>sb", telescope.builtin, { noremap = true, silent = true, desc = "Built in" })
 
-    map(mode, "<leader>se", function()
+    map(mode, "<leader>n", function()
       local function telescope_buffer_dir()
         return vim.fn.expand("%:p:h")
       end
-
       require("telescope").extensions.file_browser.file_browser({
         cwd = telescope_buffer_dir(),
       })
     end, { noremap = true, silent = true, desc = "File Browser" })
+
+    map(mode, "<leader>@", function()
+      require("telescope").extensions.telescope_chat.telescope_chat()
+    end, { noremap = true, silent = true, desc = "Telescope chat" })
   end
 end
 

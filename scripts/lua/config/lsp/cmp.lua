@@ -199,20 +199,6 @@ M.setup = function()
         cmp.config.compare.order,
       },
     },
-    -- sources = {
-    --   { name = "copilot" },
-    --   { name = "nvim_lsp" },
-    --   { name = "nvim_lsp_signature_help" },
-    --   { name = "luasnip" },
-    --   { name = "nvim_lua" },
-    --   { name = "treesitter" },
-    --   { name = "rg" },
-    --   { name = "path" },
-    --   { name = "buffer" },
-    --   -- { name = "crates" },
-    --   -- { name = "spell" },
-    --   { name =  "vsnip" }
-    -- },
     completion = {
       completeopt = "menu,menuone,noinsert",
       keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)]],
@@ -220,32 +206,32 @@ M.setup = function()
     },
   })
 
-  -- -- Autocomplete when using search "/"
-  cmp.setup.cmdline("/", {
-    -- mapping = cmp.mapping.preset.cmdline(),
-    sources = {
-      { name = "buffer" },
-    },
-  })
+  -- -- -- Autocomplete when using search "/"
+  -- cmp.setup.cmdline("/", {
+  --   -- mapping = cmp.mapping.preset.cmdline(),
+  --   sources = {
+  --     { name = "buffer" },
+  --   },
+  -- })
 
   -- -- Autocomplete when using search ":"
-  cmp.setup.cmdline(":", {
-    -- mapping = cmp.mapping.preset.cmdline(),
-    -- view = { entries = "wildmenu" },
-    sources = cmp.config.sources({
-      { name = "path" },
-    }, {
-      { name = "cmdline" },
-    }),
-  })
+  -- cmp.setup.cmdline(":", {
+  --   -- mapping = cmp.mapping.preset.cmdline(),
+  --   -- view = { entries = "wildmenu" },
+  --   sources = cmp.config.sources({
+  --     { name = "path" },
+  --   }, {
+  --     { name = "cmdline" },
+  --   }),
+  -- })
 
-  cmp.event:on("menu_opened", function()
-    vim.b.copilot_suggestion_hidden = true
-  end)
-
-  cmp.event:on("menu_closed", function()
-    vim.b.copilot_suggestion_hidden = false
-  end)
+  -- cmp.event:on("menu_opened", function()
+  --   vim.b.copilot_suggestion_hidden = true
+  -- end)
+  --
+  -- cmp.event:on("menu_closed", function()
+  --   vim.b.copilot_suggestion_hidden = false
+  -- end)
 end
 
 return M

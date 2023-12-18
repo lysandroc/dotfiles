@@ -72,6 +72,24 @@ local plugins = {
     end,
   },
   {
+		"echasnovski/mini.hipatterns",
+		event = "BufReadPre",
+		opts = {
+			highlighters = {
+				hsl_color = {
+					pattern = "hsl%(%d+,? %d+,? %d+%)",
+					group = function(_, match)
+						local utils = require("solarized-osaka.hsl")
+						local h, s, l = match:match("hsl%((%d+),? (%d+),? (%d+)%)")
+						h, s, l = tonumber(h), tonumber(s), tonumber(l)
+						local hex_color = utils.hslToHex(h, s, l)
+						return MiniHipatterns.compute_hex_color_group(hex_color, "bg")
+					end,
+				},
+			},
+		},
+	},
+  {
     "nvim-lualine/lualine.nvim",
     dependencies = { "SmiteshP/nvim-navic", "kyazdani42/nvim-web-devicons" },
     config = function()
@@ -79,6 +97,7 @@ local plugins = {
     end,
     event = "VeryLazy"
   },
+  { "rcarriga/nvim-notify", config = function() require("notify").setup() end },
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {
@@ -88,10 +107,14 @@ local plugins = {
       {
         "nvim-telescope/telescope-file-browser.nvim",
         dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim",
-          { "rcarriga/nvim-notify", config = function() require("notify").setup() end },
         }
       },
-      "nvim-treesitter/nvim-treesitter",
+      {
+        "lysandroc/nvim-telescope-chat",
+        dev=true,
+        dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+      },
+      { "nvim-treesitter/nvim-treesitter"},
     },
     config = function()
       keymaps.telescope_keymaps()
@@ -174,6 +197,23 @@ local plugins = {
       "nvim-telescope/telescope-dap.nvim",
     },
   },
+  {
+    'simrat39/rust-tools.nvim',
+    config = function()
+      local rt = require("rust-tools")
+
+      rt.setup({
+        server = {
+          on_attach = function(_, bufnr)
+            -- Hover actions
+            vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+            -- Code action groups
+            vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+          end,
+        },
+      })
+    end
+  }
   -- {
   --   "lysandroc/nvim-json2ts",
   --   dev=true,
