@@ -204,18 +204,52 @@ local servers = {
   -- gopls = {
   --   additional_mason_plugins = "gopls",
   -- },
-  -- automatically installed by 'simrat39/rust-tools.nvim' package
   rust_analyzer = {
-    additional_mason_plugins = "rust-analyzer",
+    additional_mason_plugins = "rust-analyzer codelldb",
     filetypes ={ "rust" },
     root_dir = require("lspconfig.util").root_pattern("Cargo.toml"),
+    keys = {
+      { "K", "<cmd>RustHoverActions<cr>", desc = "Hover Actions (Rust)" },
+      { "<leader>cR", "<cmd>RustCodeAction<cr>", desc = "Code Action (Rust)" },
+      { "<leader>dr", "<cmd>RustDebuggables<cr>", desc = "Run Debuggables (Rust)" },
+    },
     settings = {
       ["rust-analyzer"] = {
-        cargo = { allFeatures = true },
+        cargo = {
+          allFeatures = true,
+          loadOutDirsFromCheck = true,
+          runBuildScripts = true,
+        },
+        -- Add clippy lints for Rust.
         checkOnSave = {
+          allFeatures = true,
           command = "clippy",
           extraArgs = { "--no-deps" },
         },
+        procMacro = {
+          enable = true,
+          ignored = {
+            ["async-trait"] = { "async_trait" },
+            ["napi-derive"] = { "napi" },
+            ["async-recursion"] = { "async_recursion" },
+          },
+        },
+      },
+    },
+  },
+  taplo = {
+    additional_mason_plugins = "taplo",
+    keys = {
+      {
+        "K",
+        function()
+          if vim.fn.expand("%:t") == "Cargo.toml" and require("crates").popup_available() then
+            require("crates").show_popup()
+          else
+            vim.lsp.buf.hover()
+          end
+        end,
+        desc = "Show Crate Documentation",
       },
     },
   },

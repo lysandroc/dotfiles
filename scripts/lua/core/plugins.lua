@@ -178,6 +178,12 @@ local plugins = {
     },
     lazy = false,
   },
+  {
+    "hrsh7th/nvim-cmp",
+    dependencies = {
+      "hrsh7th/cmp-emoji",
+    }
+  },
   -- {
   --   "pmizio/typescript-tools.nvim",
   --   dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
@@ -198,21 +204,68 @@ local plugins = {
     },
   },
   {
-    'simrat39/rust-tools.nvim',
-    config = function()
-      local rt = require("rust-tools")
-
-      rt.setup({
-        server = {
-          on_attach = function(_, bufnr)
-            -- Hover actions
-            vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
-            -- Code action groups
-            vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+    "Saecki/crates.nvim",
+    event = { "BufRead Cargo.toml" },
+    opts = {
+      src = {
+        cmp = { enabled = true },
+      },
+    },
+  },
+  {
+    "simrat39/rust-tools.nvim",
+    lazy = true,
+    opts = function()
+      local ok, mason_registry = pcall(require, "mason-registry")
+      local adapter ---@type any
+      if ok then
+        -- rust tools configuration for debugging support
+        local codelldb = mason_registry.get_package("codelldb")
+        local extension_path = codelldb:get_install_path() .. "/extension/"
+        local codelldb_path = extension_path .. "adapter/codelldb"
+        local liblldb_path = ""
+        if vim.loop.os_uname().sysname:find("Windows") then
+          liblldb_path = extension_path .. "lldb\\bin\\liblldb.dll"
+        elseif vim.fn.has("mac") == 1 then
+          liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
+        else
+          liblldb_path = extension_path .. "lldb/lib/liblldb.so"
+        end
+        adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path)
+      end
+      return {
+        dap = {
+          adapter = adapter,
+        },
+        tools = {
+          on_initialized = function()
+            vim.cmd([[
+                augroup RustLSP
+                autocmd CursorHold                      *.rs silent! lua vim.lsp.buf.document_highlight()
+                autocmd CursorMoved,InsertEnter         *.rs silent! lua vim.lsp.buf.clear_references()
+                autocmd BufEnter,CursorHold,InsertLeave *.rs silent! lua vim.lsp.codelens.refresh()
+                augroup END
+                ]])
           end,
         },
-      })
-    end
+      }
+    end,
+    config = function() end,
+  },
+  {
+    "rouge8/neotest-rust",
+  },
+  {
+    "nvim-neotest/neotest",
+    optional = true,
+    dependencies = {
+      "rouge8/neotest-rust",
+    },
+    opts = {
+      adapters = {
+        ["neotest-rust"] = {},
+      },
+    },
   }
   -- {
   --   "lysandroc/nvim-json2ts",
@@ -236,5 +289,41 @@ require("lazy").setup(plugins, {
     fallback = false, -- Fallback to git when local plugin doesn't exist
   },
   -- plugins are versioned, to know more read setup.sh
-  lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json"
+  lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json",
+  defaults = {
+    -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
+    -- If you know what you're doing, you can set this to `true` to have all your custom plugins lazy-loaded by default.
+    lazy = false,
+    -- It's recommended to leave version=false for now, since a lot the plugin that support versioning,
+    -- have outdated releases, which may break your Neovim install.
+    version = false, -- always use the latest git commit
+    -- version = "*", -- try installing the latest stable version for plugins that support semver
+  },
+  spec = {
+    -- add LazyVim and import its plugins
+    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+    -- import any extras modules here
+    -- { import = "lazyvim.plugins.extras.lang.typescript" },
+    -- { import = "lazyvim.plugins.extras.lang.json" },
+    -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
+    -- import/override with your plugins
+    -- { import = "plugins" },
+  },
+  install = { colorscheme = { "tokyonight", "habamax" } },
+  checker = { enabled = true }, -- automatically check for plugin updates
+  performance = {
+    rtp = {
+      -- disable some rtp plugins
+      disabled_plugins = {
+        "gzip",
+        -- "matchit",
+        -- "matchparen",
+        -- "netrwPlugin",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
+      },
+    },
+  },
 })

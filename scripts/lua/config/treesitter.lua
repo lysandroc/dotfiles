@@ -5,7 +5,7 @@ M.setup = function()
     auto_install = true,
     sync_install = false,
     -- ensure_installed = 'all',
-    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'latex', 'bash', 'dot', 'dockerfile', 'graphql', 'json', 'markdown', 'typescript', 'javascript', 'html', 'query' },
+    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'latex', 'bash', 'dot', 'dockerfile', 'graphql', 'json', 'markdown', 'typescript', 'javascript', 'html', 'query', "ron", "rust", "toml" },
     indent = { enable = true, disable = { 'python' } },
     -- rainbow = {
     --   enable = true,

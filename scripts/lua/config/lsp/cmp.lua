@@ -168,6 +168,7 @@ M.setup = function()
         max_item_count = 3,
         group_index = 2,
       },
+      { name = "crates" },
       { name = "nvim_lsp" },
       { name = "nvim_lsp_signature_help" },
       { name = "luasnip" },
