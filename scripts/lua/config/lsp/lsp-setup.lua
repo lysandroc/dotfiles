@@ -47,16 +47,16 @@ local servers = {
                     }
                 }
             }
+        },
+        plugins = {
+          pycodestyle = {
+            ignore = {'W391'},
+            maxLineLength = 100
+          }
         }
-        -- plugins = {
-        --   pycodestyle = {
-        --     ignore = {'W391'},
-        --     maxLineLength = 100
-        --   }
-        -- }
     },
     lua_ls = {
-        -- additional_mason_plugins = "stylua lua-language-server",
+        additional_mason_plugins = "stylua lua-language-server",
         settings = {
             Lua = {
                 runtime = {
@@ -139,6 +139,14 @@ local servers = {
             -- workingDirectory = {
             --   mode = "location"
             -- }
+        }
+    },
+    prismals = {
+        additional_mason_plugins = "prisma-language-server",
+        settings = {
+            prisma = {
+                -- prismaFmtBinPath = "/usr/local/bin/prisma-fmt"
+            }
         }
     },
     tsserver = {
