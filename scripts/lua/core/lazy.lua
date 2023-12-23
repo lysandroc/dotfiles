@@ -6,8 +6,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- local plugins = require("plugins")
--- require("lazy").setup(plugins, {
 require("lazy").setup({
     dev = {
         -- directory where you store your local plugin projects

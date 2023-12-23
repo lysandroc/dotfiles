@@ -66,33 +66,40 @@ function M.setup(servers, options)
       require("neodev").setup()
       lspconfig.lua_ls.setup({ opts })
     end,
-    -- ["rust_analyzer"] = function()
-    --   local opts = vim.tbl_deep_extend("force", options, servers["rust_analyzer"] or {})
-    --
-    --   -- DAP settings - https://github.com/simrat39/rust-tools.nvim#a-better-debugging-experience
-    --   local extension_path = install_root_dir .. "/packages/codelldb/extension/"
-    --   local codelldb_path = extension_path .. "adapter/codelldb"
-    --   local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
-    --   require("rust-tools").setup {
-    --     tools = {
-    --       autoSetHints = false,
-    --       executor = require("rust-tools/executors").toggleterm,
-    --       hover_actions = { border = "solid" },
-    --       on_initialized = function()
-    --         vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "CursorHold", "InsertLeave" }, {
-    --           pattern = { "*.rs" },
-    --           callback = function()
-    --             vim.lsp.codelens.refresh()
-    --           end,
-    --         })
-    --       end,
-    --     },
-    --     server = opts,
-    --     dap = {
-    --       adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
-    --     },
-    --   }
-    -- end,
+    ["rust_analyzer"] = function()
+      local opts = vim.tbl_deep_extend("force", options, servers["rust_analyzer"] or {})
+
+      -- DAP settings - https://github.com/simrat39/rust-tools.nvim#a-better-debugging-experience
+      local extension_path = install_root_dir .. "/packages/codelldb/extension/"
+      local codelldb_path = extension_path .. "adapter/codelldb"
+      local liblldb_path = ""
+      if vim.loop.os_uname().sysname:find("Windows") then
+        liblldb_path = extension_path .. "lldb\\bin\\liblldb.dll"
+      elseif vim.fn.has("mac") == 1 then
+        liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
+      else
+        liblldb_path = extension_path .. "lldb/lib/liblldb.so"
+      end
+      require("rust-tools").setup {
+        tools = {
+          autoSetHints = false,
+          executor = require("rust-tools/executors").toggleterm,
+          hover_actions = { border = "solid" },
+          on_initialized = function()
+            vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "CursorHold", "InsertLeave" }, {
+              pattern = { "*.rs" },
+              callback = function()
+                vim.lsp.codelens.refresh()
+              end,
+            })
+          end,
+        },
+        server = opts,
+        dap = {
+          adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
+        },
+      }
+    end,
   })
 end
 

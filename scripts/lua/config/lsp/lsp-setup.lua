@@ -241,7 +241,16 @@ local servers = {
                     allFeatures = true,
                     loadOutDirsFromCheck = true,
                     runBuildScripts = true
+                    -- buildScripts = {
+                    --     enable = true,
+                    -- },
                 },
+                -- imports = {
+                --     granularity = {
+                --         group = "module",
+                --     },
+                --     prefix = "self",
+                -- },
                 -- Add clippy lints for Rust.
                 checkOnSave = {
                     allFeatures = true,

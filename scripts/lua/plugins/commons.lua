@@ -8,7 +8,12 @@ return {
     "tpope/vim-fugitive",
     "tpope/vim-rhubarb",
     "airblade/vim-gitgutter",
-    "numToStr/Comment.nvim",
+    {
+        "numToStr/Comment.nvim",
+        config = function()
+            require("Comment").setup()
+        end,
+    },
     {
         "f-person/git-blame.nvim",
         config = function()
