@@ -23,6 +23,11 @@ return {
             }, -- Mason is a plugin manager for Neovim
             "williamboman/mason-lspconfig.nvim", -- Setup the integration between mason and lspconfig
             "jay-babu/mason-null-ls.nvim", -- Setup available null-ls settings automatically
+            -- null-ls will be deprecated use this in favor, or migrate it to conform.nvim and nvim-lint
+            -- mason-tools-installer: https://github.com/WhoIsSethDaniel/ma...
+            -- conform.nvim: https://github.com/stevearc/conform.nvim
+            -- nvim-lint: https://github.com/mfussenegger/nvim-...
+            -- https://www.youtube.com/watch?v=ybUE4D80XSk
             "nvimtools/none-ls.nvim", -- sources of diagnostics, code actions, and other code manipulation functions.
             "jose-elias-alvarez/typescript.nvim", -- TypeScript support for null-ls
             {

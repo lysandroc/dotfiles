@@ -3,6 +3,9 @@ local opt = vim.opt
 -- retrocompatibility with my previous vimconf file
 vim.cmd("set guioptions-=T")            -- GUI without toolbar
 
+vim.cmd("let g:loaded_netrw       = 1")
+vim.cmd("let g:loaded_netrwPlugin = 1")
+
 opt.guifont="Operator Mono Lig, Fira Code:h16" -- Font
 opt.termguicolors=true                  -- Enable 24-bit RGB colors
 opt.encoding="utf-8"                    -- The encoding displayed

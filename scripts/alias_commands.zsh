@@ -46,6 +46,7 @@ alias gpf="git push --set-upstream origin \$(git symbolic-ref --short HEAD)"
 # alias gai="git-aicommit --openAiKey=$OPENAI_API_KEY --completionPromptParams.temperature=0.3 --no-autocommit"
 
 alias ghpr="gh pr create -a lysandroc"
+alias ghvw="gh pr view --web"
 alias ct="bat ~/dotfiles/scripts/commit-types.txt"
 alias cy="yarn run cypress:open"
 

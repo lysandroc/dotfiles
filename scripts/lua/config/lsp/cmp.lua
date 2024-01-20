@@ -216,15 +216,15 @@ M.setup = function()
   -- })
 
   -- -- Autocomplete when using search ":"
-  -- cmp.setup.cmdline(":", {
-  --   -- mapping = cmp.mapping.preset.cmdline(),
-  --   -- view = { entries = "wildmenu" },
-  --   sources = cmp.config.sources({
-  --     { name = "path" },
-  --   }, {
-  --     { name = "cmdline" },
-  --   }),
-  -- })
+  cmp.setup.cmdline(":", {
+    -- mapping = cmp.mapping.preset.cmdline(),
+    -- view = { entries = "wildmenu" },
+    sources = cmp.config.sources({
+      { name = "path" },
+    }, {
+      { name = "cmdline" },
+    }),
+  })
 
   -- cmp.event:on("menu_opened", function()
   --   vim.b.copilot_suggestion_hidden = true

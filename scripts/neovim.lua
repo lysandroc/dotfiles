@@ -4,7 +4,7 @@ require("core")
 require("config")
 
 -- Override print fn
-_G.dd = function(...)
-	require("util.debug").dump(...)
-end
-vim.print = _G.dd
+-- _G.dd = function(...)
+-- 	require("util.debug").dump(...)
+-- end
+-- vim.print = _G.dd

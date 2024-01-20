@@ -1,8 +1,13 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-    vim.fn.system(
-        {"git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", -- latest stable release
-         lazypath})
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
+    })
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -12,7 +17,7 @@ require("lazy").setup({
         path = "~/projects",
         ---@type string[] plugins that match these patterns will use your local versions instead of being fetched from GitHub
         patterns = {}, -- For example {"folke"}
-        fallback = false -- Fallback to git when local plugin doesn't exist
+        fallback = false, -- Fallback to git when local plugin doesn't exist
     },
     -- plugins are versioned, to know more read setup.sh
     lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json",
@@ -22,12 +27,12 @@ require("lazy").setup({
         lazy = false,
         -- It's recommended to leave version=false for now, since a lot the plugin that support versioning,
         -- have outdated releases, which may break your Neovim install.
-        version = false -- always use the latest git commit
+        version = false, -- always use the latest git commit
         -- version = "*", -- try installing the latest stable version for plugins that support semver
     },
-    spec = {{
-        import = "plugins"
-    }},
+    spec = { {
+        import = "plugins",
+    } },
     -- spec = {{
     --     "LazyVim/LazyVim",
     --     import = "lazyvim.plugins"
@@ -45,16 +50,22 @@ require("lazy").setup({
     -- {
     --     import = "plugins"
     -- }},
-    -- install = {
-    --     colorscheme = {"tokyonight", "habamax"}
-    -- },
+    install = {
+        -- colorscheme = { "solarized-osaka" },
+    },
+    change_detection = { notify = false, enable = true },
     performance = {
         rtp = {
             -- disable some rtp plugins
-            disabled_plugins = {"gzip", -- "matchit",
-            -- "matchparen",
-            -- "netrwPlugin",
-            "tarPlugin", "tohtml", "tutor", "zipPlugin"}
-        }
-    }
+            disabled_plugins = {
+                "gzip", -- "matchit",
+                -- "matchparen",
+                -- "netrwPlugin",
+                "tarPlugin",
+                "tohtml",
+                "tutor",
+                "zipPlugin",
+            },
+        },
+    },
 })

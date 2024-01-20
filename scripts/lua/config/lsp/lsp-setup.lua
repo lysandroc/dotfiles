@@ -25,16 +25,16 @@ local servers = {
         -- additional_mason_plugins = "jsonlint json-lsp",
         settings = {
             json = {
-                schemas = require("schemastore").json.schemas()
+                schemas = require("schemastore").json.schemas(),
                 -- validate = { enable = true }, -- I should enable this
-            }
-        }
+            },
+        },
     },
     pyright = {
         -- additional_mason_plugins = "pyright",
         analysis = {
-            typeCheckingMode = "off"
-        }
+            typeCheckingMode = "off",
+        },
     },
     pylsp = {
         additional_mason_plugins = "python-lsp-server",
@@ -42,18 +42,18 @@ local servers = {
             pylsp = {
                 plugins = {
                     pycodestyle = {
-                        ignore = {'W391'},
-                        maxLineLength = 100
-                    }
-                }
-            }
+                        ignore = { "W391" },
+                        maxLineLength = 100,
+                    },
+                },
+            },
         },
         plugins = {
-          pycodestyle = {
-            ignore = {'W391'},
-            maxLineLength = 100
-          }
-        }
+            pycodestyle = {
+                ignore = { "W391" },
+                maxLineLength = 100,
+            },
+        },
     },
     lua_ls = {
         additional_mason_plugins = "stylua lua-language-server",
@@ -62,32 +62,33 @@ local servers = {
                 runtime = {
                     -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
                     -- version = "Lua 5.4.3",
+                    version = "LuaJIT",
                     -- -- Setup your lua path
                     -- path = vim.split(package.path, ";"),
                 },
                 diagnostics = {
                     -- Get the language server to recognize the `vim` global
-                    globals = {"vim", "describe", "it", "before_each", "after_each", "packer_plugins"}
+                    globals = { "vim", "describe", "it", "before_each", "after_each", "packer_plugins" },
                     -- disable = { "lowercase-global", "undefined-global", "unused-local", "unused-vararg", "trailing-space" },
                 },
-                -- workspace = {
-                --   -- Make the server aware of Neovim runtime files
-                --   library = {
-                --     [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                --     [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
-                --   },
-                --   -- library = vim.api.nvim_get_runtime_file("", true),
-                --   maxPreload = 2000,
-                --   preloadFileSize = 50000,
-                -- },
+                workspace = {
+                    -- Make the server aware of Neovim runtime files
+                    -- library = {
+                    --   [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                    --   [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+                    -- },
+                    library = vim.api.nvim_get_runtime_file("", true),
+                    maxPreload = 2000,
+                    preloadFileSize = 50000,
+                },
                 completion = {
-                    callSnippet = "Both"
+                    callSnippet = "Both",
                 },
                 telemetry = {
-                    enable = false
-                }
-            }
-        }
+                    enable = false,
+                },
+            },
+        },
     },
     -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
     eslint = {
@@ -139,15 +140,15 @@ local servers = {
             -- workingDirectory = {
             --   mode = "location"
             -- }
-        }
+        },
     },
     prismals = {
         additional_mason_plugins = "prisma-language-server",
         settings = {
             prisma = {
                 -- prismaFmtBinPath = "/usr/local/bin/prisma-fmt"
-            }
-        }
+            },
+        },
     },
     tsserver = {
         -- additional_mason_plugins = "typescript-language-server js-debug-adapter prettier",
@@ -158,15 +159,15 @@ local servers = {
                 function()
                     vim.lsp.buf.execute_command({
                         command = "_typescript.organizeImports",
-                        arguments = {vim.api.nvim_buf_get_name(0)}
+                        arguments = { vim.api.nvim_buf_get_name(0) },
                     })
                 end,
-                description = "Organize Imports"
-            }
+                description = "Organize Imports",
+            },
         },
         settings = {
             format = {
-                enable = false
+                enable = false,
             },
             javascript = {
                 inlayHints = {
@@ -176,8 +177,8 @@ local servers = {
                     includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
                     includeInlayParameterNameHintsWhenArgumentMatchesName = true,
                     includeInlayPropertyDeclarationTypeHints = true,
-                    includeInlayVariableTypeHints = true
-                }
+                    includeInlayVariableTypeHints = true,
+                },
             },
             typescript = {
                 inlayHints = {
@@ -187,24 +188,24 @@ local servers = {
                     includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
                     includeInlayParameterNameHintsWhenArgumentMatchesName = true,
                     includeInlayPropertyDeclarationTypeHints = true,
-                    includeInlayVariableTypeHints = true
-                }
-            }
-        }
+                    includeInlayVariableTypeHints = true,
+                },
+            },
+        },
     },
     yamlls = {
         -- additional_mason_plugins = "yaml-language-server",
         schemastore = {
-            enable = true
+            enable = true,
         },
         settings = {
             yaml = {
                 hover = true,
                 completion = true,
                 validate = true,
-                schemas = require("schemastore").json.schemas()
-            }
-        }
+                schemas = require("schemastore").json.schemas(),
+            },
+        },
     },
     vimls = {
         -- additional_mason_plugins = "vim-language-server"
@@ -219,28 +220,16 @@ local servers = {
     --   additional_mason_plugins = "gopls",
     -- },
     rust_analyzer = {
+        cmd = { "rust-analyzer" },
         additional_mason_plugins = "rust-analyzer codelldb",
-        filetypes = {"rust"},
+        filetypes = { "rust" },
         root_dir = require("lspconfig.util").root_pattern("Cargo.toml"),
-        keys = {{
-            "K",
-            "<cmd>RustHoverActions<cr>",
-            desc = "Hover Actions (Rust)"
-        }, {
-            "<leader>cR",
-            "<cmd>RustCodeAction<cr>",
-            desc = "Code Action (Rust)"
-        }, {
-            "<leader>dr",
-            "<cmd>RustDebuggables<cr>",
-            desc = "Run Debuggables (Rust)"
-        }},
         settings = {
             ["rust-analyzer"] = {
                 cargo = {
                     allFeatures = true,
                     loadOutDirsFromCheck = true,
-                    runBuildScripts = true
+                    runBuildScripts = true,
                     -- buildScripts = {
                     --     enable = true,
                     -- },
@@ -255,33 +244,27 @@ local servers = {
                 checkOnSave = {
                     allFeatures = true,
                     command = "clippy",
-                    extraArgs = {"--no-deps"}
+                    extraArgs = { "--no-deps" },
                 },
                 procMacro = {
                     enable = true,
                     ignored = {
-                        ["async-trait"] = {"async_trait"},
-                        ["napi-derive"] = {"napi"},
-                        ["async-recursion"] = {"async_recursion"}
-                    }
-                }
-            }
-        }
+                        ["async-trait"] = { "async_trait" },
+                        ["napi-derive"] = { "napi" },
+                        ["async-recursion"] = { "async_recursion" },
+                    },
+                },
+            },
+        },
     },
     taplo = {
+        -- depends on crates.nvim plugin
         additional_mason_plugins = "taplo",
-        keys = {{
-            "K",
-            function()
-                if vim.fn.expand("%:t") == "Cargo.toml" and require("crates").popup_available() then
-                    require("crates").show_popup()
-                else
-                    vim.lsp.buf.hover()
-                end
-            end,
-            desc = "Show Crate Documentation"
-        }}
-    }
+        cmd = { "taplo", "lsp", "stdio" },
+        filetypes = { "toml" },
+        root_dir = require("lspconfig.util").root_pattern("*.toml"),
+        single_file_support = true,
+    },
     -- pylsp = {},
     -- tailwindcss = {},
     -- html = {},
@@ -335,18 +318,18 @@ local new_capabilities = require("cmp_nvim_lsp").default_capabilities()
 new_capabilities.textDocument.completion.completionItem.snippetSupport = true
 new_capabilities.textDocument.foldingRange = {
     dynamicRegistration = false,
-    lineFoldingOnly = true
+    lineFoldingOnly = true,
 }
 new_capabilities.textDocument.completion.completionItem.resolveSupport = {
-    properties = {"documentation", "detail", "additionalTextEdits"}
+    properties = { "documentation", "detail", "additionalTextEdits" },
 }
 
 local opts = {
     on_attach = M.on_attach,
     capabilities = new_capabilities,
     flags = {
-        debounce_text_changes = 150
-    }
+        debounce_text_changes = 150,
+    },
 }
 
 function M.setup()

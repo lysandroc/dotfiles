@@ -349,7 +349,7 @@ function M.telescope_keymaps()
     map(mode, "<leader>sc", telescope.colorscheme, { noremap = true, silent = true, desc = "Color scheme" })
     map(mode, "<leader>sb", telescope.builtin, { noremap = true, silent = true, desc = "Built in" })
 
-    map(mode, "<leader>n", function()
+    map(mode, "<leader>se", function()
       local function telescope_buffer_dir()
         return vim.fn.expand("%:p:h")
       end
