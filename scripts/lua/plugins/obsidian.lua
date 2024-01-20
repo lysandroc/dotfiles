@@ -14,16 +14,19 @@ return {
         "hrsh7th/nvim-cmp",
         "nvim-telescope/telescope.nvim",
     },
-    opts = {
-        workspaces = {
-            {
-                name = "personal",
-                path = "~/Users/lysandroc/Library/Mobile Documents/iCloud~md~obsidian/Documents/Lysandroc",
+    config = function()
+        vim.opt.conceallevel=1
+        require("obsidian").setup({
+            workspaces = {
+                {
+                    name = "notes",
+                    path = "~/vaults/notes",
+                },
             },
-            {
-                name = "work",
-                path = "~/vaults/work",
-            },
-        },
-    },
+            follow_url_func = function(url)
+                -- opens external url in a browser
+                vim.fn.jobstart({"open", url})  -- Mac OS
+            end,
+        })
+    end
 }
