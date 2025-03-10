@@ -7,7 +7,8 @@ local fb_actions = require ("telescope").extensions.file_browser.actions
 function M.setup()
   require("telescope").setup({
     defaults = {
-      file_ignore_patterns = { "node_modules", "vendor", "assets" },
+      -- file_ignore_patterns = { "node_modules", "vendor", "assets" },
+      file_ignore_patterns = { "vendor" },
       layout_config = {
         prompt_position = "top",
         horizontal = { width = 0.8, width_padding = 1000 },

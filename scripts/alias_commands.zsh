@@ -52,12 +52,12 @@ alias cy="yarn run cypress:open"
 
 ialias fzf="fzf --color=16 --preview 'bat --style=numbers --color=always {}'"
 
-ialias ls="exa --all"
-ialias ll="exa -l --all"
-ialias l="exa -l --all"
+ialias ls="eza --all"
+ialias ll="eza -l --all"
+ialias l="eza -l --all"
 ialias cat="bat"
 
-alias tree="exa -a --tree --level=2 --long --ignore-glob=\"*.git*\""
+alias tree="eza -a --tree --level=2 --long --ignore-glob=\"*.git*\""
 
 open_with_fzf() {
   nvim $(fzf)

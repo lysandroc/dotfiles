@@ -1,7 +1,7 @@
 [user]
 	email = lysandroc@gmail.com
 	name = Lysandro Carioca
-	signingkey = ~/.ssh/gh.pub
+  signingkey = ~/.ssh/gh.pub
 [core]
 	pager = delta
 	editor = nvim
@@ -49,8 +49,8 @@
 	instructionFormat = (%an <%ae>) %s
 [includeIf "gitdir:~/natura/"]
 	path = ~/natura/.gitconfig
-[includeIf "gitdir:~/projects/stay/"]
-	path = .gitconfig-stay22
+; [includeIf "gitdir:~/projects/stay/"]
+; 	path = .gitconfig-stay22
 [commit]
 	gpgsign = true
 [gpg]

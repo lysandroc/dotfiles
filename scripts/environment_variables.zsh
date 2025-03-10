@@ -3,11 +3,12 @@ export HISTFILESIZE=10000
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH 
 # export PATH="$HOME/.asdf/bin:$HOME/.asdf/shims:$PATH"
 
-export GOROOT=~/.asdf/installs/golang/$(asdf current golang | awk '{print $2}')/go/
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin
-export GOPATH=$(go env GOPATH)
-export PATH="$PATH:$(go env GOPATH)/bin"
+# golang disabled
+# export GOROOT=~/.asdf/installs/golang/$(asdf current golang | awk '{print $2}')/go/
+# export PATH=$PATH:$GOPATH/bin
+# export PATH=$PATH:$GOROOT/bin
+# export GOPATH=$(go env GOPATH)
+# export PATH="$PATH:$(go env GOPATH)/bin"
 export CGO_ENABLED=1
 
 

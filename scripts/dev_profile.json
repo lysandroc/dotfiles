@@ -1,0 +1,261 @@
+{
+  "Working Directory" : "\/Users\/lysandroc",
+  "Prompt Before Closing 2" : false,
+  "Selected Text Color" : {
+    "Green Component" : 0.56244754791259766,
+    "Red Component" : 0.47797361016273499,
+    "Blue Component" : 0.55732053518295288
+  },
+  "Rows" : 35,
+  "Ansi 11 Color" : {
+    "Green Component" : 0.49430075287818909,
+    "Red Component" : 0.69710838794708252,
+    "Blue Component" : 0.1584954559803009
+  },
+  "Use Italic Font" : true,
+  "HotKey Characters" : "t",
+  "Foreground Color" : {
+    "Green Component" : 0.75921261310577393,
+    "Red Component" : 0.61000990867614746,
+    "Blue Component" : 0.7630731463432312
+  },
+  "HotKey Window Floats" : true,
+  "Use Custom Window Title" : false,
+  "Right Option Key Sends" : 0,
+  "Show Status Bar" : false,
+  "Character Encoding" : 4,
+  "Selection Color" : {
+    "Green Component" : 0.21576285362243652,
+    "Red Component" : 0,
+    "Blue Component" : 0.28167051076889038
+  },
+  "Triggers" : [
+
+  ],
+  "Mouse Reporting" : true,
+  "Ansi 4 Color" : {
+    "Green Component" : 0.46265947818756104,
+    "Red Component" : 0.12754884362220764,
+    "Blue Component" : 0.78231418132781982
+  },
+  "Non-ASCII Anti Aliased" : true,
+  "Sync Title" : false,
+  "Disable Window Resizing" : true,
+  "Description" : "Default",
+  "Close Sessions On End" : 1,
+  "Jobs to Ignore" : [
+    "rlogin",
+    "ssh",
+    "slogin",
+    "telnet"
+  ],
+  "Non-ASCII Ligatures" : true,
+  "Scrollback Lines" : 1000,
+  "HotKey Window Reopens On Activation" : false,
+  "Draw Powerline Glyphs" : true,
+  "Status Bar Layout" : {
+    "components" : [
+
+    ],
+    "advanced configuration" : {
+      "font" : ".AppleSystemUIFont 12",
+      "algorithm" : 0,
+      "auto-rainbow style" : 1
+    }
+  },
+  "Flashing Bell" : false,
+  "Cursor Guide Color" : {
+    "Red Component" : 0.70214027166366577,
+    "Color Space" : "sRGB",
+    "Blue Component" : 1,
+    "Alpha Component" : 0.25,
+    "Green Component" : 0.92681378126144409
+  },
+  "BM Growl" : true,
+  "Ansi 3 Color" : {
+    "Green Component" : 0.46751424670219421,
+    "Red Component" : 0.64746475219726562,
+    "Blue Component" : 0.023484811186790466
+  },
+  "Use Non-ASCII Font" : true,
+  "Link Color" : {
+    "Red Component" : 0,
+    "Color Space" : "sRGB",
+    "Blue Component" : 0.73422706127166748,
+    "Alpha Component" : 1,
+    "Green Component" : 0.35915294289588928
+  },
+  "Shortcut" : "",
+  "Background Image Location" : "",
+  "Bold Color" : {
+    "Green Component" : 0.83450067043304443,
+    "Red Component" : 0.70913255214691162,
+    "Blue Component" : 0.82687115669250488
+  },
+  "Unlimited Scrollback" : false,
+  "Custom Command" : "No",
+  "HotKey Key Code" : 17,
+  "Keyboard Map" : {
+    "0xf703-0x280000" : {
+      "Text" : "f",
+      "Action" : 10
+    },
+    "0xf703-0x300000" : {
+      "Text" : "[F",
+      "Action" : 10
+    },
+    "0xf702-0x280000" : {
+      "Text" : "b",
+      "Action" : 10
+    },
+    "0xf702-0x300000" : {
+      "Text" : "[H",
+      "Action" : 10
+    },
+    "0x7f-0x80000" : {
+      "Text" : "0x1b 0x7f",
+      "Action" : 11
+    }
+  },
+  "Ansi 14 Color" : {
+    "Green Component" : 0.70167088508605957,
+    "Red Component" : 0,
+    "Blue Component" : 0.62018769979476929
+  },
+  "Ansi 2 Color" : {
+    "Green Component" : 0.7455558180809021,
+    "Red Component" : 0.42339208722114563,
+    "Blue Component" : 0.42409399151802063
+  },
+  "Send Code When Idle" : false,
+  "ASCII Anti Aliased" : true,
+  "Tags" : [
+
+  ],
+  "Ansi 9 Color" : {
+    "Green Component" : 0.084504462778568268,
+    "Red Component" : 0.95941102504730225,
+    "Blue Component" : 0.23225757479667664
+  },
+  "Use Bold Font" : true,
+  "Silence Bell" : false,
+  "Ansi 12 Color" : {
+    "Green Component" : 0.55553519725799561,
+    "Red Component" : 0.091996639966964722,
+    "Blue Component" : 0.78393226861953735
+  },
+  "Mouse Reporting allow clicks and drags" : true,
+  "Window Type" : 12,
+  "Allow Title Reporting" : true,
+  "Use Bright Bold" : true,
+  "Has Hotkey" : true,
+  "HotKey Modifier Activation" : 3,
+  "Cursor Text Color" : {
+    "Green Component" : 0.15575926005840302,
+    "Red Component" : 0,
+    "Blue Component" : 0.19370138645172119
+  },
+  "HotKey Window Dock Click Action" : 0,
+  "Default Bookmark" : "No",
+  "Cursor Color" : {
+    "Green Component" : 0.29334646463394165,
+    "Red Component" : 0.95475113391876221,
+    "Blue Component" : 0
+  },
+  "Ansi 1 Color" : {
+    "Green Component" : 0.10840655118227005,
+    "Red Component" : 0.81926977634429932,
+    "Blue Component" : 0.14145714044570923
+  },
+  "Name" : "dev_profile",
+  "Blinking Cursor" : true,
+  "Guid" : "1D8C7988-DF1E-4CE3-9888-CBDD5D7E93DD",
+  "Ansi 8 Color" : {
+    "Green Component" : 0.39142724871635437,
+    "Red Component" : 0,
+    "Blue Component" : 0.53505516052246094
+  },
+  "Ansi 10 Color" : {
+    "Green Component" : 0.93699550628662109,
+    "Red Component" : 0.31744870543479919,
+    "Blue Component" : 0.51931029558181763
+  },
+  "Idle Code" : 0,
+  "Badge Color" : {
+    "Red Component" : 1,
+    "Color Space" : "sRGB",
+    "Blue Component" : 0,
+    "Alpha Component" : 0.5,
+    "Green Component" : 0.14910030364990234
+  },
+  "Ambiguous Double Width" : false,
+  "Blur Radius" : 4.4295841799195363,
+  "Ansi 0 Color" : {
+    "Green Component" : 0.15575926005840302,
+    "Red Component" : 0,
+    "Blue Component" : 0.19370138645172119
+  },
+  "Cursor Type" : 0,
+  "Session Close Undo Timeout" : 10,
+  "Blur" : true,
+  "Normal Font" : "PlemolJP-TextItalic 18",
+  "Application Keypad Allowed" : false,
+  "Vertical Spacing" : 1,
+  "Ansi 7 Color" : {
+    "Green Component" : 0.89001238346099854,
+    "Red Component" : 0.91611063480377197,
+    "Blue Component" : 0.79781103134155273
+  },
+  "Space" : 0,
+  "HotKey Window AutoHides" : false,
+  "Command" : "",
+  "Terminal Type" : "xterm-256color",
+  "Horizontal Spacing" : 1,
+  "Option Key Sends" : 2,
+  "Only The Default BG Color Uses Transparency" : false,
+  "HotKey Window Animates" : false,
+  "HotKey Modifier Flags" : 1179648,
+  "Ansi 15 Color" : {
+    "Green Component" : 0.95794391632080078,
+    "Red Component" : 0.98943418264389038,
+    "Blue Component" : 0.86405980587005615
+  },
+  "Minimum Contrast" : 0,
+  "Open Toolbelt" : false,
+  "Ansi 6 Color" : {
+    "Green Component" : 0.57082360982894897,
+    "Red Component" : 0.14679534733295441,
+    "Blue Component" : 0.52502274513244629
+  },
+  "Transparency" : 0.15597615507069379,
+  "HotKey Activated By Modifier" : true,
+  "Background Color" : {
+    "Green Component" : 0.11783610284328461,
+    "Red Component" : 0,
+    "Blue Component" : 0.15170273184776306
+  },
+  "Unicode Version" : 9,
+  "Initial Text" : "",
+  "Screen" : -2,
+  "HotKey Characters Ignoring Modifiers" : "T",
+  "Non Ascii Font" : "HackNFM-Italic 18",
+  "Mouse Reporting allow mouse wheel" : true,
+  "Ansi 13 Color" : {
+    "Green Component" : 0.30289158225059509,
+    "Red Component" : 0.88624399900436401,
+    "Blue Component" : 0.55838865041732788
+  },
+  "Columns" : 90,
+  "HotKey Alternate Shortcuts" : [
+
+  ],
+  "Unicode Normalization" : 0,
+  "Visual Bell" : true,
+  "Custom Directory" : "No",
+  "Ansi 5 Color" : {
+    "Green Component" : 0.10802463442087173,
+    "Red Component" : 0.77738940715789795,
+    "Blue Component" : 0.43516635894775391
+  },
+  "ASCII Ligatures" : true
+}

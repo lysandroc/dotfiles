@@ -53,7 +53,7 @@ require("lazy").setup({
     install = {
         -- colorscheme = { "solarized-osaka" },
     },
-    change_detection = { notify = false, enable = true },
+    change_detection = { notify = false, enable = false },
     performance = {
         rtp = {
             -- disable some rtp plugins

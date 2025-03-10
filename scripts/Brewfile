@@ -15,7 +15,7 @@ brew "rabbitmq"
 brew "mackup"
 brew "openvpn", restart_service: true
 brew "fzf"
-brew "exa"
+brew "eza"
 brew "ripgrep"
 brew "autojump"
 brew "fd"

@@ -20,13 +20,21 @@ return {
             workspaces = {
                 {
                     name = "notes",
-                    path = "~/vaults/notes",
+                    path = "/Users/lysandroc/Library/Mobile Documents/iCloud~md~obsidian/Documents/notes",
                 },
             },
             follow_url_func = function(url)
                 -- opens external url in a browser
                 vim.fn.jobstart({"open", url})  -- Mac OS
             end,
+            -- mappings = {
+            --     ["<leader>ob"] = {
+            --         action = function()
+            --             return require("obsidian").open_workspace("notes")
+            --         end,
+            --         opts = { noremap = false, expr = true, buffer = true },
+            --     }
+            -- },
         })
-    end
+    end,
 }
