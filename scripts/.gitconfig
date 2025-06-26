@@ -1,7 +1,7 @@
 [user]
 	email = lysandroc@gmail.com
 	name = Lysandro Carioca
-  signingkey = ~/.ssh/gh.pub
+  signingkey = ~/.ssh/github.pub
 [core]
 	pager = delta
 	editor = nvim

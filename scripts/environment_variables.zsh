@@ -21,6 +21,7 @@ export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
+HOMEBREW_NO_INSTALL_UPGRADE=1
 
 export NVIM_MAGIC_LOGLEVEL='debug'
 

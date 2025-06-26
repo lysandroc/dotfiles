@@ -16,7 +16,7 @@ curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/instal
 brew bundle install e --file=~/dotfiles/scripts/Brewfile
 
 asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git 
-asdf install nodejs 14.18.1
-asdf global nodejs 14.18.1
+# asdf install nodejs 14.18.1
+# asdf global nodejs 14.18.1
 
 echo "Finished! Reload your terminal to use the latest setup."

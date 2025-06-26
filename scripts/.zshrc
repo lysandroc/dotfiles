@@ -26,6 +26,3 @@ plugins=(
 eval "$(starship init zsh)"
 
 autoload -Uz compinit && compinit
-
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/lysandroc/.cache/lm-studio/bin"
