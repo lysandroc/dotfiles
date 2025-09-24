@@ -142,6 +142,12 @@ local servers = {
             -- }
         },
     },
+    biome = {
+        additional_mason_plugins = "biome",
+        root_dir = require("lspconfig.util").root_pattern("biome.json", "biome.jsonc", ".biomejs.json", ".biomejs.jsonc"),
+        single_file_support = false,
+        settings = {},
+    },
     prismals = {
         additional_mason_plugins = "prisma-language-server",
         settings = {

@@ -1,7 +1,6 @@
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 local lspkind = require("lspkind")
-local copilot_cmp = require("copilot_cmp")
 
 local has_words_before = function()
   if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
@@ -18,17 +17,11 @@ M.setup = function()
   --My custom snippets written in lua
   --require("luasnip.loaders.from_lua").load({ paths = root .. "/lua/core/snippets/" })
 
-  copilot_cmp.setup({
-    method = "getCompletionsCycling",
-  })
-
-  -- Define copilot color's icon in the cmp option list
-  vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#26C281" })
 
   cmp.setup({
     formatting = {
       format = lspkind.cmp_format({
-        symbol_map = { Copilot = "" },
+        symbol_map = {},
         mode = "symbol_text",
         maxwidth = 30, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
         ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
@@ -80,9 +73,7 @@ M.setup = function()
       --   end
       -- end, { "i", "c", "s" }),
       ["<Tab>"] = cmp.mapping(function(fallback)
-        if require("copilot.suggestion").is_visible() then
-          require("copilot.suggestion").accept()
-        elseif cmp.visible() then
+        if cmp.visible() then
           cmp.select_next_item({ behavior = cmp.SelectBehavior.Replace, select = false })
         elseif luasnip.expandable() then
           luasnip.expand()
@@ -163,11 +154,6 @@ M.setup = function()
       },
     }),
     sources = {
-      {
-        name = "copilot",
-        max_item_count = 3,
-        group_index = 2,
-      },
       { name = "crates" },
       { name = "nvim_lsp" },
       { name = "nvim_lsp_signature_help" },
@@ -184,9 +170,6 @@ M.setup = function()
     sorting = {
       priority_weight = 2,
       comparators = {
-        require("copilot_cmp.comparators").prioritize,
-        require("copilot_cmp.comparators").score,
-
         -- Below is the default comparitor list and order for nvim-cmp
         cmp.config.compare.offset,
         -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
@@ -226,13 +209,6 @@ M.setup = function()
     }),
   })
 
-  -- cmp.event:on("menu_opened", function()
-  --   vim.b.copilot_suggestion_hidden = true
-  -- end)
-  --
-  -- cmp.event:on("menu_closed", function()
-  --   vim.b.copilot_suggestion_hidden = false
-  -- end)
 end
 
 return M

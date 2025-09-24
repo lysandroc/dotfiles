@@ -9,6 +9,9 @@ export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 # export PATH=$PATH:$GOROOT/bin
 # export GOPATH=$(go env GOPATH)
 # export PATH="$PATH:$(go env GOPATH)/bin"
+export GOBIN="$HOME/.local/bin"
+export PATH="$GOBIN:$PATH"
+
 export CGO_ENABLED=1
 
 

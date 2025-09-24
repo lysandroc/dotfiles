@@ -2,7 +2,14 @@ return {
     {
         "rcarriga/nvim-notify",
         config = function()
-            require("notify").setup()
+            require("notify").setup({
+                level = vim.log.levels.ERROR,
+                minimum_width = 50,
+                render = "minimal",
+                stages = "fade_in_slide_out",
+                timeout = 3000,
+                top_down = true
+            })
         end,
     },
     -- {

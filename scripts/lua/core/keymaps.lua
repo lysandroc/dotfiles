@@ -149,17 +149,6 @@ map(
 
 local M = {}
 
--- TEMPORARY DISABLED
--- function M.copilot_keymaps()
---   local copilot_suggestion = require("copilot.suggestion")
---
---   map(
---     Mode.INSERT,
---     "<CTRL-S>",
---     copilot_suggestion.next,
---     { noremap = true, silent = true, desc = "Next Copilot Suggestion" }
---   )
--- end
 
 function M.git_blame()
   map(
@@ -316,7 +305,9 @@ function M.telescope_keymaps()
     end, { noremap = true, silent = true, desc = "Search dotfiles" })
 
     map(mode, "<C-p>", function()
-      local opts = {} -- custom options
+      local opts = {
+        cwd = vim.fn.getcwd() -- Search from current working directory only
+      }
       -- use git_files when the current directory is a git repository
       local ok = pcall(telescope.git_files, opts)
       if not ok then
