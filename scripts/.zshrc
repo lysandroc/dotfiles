@@ -26,3 +26,6 @@ plugins=(
 eval "$(starship init zsh)"
 
 autoload -Uz compinit && compinit
+
+# opencode
+export PATH=/Users/lysandroc/.opencode/bin:$PATH
