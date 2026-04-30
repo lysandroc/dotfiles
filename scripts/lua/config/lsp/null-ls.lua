@@ -23,6 +23,14 @@ local diagnostics = nullls.builtins.diagnostics
 local code_actions = nullls.builtins.code_actions
 local hover = nullls.builtins.hover
 
+local with_root_files = function(builtin, files)
+  return builtin.with({
+    condition = function(utils)
+      return utils.root_has_file(files)
+    end,
+  })
+end
+
 local sources = {
   require("typescript.extensions.null-ls.code-actions"), -- https://github.com/jose-elias-alvarez/typescript.nvim
 
@@ -33,6 +41,7 @@ local sources = {
   formatting.black.with({ extra_args = { "--fast" } }),
   formatting.isort,
   with_root_file(formatting.stylua, "stylua.toml"),
+  with_root_files(formatting.biome, { "biome.json", "biome.jsonc" }),
 
   -- diagnostics
   -- diagnostics.eslint_d,
