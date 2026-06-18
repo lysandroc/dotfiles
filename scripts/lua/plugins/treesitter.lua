@@ -25,6 +25,7 @@ return {
                     "graphql",
                     "json",
                     "markdown",
+                    "markdown_inline",
                     "prisma",
                     "tsx",
                     "typescript",
