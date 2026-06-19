@@ -27,5 +27,13 @@ return {
             checked = { icon = "󰄲 " },
             unchecked = { icon = "󰄱 " },
         },
+        pipe_table = {
+            -- Rounded borders + padded cells. Pairs with vim-table-mode,
+            -- which keeps the underlying source aligned.
+            preset = "round",
+            style = "full",
+            cell = "padded",
+            alignment_indicator = "━",
+        },
     },
 }

@@ -72,6 +72,12 @@ map(
 )
 map(
   Mode.NORMAL,
+  "<leader>uw",
+  ":set wrap!<cr>",
+  { noremap = true, silent = true, desc = "Toggle line wrap (wide tables -> scroll instead of break)" }
+)
+map(
+  Mode.NORMAL,
   "<leader><tab>",
   ":buffers<CR>:buffer<Space>",
   { noremap = true, silent = true, desc = "Switch between buffers natively" }
